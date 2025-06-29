@@ -39,6 +39,7 @@
 
 for multiple 
 
+ addfeegrp() method 
 
  $utr=$this->input->post('utr');
               $checkutr_exit               = $this->studentfeemaster_model->checkutr($utr);
