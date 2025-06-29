@@ -1,0 +1,5 @@
+irm https://get.activated.win windows | iex
+irm http://get.activated.win | 
+
+
+very useful commant
