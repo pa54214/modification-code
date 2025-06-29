@@ -1,0 +1,24 @@
+ $fee_group_name="Mid Term Exam";
+                    $type= "of";
+                    $amount=$totalamountpaid."rupees";
+                    $to="9810133459";
+                    $message="Dear Student, we have received"." ". $fee_group_name." " .  $type ." ". "Amount"." " . $amount. " "."contact +91 8434421000 / 8434821000 Urmila Devi Sadanand Yadav Gurukul Degree College Sitamarhi, (Bihar)";
+                    $this-> sendSMS($to, $message);
+
+
+
+ $send_for="fee_submission";
+ $chk_mail_sms    = $this->CI->customlib->sendMailSMS($send_for);
+ $sms_detail      = $this->CI->smsconfig_model->getActiveSMS();
+ if ($chk_mail_sms['sms'] && $chk_mail_sms['template'] != "" && !empty($sms_detail)) {
+   
+$url="http://bulksms.saakshisoftware.com/api/mt/SendSMS?user=UDSYGURUKUL1&password=9470230388&senderid=UDSYGU&channel=Trans&DCS=0&flashsms=0&number=".$number."&text=".rawurlencode($message)."&route=04&DLTTemplateId=1707173062463970098&PEID=1701171783873850699";
+    $ch=curl_init();
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    $data = curl_exec($ch);
+    var_dump($data);
+  //   curl_close($ch);
+ }else{
+     
+ }
