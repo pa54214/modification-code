@@ -1,3 +1,90 @@
+edit stuent file
+
+<div class="bozero">
+    <h4 class="pagetitleh2">Details of Academic Record</h4>
+        <div class="around10">
+            <div class="row"> 
+        <table>
+        <!-- row with fixed height-->
+        <tr>
+            <td width="150px;" class="text-center">
+                  <b>Class</b>
+              </td>
+            <td width="150px;" class="text-center">
+                <b>Board</b>
+            </td>
+            <td width="150px;" class="text-center">
+                <b>Passing Year</b>
+            </td>
+            <td width="150px;" class="text-center">
+                  <b>Roll No.</b>
+              </td>
+              <td width="150px;" class="text-center">
+                  <b>Marks Obt</b>
+              </td>
+              <td width="150px;" class="text-center">
+                  <b>Marks %</b>
+              </td>
+              <td width="250px;" class="text-center">
+                  <b>Which School/College did you Pass</b>
+              </td>
+        </tr>
+ 
+        <!-- row without fixed height-->
+        <tr>
+            <td width="150px;" class="text-center">
+                  <b>Matric (10th)</b>
+              </td>
+            <td width="150px;" class="text-center">
+                <textarea style="border-color: transparent" name="matric_board" value="<?= $student['matric_board']?>"><?= $student['matric_board']?></textarea>
+            </td>
+            <td width="150px;" class="text-center">
+               <textarea style="border-color: transparent" name="matric_passing_year" value="<?= $student['matric_passing_year']?>"><?= $student['matric_passing_year']?></textarea>
+            </td>
+            <td width="150px;" class="text-center">
+                 <textarea style="border-color: transparent" name="matric_roll_num" value="<?= $student['matric_roll_num']?>"><?= $student['matric_roll_num']?></textarea>
+              </td>
+              <td width="150px;" class="text-center">
+                  <textarea style="border-color: transparent" name="matric_marks" value="<?= $student['matric_marks']?>"><?= $student['matric_marks']?></textarea>
+              </td>
+              <td width="150px;" class="text-center">
+                  <textarea style="border-color: transparent" name="matric_percent" value="<?= $student['matric_percent']?>"><?= $student['matric_percent']?></textarea>
+              </td>
+              <td width="250px;" class="text-center">
+                  <textarea style="border-color: transparent" name="matric_school" value="<?= $student['matric_school']?>"><?= $student['matric_school']?></textarea>
+              </td>
+        </tr>
+        <tr>
+            <td width="150px;" class="text-center">
+                  <b>Inter (12th)</b>
+              </td>
+            <td width="150px;" class="text-center">
+                <textarea style="border-color: transparent" name="inter_board" value="<?= $student['inter_board']?>"><?= $student['inter_board']?></textarea>
+            </td>
+            <td width="150px;" class="text-center">
+               <textarea style="border-color: transparent" name="inter_passing_year" value="<?= $student['inter_passing_year']?>"><?= $student['inter_passing_year']?></textarea>
+            </td>
+            <td width="150px;" class="text-center">
+                 <textarea style="border-color: transparent" name="inter_roll_num" value="<?= $student['inter_roll_num']?>"><?= $student['inter_roll_num']?></textarea>
+              </td>
+              <td width="150px;" class="text-center">
+                  <textarea style="border-color: transparent" name="inter_marks" value="<?= $student['inter_marks']?>"><?= $student['inter_marks']?></textarea>
+              </td>
+              <td width="150px;" class="text-center">
+                  <textarea style="border-color: transparent" name="inter_percent" value="<?= $student['inter_percent']?>"><?= $student['inter_percent']?></textarea>
+              </td>
+              <td width="250px;" class="text-center">
+                  <textarea style="border-color: transparent" name="inter_school" value="<?= $student['inter_school']?>"><?= $student['inter_school']?></textarea>
+              </td>
+        </tr>
+    </table>
+                            
+                           </div>
+                     </div>
+             </div>
+
+=============================================================
+
 <div class="bozero">
     <h4 class="pagetitleh2">Details of Academic Record</h4>
         <div class="around10">
