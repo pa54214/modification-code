@@ -1,0 +1,97 @@
+             $utr=$this->input->post('utr');
+              $checkutr_exit               = $this->studentfeemaster_model->checkutr($utr);
+              if($checkutr_exit){
+               $this->session->set_userdata('utr', $checkutr_exit);
+                $array = array('status' => 1, 'error' => '');
+               echo json_encode($array);
+              }
+              else{
+                   $utrs=" ";
+                  if (!empty($utr)) { 
+                       $this->studentfeemaster_model->addkutr($utr);
+                        $utrs="(".$utr.")";
+                   }
+                  .
+                  .
+                  .
+
+
+             $json_array               = array(
+                'amount'          => convertCurrencyFormatToBaseAmount($this->input->post('amount')),
+                'amount_discount' => convertCurrencyFormatToBaseAmount($this->input->post('amount_discount')),
+                'amount_fine'     => convertCurrencyFormatToBaseAmount($this->input->post('amount_fine')),
+                'date'            => date('Y-m-d', $this->customlib->datetostrtotime($this->input->post('date'))),
+               // 'description'     => $this->input->post('description'),
+              'description'     =>  $utrs.$this->input->post('description'),
+                'collected_by'    => $collected_by,
+                'payment_mode'    => $this->input->post('payment_mode'),
+                'received_by'     => $staff_record['id'],
+            );
+            .
+            .
+            .
+           so on
+
+
+
+
+
+
+for multiple 
+
+
+ $utr=$this->input->post('utr');
+              $checkutr_exit               = $this->studentfeemaster_model->checkutr($utr);
+              if($checkutr_exit){
+             //  $this->session->set_userdata('utr', $checkutr_exit);
+                $array = array('status' => 1, 'error' => '');
+               echo json_encode($array);
+              }
+              else{
+                   $utrs=" ";
+                  if (!empty($utr)) { 
+                       $this->studentfeemaster_model->addkutr($utr);
+                        $utrs="(".$utr.")";
+                   }
+                 
+                 
+              // $this->studentfeemaster_model->addkutr($utr);
+              $amountpaid=0;
+               .
+                .
+                .
+                 $total_row          = $this->input->post('row_counter');
+            foreach ($total_row as $total_row_key => $total_row_value) {
+                $fee_category             = $this->input->post('fee_category_' . $total_row_value);
+                $student_transport_fee_id = $this->input->post('trans_fee_id_' . $total_row_value);
+            /*    $json_array = array(
+                     'amount'          => $this->input->post('fee_amount_' . $total_row_value),
+                     'date'            => date('Y-m-d', $this->customlib->datetostrtotime($this->input->post('collected_date'))),
+                     'description'     =>  "(".$utr.")".$this->input->post('fee_gupcollected_note'),
+                   //   'description'     =>  $utrs.$this->input->post('fee_gupcollected_note'),
+                   // 'description'     => $this->input->post('fee_gupcollected_note'),
+                     'amount_discount' => 0,
+                     'collected_by'    => $collected_by,
+                     'amount_fine'     => $this->input->post('fee_groups_feetype_fine_amount_' . $total_row_value),
+                     'payment_mode'    => $this->input->post('payment_mode_fee'),
+                     'received_by'     => $staff_record['id'],
+                           );*/
+                     $amountpaid   = $amountpaid+$this->input->post('fee_amount_' . $total_row_value)+$this->input->post('fee_groups_feetype_fine_amount_' . $total_row_value)   ;     
+                     //amount paid me discount included hai and sirf fine add krna hai then we get paid amount      
+                $json_array = array(
+                       
+                        'amount'          => $this->input->post('fee_amount_' . $total_row_value),
+                        'date'            => date('Y-m-d', $this->customlib->datetostrtotime($this->input->post('collected_date'))),
+                     /* 'date'            => date('Y-m-d'),*/
+                     // 'description'     => $this->input->post('fee_gupcollected_note'),
+    				    'description'     =>  $utrs.$this->input->post('fee_gupcollected_note'),
+                      //'amount_discount' => 0,
+                        'discount_module' => "multi-1.0",//multidiscount starts from here
+                        'discount_type' => $this->input->post('discount_type_' . $total_row_value),
+                        'amount_discount' => $this->input->post('discount_' . $total_row_value),
+                        'collected_by'    => $collected_by,
+                        'amount_fine'     => $this->input->post('fee_groups_feetype_fine_amount_' . $total_row_value),
+                         'amountpaid'   => $this->input->post('fee_amount_' . $total_row_value)+$this->input->post('fee_groups_feetype_fine_amount_' . $total_row_value),
+                        'payment_mode'    => $this->input->post('payment_mode_fee'),
+                        'received_by'     => $staff_record['id'],
+                );
