@@ -1,3 +1,113 @@
+<div class="bozero">
+    <h4 class="pagetitleh2">Details of Academic Record</h4>
+        <div class="around10">
+            <div class="row"> 
+        <table>
+        <!-- row with fixed height-->
+        <tr>
+            <td width="150px;" class="text-center">
+                  <b>Class</b>
+              </td>
+            <td width="150px;" class="text-center">
+                <b>Board</b>
+            </td>
+            <td width="150px;" class="text-center">
+                <b>Passing Year</b>
+            </td>
+            <td width="150px;" class="text-center">
+                  <b>Roll No.</b>
+              </td>
+              <td width="150px;" class="text-center">
+                  <b>Marks Obt</b>
+              </td>
+              <td width="150px;" class="text-center">
+                  <b>Marks %</b>
+              </td>
+              <td width="250px;" class="text-center">
+                  <b>Which School/College did you Pass</b>
+              </td>
+        </tr>
+ 
+        <!-- row without fixed height-->
+        <tr>
+            <td width="150px;" class="text-center">
+                  <b>Matric (10th)</b>
+              </td>
+            <td width="150px;" class="text-center">
+                <textarea style="border-color: transparent" name="matric_board" value=""></textarea>
+            </td>
+            <td width="150px;" class="text-center">
+               <textarea style="border-color: transparent" name="matric_passing_year" value=""></textarea>
+            </td>
+            <td width="150px;" class="text-center">
+                 <textarea style="border-color: transparent" name="matric_roll_num" value=""></textarea>
+              </td>
+              <td width="150px;" class="text-center">
+                  <textarea style="border-color: transparent" name="matric_marks" value=""></textarea>
+              </td>
+              <td width="150px;" class="text-center">
+                  <textarea style="border-color: transparent" name="matric_percent" value=""></textarea>
+              </td>
+              <td width="250px;" class="text-center">
+                  <textarea style="border-color: transparent" name="matric_school" value=""></textarea>
+              </td>
+        </tr>
+        <tr>
+            <td width="150px;" class="text-center">
+                  <b>Inter (12th)</b>
+              </td>
+            <td width="150px;" class="text-center">
+                <textarea style="border-color: transparent" name="inter_board" value=""></textarea>
+            </td>
+            <td width="150px;" class="text-center">
+               <textarea style="border-color: transparent" name="inter_passing_year" value=""></textarea>
+            </td>
+            <td width="150px;" class="text-center">
+                 <textarea style="border-color: transparent" name="inter_roll_num" value=""></textarea>
+              </td>
+              <td width="150px;" class="text-center">
+                  <textarea style="border-color: transparent" name="inter_marks" value=""></textarea>
+              </td>
+              <td width="150px;" class="text-center">
+                  <textarea style="border-color: transparent" name="inter_percent" value=""></textarea>
+              </td>
+              <td width="250px;" class="text-center">
+                  <textarea style="border-color: transparent" name="inter_school" value=""></textarea>
+              </td>
+        </tr>
+        
+        <tr>
+            <td width="150px;" class="text-center">
+                  <b>Graduation</b>
+              </td>
+            <td width="150px;" class="text-center">
+                <textarea style="border-color: transparent" name="graduation_board" value=""></textarea>
+            </td>
+            <td width="150px;" class="text-center">
+               <textarea style="border-color: transparent" name="graduation_passing_year" value=""></textarea>
+            </td>
+            <td width="150px;" class="text-center">
+                 <textarea style="border-color: transparent" name="graduation_roll_num" value=""></textarea>
+              </td>
+              <td width="150px;" class="text-center">
+                  <textarea style="border-color: transparent" name="graduation_marks" value=""></textarea>
+              </td>
+              <td width="150px;" class="text-center">
+                  <textarea style="border-color: transparent" name="graduation_percent" value=""></textarea>
+              </td>
+              <td width="250px;" class="text-center">
+                  <textarea style="border-color: transparent" name="graduation_school" value=""></textarea>
+              </td>
+        </tr>
+        
+        
+    </table>
+                            
+                           </div>
+                     </div>
+             </div>
+
+
 
                 'matric_board'         => $this->input->post('matric_board'),
                 'matric_passing_year'         => $this->input->post('matric_passing_year'),
