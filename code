@@ -121,3 +121,11 @@
                 'inter_marks'         => $this->input->post('inter_marks'),
                 'inter_percent'         => $this->input->post('inter_percent'),
                 'inter_school'         => $this->input->post('inter_school'),
+   // ======================graduation==================
+                'graduation_board'         => $this->input->post('graduation_board'),
+                'graduation_passing_year'         => $this->input->post('graduation_passing_year'),
+                'graduation_roll_num'         => $this->input->post('graduation_roll_num'),
+                'graduation_marks'         => $this->input->post('graduation_marks'),
+                'graduation_percent'         => $this->input->post('graduation_percent'),
+                'graduation_school'         => $this->input->post('graduation_school'),
+                // ====================================================================================================
