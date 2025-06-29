@@ -1,0 +1,65 @@
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <table id="headerTable">
+        <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+        </tr>
+        <tr>
+            <td>Data 1</td>
+            <td>Data 2</td>
+        </tr>
+    </table>
+    <button onclick="fnExcelReport()">Export to Excel</button>
+</body>
+</html>
+```
+
+
+
+
+
+
+
+
+
+
+
+updated code
+
+
+function fnExcelReport() {
+    var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+    var j = 0;
+    var tab = document.getElementById('headerTable'); // id of table
+
+    for (j = 0; j < tab.rows.length; j++) {
+        tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+    }
+
+    tab_text = tab_text + "</table>";
+    tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, ""); // Remove links
+    tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // Remove images
+    tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // Remove input fields
+
+    // Create a Blob object with the table data
+    var blob = new Blob([tab_text], { type: 'application/vnd.ms-excel' });
+    
+    // Create a link element
+    var link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'Report.xls'; // Set the default file name
+    link.click(); // Trigger the download
+}
+
+
+use blob
+
+
+
+

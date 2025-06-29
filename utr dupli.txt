@@ -1,0 +1,20 @@
+
+
+update it it creatoing issue for cash
+
+
+
+  $utr=$this->input->post('utr');
+              if (!empty($utr)) { 
+              $checkutr_exit               = $this->studentfeemaster_model->checkutr($utr);
+             
+              if($checkutr_exit){
+               $this->session->set_userdata('utr', $checkutr_exit);
+                $array = array('status' => 1, 'error' => '');
+               echo json_encode($array);
+              }
+              }
+              else{
+                   if (empty($utr)) { 
+                       $this->studentfeemaster_model->addkutr($utr);
+                   }

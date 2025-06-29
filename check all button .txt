@@ -1,0 +1,4 @@
+$(document).on('change','#select_all',function(){
+  console.log("sdfsfs");
+        $('input:checkbox').not(this).prop('checked', this.checked);
+});

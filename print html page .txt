@@ -1,0 +1,43 @@
+view/student/studentshow
+
+<style>
+    @media print {
+        
+  #content{border:3px solid lightgrey;}
+  #printPageButton {
+    display: none;
+  }
+  #listp{
+    display: none;
+  }
+  #sidebarCollapse{
+      display: none;
+  }
+  .main-footer{
+      display: none;
+  }
+}
+</style>
+
+near line no197
+<button id="printPageButton" onClick="window.print();">Print</button>
+
+
+
+sring posion
+
+  <!--<td class="text text-right">  <?php 
+                                                              //  print_r($fee_deposits_value->collected_by);
+                                                                $position = strpos($fee_deposits_value->collected_by, '(');
+                                                              //  echo $position;
+                                                                $result = substr($fee_deposits_value->collected_by, 0, $position);
+                                                              //  echo $result; ?></td>-->
+
+
+indictor for data check
+   public function testp()
+    {
+     $data=$this->session->has_userdata('some_name');   
+     echo "<pre>";var_dump($data);
+    }
+    

@@ -1,0 +1,3 @@
+  $sql = 'SELECT * FROM `custom_fields` INNER JOIN online_admission_custom_field_value on online_admission_custom_field_value.belong_table_id=' . $CI->db->escape($rel_id) . ' and online_admission_custom_field_value.custom_field_id=custom_fields.id WHERE belong_to =' . $CI->db->escape($belongs_to) . ' and online_admission_custom_field_value.custom_field_id=' . $CI->db->escape($field_id);
+        $query = $CI->db->query($sql);
+        return $query->row();

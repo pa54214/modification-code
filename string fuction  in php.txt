@@ -1,0 +1,9 @@
+sring posion
+
+  <!--<td class="text text-right">  <?php 
+                                                              //  print_r($fee_deposits_value->collected_by);
+                                                                $position = strpos($fee_deposits_value->collected_by, '(');
+                                                              //  echo $position;
+                                                                $result = substr($fee_deposits_value->collected_by, 0, $position);
+                                                              //  echo $result; ?></td>-->
+

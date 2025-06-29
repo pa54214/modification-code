@@ -1,0 +1,60 @@
+array(16) {
+  ["student_id"]=>
+  string(4) "3188"
+  ["student_session_id"]=>
+  string(4) "3203"
+  ["invoice"]=>
+  array(2) {
+    [0]=>
+    array(3) {
+      ["invoice_id"]=>
+      int(1509)
+      ["sub_invoice_id"]=>
+      int(1)
+      ["fee_category"]=>
+      string(4) "fees"
+    }
+    [1]=>
+    array(3) {
+      ["invoice_id"]=>
+      int(1510)
+      ["sub_invoice_id"]=>
+      int(1)
+      ["fee_category"]=>
+      string(4) "fees"
+    }
+  }
+  ["contact_no"]=>
+  string(10) "9128160783"
+  ["email"]=>
+  string(0) ""
+  ["parent_app_key"]=>
+  NULL
+  ["amount"]=>
+  string(17) "(2255.00,2100.00)"
+  ["fine_type"]=>
+  string(11) "(none,none)"
+  ["due_date"]=>
+  string(3) "(,)"
+  ["fine_percentage"]=>
+  string(11) "(0.00,0.00)"
+  ["fine_amount"]=>
+  string(11) "(0.00,0.00)"
+  ["fee_group_name"]=>
+  string(45) "(Admission I,UG Semester 1 Examination Fee  )"
+  ["type"]=>
+  string(30) "(Admission I,Examination Fee )"
+  ["code"]=>
+  string(52) "(Semester I,Semester I Examination Fee (Gen/BC/WBC))"
+  ["fee_category"]=>
+  string(4) "fees"
+  ["send_type"]=>
+  string(5) "group"
+}
+
+
+http://www.bulksms.saakshisoftware.com/api/mt/SendSMS?user=demo&password=demo123&senderid=WEBSMS&channel=Promo&DCS=0&flashsms=0&number=91989xxxxxxx&text=test message&route=##
+
+
+
+http://www.bulksms.saakshisoftware.com/api/mt/SendSMS?user=UDSYGURUKUL1&password=9470230388&senderid=WEBSMS&channel=Promo&DCS=0&flashsms=0&number=91989xxxxxxx&text=test message&route=##
