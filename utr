@@ -210,3 +210,26 @@ function resetp(num,amountopay){
                         'payment_mode'    => $this->input->post('payment_mode_fee'),
                         'received_by'     => $staff_record['id'],
                 );
+----------------------------------------------------------------------------------------
+  public function checkutr($utr)
+ 
+{
+        $sql = "SELECT * FROM utrcheck WHERE utr='" . $utr."'";
+        $query = $this->db->query($sql);
+        return $query->row();
+            
+    }
+
+  public function addkutr($utr)
+ 
+{
+        $sql = "INSERT INTO `utrcheck` (`utr`) VALUES( '" .$utr." '); ";
+        $query = $this->db->query($sql);
+        //return $query->row();
+      /*if($query->row() > 0){
+               return true;
+            }else{
+              return false;
+          }*/
+            
+    }
