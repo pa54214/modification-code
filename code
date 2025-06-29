@@ -1,1 +1,13 @@
 
+                'matric_board'         => $this->input->post('matric_board'),
+                'matric_passing_year'         => $this->input->post('matric_passing_year'),
+                'matric_roll_num'         => $this->input->post('matric_roll_num'),
+                'matric_marks'         => $this->input->post('matric_marks'),
+                'matric_percent'         => $this->input->post('matric_percent'),
+                'matric_school'         => $this->input->post('matric_school'),
+                'inter_board'         => $this->input->post('inter_board'),
+                'inter_passing_year'         => $this->input->post('inter_passing_year'),
+                'inter_roll_num'         => $this->input->post('inter_roll_num'),
+                'inter_marks'         => $this->input->post('inter_marks'),
+                'inter_percent'         => $this->input->post('inter_percent'),
+                'inter_school'         => $this->input->post('inter_school'),
