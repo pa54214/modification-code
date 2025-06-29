@@ -1,0 +1,97 @@
+## layout 
+<!-- Added Agai for layout -->
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <section class="content-header">
+
+            </section>
+        </div>
+   </div> 
+    <!-- /.control-sidebar -->
+    <section class="content">
+        <div class="row">
+       </div>
+   </section>
+</div>
+#javascript event action="<?php echo base_url() . "admin/patient" ?>" 
+
+ $('#myModal').modal('hide');
+ $(this).find('#formaddpa')[0].reset();
+model.css("display", "inline").fadeOut(2000);
+ $("span").css("display", "inline").fadeOut(2000);
+ $("input").focus();
+$("select").focus(function(){
+    $(this).css("background-color", "green");
+  });
+##modify table
+ALTER TABLE patients MODIFY dob varchar(255);
+##date and time
+echo date("d-m-Y h:i:s A");
+
+#show fee after exclude some letter 
+$str= explode("/",$fee_value->name);
+           //echo $fee_value->name."<br>";
+            echo $str[0] ;//. " (" . $fee_value->type . ")";
+
+#for fee show after admission
+if((substr("$fee_value->name",0,11) == 'Tuition Fee') && (  date('F', strtotime($fee_value->due_date))  >= date('F', strtotime($student['admission_date'])))){
+
+
+}elseif((substr("$fee_value->name",0,11) == 'Tuition Fee') && ( $fee_value->due_date  <= $student['admission_date'])){
+
+}else{
+
+}
+
+
+#for admit card due to new formate
+if(substr($subjectCode,0,1) == 'S'){ 
+
+}
+
+#date formate dob in class mnetor
+$studentDetails['dob']
+ echo date($this->customlib->getSchoolDateFormat(), strtotime($student_value->dob))
+ echo date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($studentDetails['dob']));
+ 
+# for scroller at fee 
+ <div class="table-responsive border0"   style=" overflow:scroll; height:400px;">
+</div>
+
+#select query for uplaoded file in database for Download center
+select share_upload_contents.*,
+upload_contents.real_name,
+upload_contents.thumb_path,upload_contents.dir_path,
+upload_contents.img_name,
+upload_contents.thumb_name,
+upload_contents.file_type,
+upload_contents.mime_type,upload_contents.vid_url,
+upload_contents.vid_title from share_upload_contents 
+join upload_contents ON 
+upload_contents.id = share_upload_contents.upload_content_id;
+
+## grading scale
+
+<strong style="font-weight: bold; font-size: 2em; color: #000;">
+            <tr >
+                
+                                     
+                  <th class="text-left" style="background-color: transparent;">Marks Range</td>
+                  <th class="text-left" style="background-color: transparent;"> (91%- 100%)</td>
+                   <th class="text-left" style="background-color: transparent;">(81%- 90%)</td>
+                     <th class="text-left" style="background-color: transparent;">(71%- 80%)</td>
+                     <th class="text-left" style="background-color: transparent;">(61%- 70%)</td>
+                     <th class="text-left" style="background-color: transparent;">(51%- 60%)</td><th class="text-left" style="background-color: transparent;">(41%- 50%)</td>
+                    </tr> 
+                    
+                   <tr >
+                
+                <th class="text-left" style="background-color: transparent;">Grade</td>
+                  <th class="text-left" style="background-color: transparent;"> A1</td>
+                   <th class="text-left" style="background-color: transparent;">A2</td>
+                     <th class="text-left" style="background-color: transparent;">B1</td>
+                     <th class="text-left" style="background-color: transparent;">B2</td>
+                     <th class="text-left" style="background-color: transparent;">C1</td><th class="text-left" style="background-color: transparent;">C2 </td>
+                  </tr>
+                  </strong>
