@@ -1,0 +1,184 @@
+## back button
+
+    <div class="col-md-8">
+                                <div class="btn-group pull-right">
+                                    <a href="<?php echo base_url() ?>studentfee" type="button" class="btn btn-primary btn-xs">
+                                        <i class="fa fa-arrow-left"></i> <?php echo $this->lang->line('back'); ?></a>
+                                </div>
+                            </div>
+
+##
+
+#fine claculation
+$date1 = $fee_value->due_date;
+$date2 = date('Y-m-d');
+$timestamp1 = strtotime($date1);
+$timestamp2 = strtotime($date2);
+$difference = $timestamp2 - $timestamp1;
+$difference = strtotime(date('Y-m-d')) - strtotime($fee_value->due_date);
+$lateday=floor($difference/(24*60*60)); for day calculation
+
+
+for search
+SELECT  FROM `students` WHERE `mobileno` LIKE '9304648947'
+check student delete krne ke bad uska assigned id and fee and marks delete hota hai ya nhi
+
+### on click jquery
+<script>
+$(document).ready(function() {
+	function myFunction(){
+		alert('This is an alert message.');
+	}
+	$('.mybtn').click(function(){
+		myFunction();
+	});
+});
+</script>
+<button type="button">Click me</button>
+
+##https://api.whatsapp.com/send/?phone=%2B919301447051&text&type=phone_number&app_absent=0
+
+##<iframe id="video" width="420" height="315" src="//www.youtube.com/embed/' + youtubeID + '?rel=0" frameborder="0" allowfullscreen></iframe>
+
+UPDATE `front_cms_pages` SET `description` = '<>'
+for discount
+function totalupdate(num,prevalue) {
+    var total=$("#total").val();
+    var value=$("input[name='fee_amount_"+num+"']").val();
+    var newvalue=prevalue-value
+    total=total-newvalue;
+    $("#total").val(total);
+}
+for discount id selector
+ var value=$("input[name='fee_amount_1']").val();
+##challene
+same page pe rahna in ajax print page pe redirect nhi krna and console pe print krna   
+server se localhost pe data send krna Ask from go daddy 
+div define kr code dusre page pe likhna refernce hospital software
+
+##send data using ajax and get response form data 
+ $.ajax({
+            type: "POST",
+            url: form.attr('action'),
+            data: formdata, // serializes the form's elements.
+            dataType: "JSON", // serializes the form's elements.
+            beforeSend: function () {
+                subsubmit_button.button('loading');
+            },
+            success: function (response)
+            {
+                Popup(response.page);
+
+            },
+       error: function (xhr) { // if error occured
+
+                alert("<?php echo $this->lang->line('error_occurred_please_try_again'); ?>");
+                subsubmit_button.button('reset');
+            },
+            complete: function () {
+                subsubmit_button.button('reset');
+            }
+        });
+
+##multiple select
+<input type="checkbox" id="select_all" />
+  $(document).on('click', '#select_all', function () {
+        $(this).closest('table').find('td input:checkbox').prop('checked', this.checked);
+    });
+## single single select
+
+<input type="checkbox" class="checkbox center-block"  name="exam_group_class_batch_exam_student_id[]" 
+data-student_id="<?php echo $student_value->exam_group_class_batch_exam_student_id; ?>" 
+value="<?php echo $student_value->exam_group_class_batch_exam_student_id; ?>">
+ var list_selected =  $('form#printCard input[name="exam_group_class_batch_exam_student_id[]"]:checked').length;
+Welcome@2022#
+##debug code
+echo "<pre>";
+var_dump($array);
+echo "</pre>";
+
+## increase date code for valid till 
+ $date = strtotime("+14 day", strtotime($result["appointment_date"]));
+echo date("d-m-Y", $date);
+          
+### page break
+<style type="text/css">
+    .page-break { display: block; page-break-before: always; }
+    @media print {
+        .page-break { display: block; page-break-before: always; 
+</style>
+
+Apply div for page-break   
+
+#### for print issue of  fee  replace by below line
+ <img  src="<?php echo base_url().'uploads/print_headerfooter/student_receipt/'.$feeheader;?>" 
+style="height:100px;width:;">
+
+### for each loop
+$array=array(
+  "0"=> array (
+    "id"=> "7",
+    "charge_type_id"=> "1",
+    "name"=> "Normal",
+    "description"=> "Normal",
+    "short_code"=>"",
+    "is_default"=> "",
+    "created_at"=>""
+  ),
+  "1"=> array(
+    "id"=> "8",
+    "charge_type_id"=> "1",
+    "name"=>"Emergency",
+    "description"=> "Emergency",
+    "short_code"=>" ",
+    "is_default"=> " ",
+    "created_at"=> " "
+  )
+);
+
+foreach ($array as $key => $value) {
+    echo $key;echo "<br>";
+   // echo $array[$key];echo "<br>"; it will give error  Array to string conversion
+   echo $array[$key]['id'];echo "<br>";
+   echo  $value['id']; echo "<br>";        //for aeeay
+echo $value->id // for objectS                                      
+}
+
+## Admit card printing issue check src path
+<img src="<?php echo  'https://dpsparsauni.com/uploads/admit_card/' . $admitcard->background_img; ?>" class="tcmybg" width="100%" height="100%" />
+echo base_url().'uploads/admit_card/' . $admitcard->background_img;        
+
+##data send to controller from view using ajax for send reminder class wise by prince own
+    $(document).ready(function(){
+    $("#Reminder").click(function(){
+     var   dataString = <?php echo json_encode($details); ?> ; // array?
+    var jsonString = JSON.stringify(dataString);
+//  console.log(jsonString);
+   $.ajax({
+        type: "POST",
+        url: "http://imperialacademybairgania.com/financereports/details",
+        data: {data : jsonString}, 
+        success: function(result){
+             console.log(result);
+        }
+    });
+    });
+});
+     
+### session
+ $this->session->set_userdata('name', 'OPD_Out_Patient');
+$name = $this->session->userdata('name');
+## for view
+public function view(){
+    $name = $this->session->userdata('name');
+    echo "<pre>";
+var_dump(json_decode($name));
+echo"</pre>";
+
+}
+
+## exam auto submit buttom
+setTimeout(displayTime, 1000);
+
+## repeataion of work
+ setInterval()
