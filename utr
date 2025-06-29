@@ -39,6 +39,120 @@
 
 for multiple 
 
+-------------------------------------------------------------------------------
+   &nbsp;&nbsp;&nbsp;
+                
+                <div class="row">
+             <div class="col-sm-6">
+              Fees:-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="fee_amount_<?php echo $row_counter; ?>" 
+              type="text" value="<?php echo $amount_to_be_pay; ?>"  
+              onchange="totalupdate(<?php echo $row_counter; ?>, <?php echo $amount_to_be_pay; ?>)" >
+              </div>
+              
+              <div class="col-sm-6">
+              Fine:-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input name="fee_groups_feetype_fine_amount_<?php echo $row_counter; ?>"  type="text" value="<?php echo (int)$fees_fine_amount; ?>" onchange="fineupdate(<?php echo $row_counter; ?>)"><br>
+              </div>
+
+                </div>
+                <div style="margin-top:5px;"></div>
+              <div class="row">
+              
+              
+             <!-- <div class="col-sm-6">
+              Discount( % ):-<input name="discount_percentage_<?php echo $row_counter; ?>" type="text" value="0"><div style="margin-top:5px;"></div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+           <button type="button" onclick="discountpercentage(<?php echo $row_counter; ?>)">Apply By %</button>
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <button type="button" onclick="resetp(<?php echo $row_counter; ?>, <?php echo $amount_to_be_pay; ?>)">Reset</button>
+             </div> -->
+             
+             <div class="col-sm-6">
+                 Discount Type:-<!--<input name="discount_type_<?php echo $row_counter; ?>" type="text" value="NONE" placeholder="Discount Type" >-->
+                   
+                     
+                     
+                     
+                     <select name="discount_type_<?php echo $row_counter; ?>" id="">
+                   <!--   <option selected="selected">selected</option>-->
+                     <option value="Others">Others</option>
+  <option value="EBC">EBC</option>
+  <option value="SC/St">SC/ST</option>
+  <option value="Meritorious">Meritorious</option>
+  <option value="Poor">Poor</option>
+ 
+</select> 
+
+</div> 
+
+
+                        <div class="col-sm-6">
+             Discount:-<input name="discount_<?php echo $row_counter; ?>" type="text" value="0"><div style="margin-top:5px;"></div>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <button type="button" onclick="flat(<?php echo $row_counter; ?>)">Apply BY Rs</button>
+             </div>
+          </div>
+               
+           <br>
+
+
+
+
+
+At footer 
+
+<div class="row fees-footer">
+     <div class="col-md-4 ">
+        <span class="pull-right">
+            <?php //echo $currency_symbol.amountFormat((float) $total_amount, 2, '.', '')col-md-offset-1; ?>
+            <input name="total" id="total" type="text" value="<?php echo  $total_amount; ?> "  readonly>
+            
+        </span>
+    </div>
+    <div class="col-md-1">
+        <button   type="button" class="btn-close" data-dismiss="modal" aria-label="Close" >&times;</button>
+        </div>
+    <div class="col-md-2">
+       <input type="reset"  class="btn btn-primary"  value="Default">
+       </div>
+    <div class="col-md-5">
+          <button type="submit" class="btn btn-primary pull-right payment_collect" data-loading-text="<i class='fa fa-spinner fa-spin '></i><?php echo $this->lang->line('processing')?>"><i class="fa fa-money"></i> <?php echo $this->lang->line('pay'); ?></button>
+    </div>
+</div>
+-------------------------------------------------------------------------------------------------------------------------------------------
+function fineupdate(num) {
+          var total=$("#total").val();
+          var namee='fee_groups_feetype_fine_amount_'+num;
+          var value=$("input[name="+namee+"]").val();
+          total=   parseInt(total)+parseInt(value);
+          $("#total").val(total);
+}
+function flat(num) {
+  var total=$("#total").val();
+   if($("input[name='discount_"+num+"']").val() !== 0){
+            var value=$("input[name='discount_"+num+"']").val()
+            total=total-value;
+            value=$("input[name='fee_amount_"+num+"']").val() - value;
+            $("input[name='fee_amount_"+num+"']").val(value);
+            $("#total").val(total);
+         }
+} 
+
+function totalupdate(num,prevalue) {
+    var total=$("#total").val();
+    var value=$("input[name='fee_amount_"+num+"']").val();
+    var newvalue=prevalue-value
+    total=total-newvalue;
+    $("#total").val(total);
+}
+function resetp(num,amountopay){
+ $("input[name='fee_amount_"+num+"']").val(amountopay);
+ $("input[name='fee_groups_feetype_fine_amount_"+num+"']").val(0);
+ $("input[name='discount_percentage_"+num+"']").val(0);
+ $("input[name='discount_"+num+"']").val(0);
+}
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
  addfeegrp() method 
 
  $utr=$this->input->post('utr');
