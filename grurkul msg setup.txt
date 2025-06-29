@@ -12,7 +12,7 @@
  $sms_detail      = $this->CI->smsconfig_model->getActiveSMS();
  if ($chk_mail_sms['sms'] && $chk_mail_sms['template'] != "" && !empty($sms_detail)) {
    
-$url="http://bulksms.saakshisoftware.com/api/mt/SendSMS?user=UDSYGURUKUL1&password=9470230388&senderid=UDSYGU&channel=Trans&DCS=0&flashsms=0&number=".$number."&text=".rawurlencode($message)."&route=04&DLTTemplateId=1707173062463970098&PEID=1701171783873850699";
+$url="http://bulksms.saakshisoftware.com/api/mt/SendSMS?user=UDSYGURUKUL1&password=&senderid=UDSYGU&channel=Trans&DCS=0&flashsms=0&number=".$number."&text=".rawurlencode($message)."&route=04&DLTTemplateId=1707173062463970098&PEID=1701171783873850699";
     $ch=curl_init();
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_URL, $url);
