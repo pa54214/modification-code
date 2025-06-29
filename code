@@ -132,3 +132,42 @@
 
 
 
+  
+  ALTER TABLE students
+ADD matric_passing_year varchar(255) NOT NULL;
+
+ALTER TABLE students
+ADD  matric_marks varchar(255) NOT NULL;
+
+ALTER TABLE students
+ADD matric_percent varchar(255) NOT NULL;
+
+ALTER TABLE students
+ADD matric_roll_num varchar(255) NOT NULL;
+
+ALTER TABLE students
+ADD matric_school varchar(255) NOT NULL;
+
+
+
+
+  ALTER TABLE students
+ADD matric_board varchar(255) NOT NULL;
+
+
+ ALTER TABLE students
+ADD inter_board varchar(255) NOT NULL;
+  ALTER TABLE students
+ADD inter_passing_year varchar(255) NOT NULL;
+
+ALTER TABLE students
+ADD  inter_roll_num varchar(255) NOT NULL;
+
+ALTER TABLE students
+ADD inter_marks varchar(255) NOT NULL;
+
+ALTER TABLE students
+ADD inter_percent varchar(255) NOT NULL;
+
+ALTER TABLE students
+ADD inter_school varchar(255) NOT NULL;
