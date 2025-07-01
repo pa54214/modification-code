@@ -1,3 +1,9 @@
+pattern="[A-Za-z]*"  firstname
+
+pattern="[0-9]{10}"   maxlength="10" mobile no
+pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"  eamil
+
+-----------------------
 <input type="text" name="fullname" pattern="^[A-Za-z\s]{2,50}$" title="Name should only contain letters and spaces (2-50 characters)">
 
 First letter capital + only letters (no digits/symbols):
