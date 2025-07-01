@@ -64,6 +64,31 @@ title="Enter valid driving license number (e.g. MH12 20110012345)">
 <input type="text" name="address" 
 pattern="^[A-Za-z0-9\s,\/\-]{5,100}$" 
 title="Enter a valid address (letters, numbers, /, -, comma allowed)">
+-------------------------------------------------------------------------
+
+
+<input type="file" name="photo" accept=".jpg, .jpeg, .png" required>
+
+
+<input type="file" name="doc" accept=".pdf" required>
+
+------------------------------------------------------
+max 2MB
+<input type="file" id="uploadFile" name="file" accept=".jpg, .png">
+
+<script>
+document.getElementById("uploadFile").addEventListener("change", function () {
+  const file = this.files[0];
+  if (file) {
+    const maxSize = 2 * 1024 * 1024; // 2MB
+    if (file.size > maxSize) {
+      alert("File size should be less than 2MB");
+      this.value = ""; // Reset file input
+    }
+  }
+});
+</script>
+
 
 
 
