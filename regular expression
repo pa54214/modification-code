@@ -28,6 +28,12 @@ required title="Enter a valid 10-digit number (with or without +91)">
 pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" 
 required title="Password must be at least 8 characters long and contain at least 1 letter and 1 number">
 
+
+<input type="password" name="password" 
+pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$" 
+title="At least 1 uppercase, 1 lowercase, 1 number, 1 special character, 8+ characters">
+
+
 ------------------------------------------------------------------
 <input type="text" name="aadhaar" pattern="^\d{4}\s\d{4}\s\d{4}$" title="Enter Aadhaar in XXXX XXXX XXXX format">
 ------------------------------------------------------
@@ -52,5 +58,12 @@ title="Enter valid 15-digit GSTIN">
 <input type="text" name="dl" 
 pattern="^[A-Z]{2}[0-9]{2}\s?[0-9]{11}$" 
 title="Enter valid driving license number (e.g. MH12 20110012345)">
+
+----------------------------------------------------------------------
+
+<input type="text" name="address" 
+pattern="^[A-Za-z0-9\s,\/\-]{5,100}$" 
+title="Enter a valid address (letters, numbers, /, -, comma allowed)">
+
 
 
