@@ -5,3 +5,21 @@ pattern="^[A-Z][a-z]+(\s[A-Z][a-z]+)*$"
 Allow Hindi or Unicode (for international names):
 pattern="^[\p{L}\s.'-]{2,50}$"
 
+
+-----------------------------------------------------
+
+<input type="email" name="email" required>
+
+---------------------------------------------------------
+<input type="tel" name="mobile" pattern="^[6-9]\d{9}$" required title="Enter valid 10-digit mobile number">
+
+------------------------------------------------------------------------------
+<input type="password" name="password" 
+pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" 
+required title="Password must be at least 8 characters long and contain at least 1 letter and 1 number">
+
+------------------------------------------------------------------
+<input type="text" name="aadhaar" pattern="^\d{4}\s\d{4}\s\d{4}$" title="Enter Aadhaar in XXXX XXXX XXXX format">
+
+----------------------------------------------------------------------
+
