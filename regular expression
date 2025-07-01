@@ -88,7 +88,35 @@ document.getElementById("uploadFile").addEventListener("change", function () {
   }
 });
 </script>
+<form id="uploadForm">
+  <input type="file" id="myFile" name="myFile" accept=".jpg,.jpeg,.png" required>
+  <input type="submit" value="Upload">
+</form>
 
+<script>
+document.getElementById("uploadForm").addEventListener("submit", function (e) {
+  const fileInput = document.getElementById("myFile");
+  const file = fileInput.files[0];
+
+  if (file) {
+    const allowedTypes = ["image/jpeg", "image/png"];
+    const maxSize = 2 * 1024 * 1024; // 2MB
+
+    if (!allowedTypes.includes(file.type)) {
+      alert("Only JPG and PNG formats are allowed.");
+      e.preventDefault();
+    } else if (file.size > maxSize) {
+      alert("File size should be under 2MB.");
+      e.preventDefault();
+    }
+  }
+});
+</script>
+
+------------------------------------------------------------------------------
+Mobile par bhi:
+camera ka option bhi aa sakta hai (capture attribute se)
+<input type="file" accept="image/*" capture="environment">
 
 
 
