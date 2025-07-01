@@ -10,6 +10,12 @@ pattern="^[\p{L}\s.'-]{2,50}$"
 
 <input type="email" name="email" required>
 
+
+<input type="text" name="email" 
+pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$" 
+required title="Enter a valid email (e.g. user@example.com)">
+
+
 ---------------------------------------------------------
 <input type="tel" name="mobile" pattern="^[6-9]\d{9}$" required title="Enter valid 10-digit mobile number">
 
@@ -20,6 +26,9 @@ required title="Password must be at least 8 characters long and contain at least
 
 ------------------------------------------------------------------
 <input type="text" name="aadhaar" pattern="^\d{4}\s\d{4}\s\d{4}$" title="Enter Aadhaar in XXXX XXXX XXXX format">
+------------------------------------------------------
+<input type="number" name="age" min="18" max="99" required>
+
 
 ----------------------------------------------------------------------
 
