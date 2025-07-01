@@ -19,6 +19,10 @@ required title="Enter a valid email (e.g. user@example.com)">
 ---------------------------------------------------------
 <input type="tel" name="mobile" pattern="^[6-9]\d{9}$" required title="Enter valid 10-digit mobile number">
 
+<input type="tel" name="phone" 
+pattern="^(\+91[\-\s]?)?[6-9]\d{9}$" 
+required title="Enter a valid 10-digit number (with or without +91)">
+
 ------------------------------------------------------------------------------
 <input type="password" name="password" 
 pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" 
