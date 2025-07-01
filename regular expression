@@ -73,6 +73,9 @@ title="Enter a valid address (letters, numbers, /, -, comma allowed)">
 <input type="file" name="doc" accept=".pdf" required>
 
 ------------------------------------------------------
+
+Optional: Server-side Validation (Recommended) 
+hamesh file validation cliemt side hi krna chaiye
 max 2MB
 <input type="file" id="uploadFile" name="file" accept=".jpg, .png">
 
