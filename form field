@@ -12,3 +12,15 @@
                                                             <option value="HTML">HTML</option>
                                                             <option value="XML">XML</option>
                                                         </select>
+
+
+//   $('select[multiple]').multiselect();
+    $('#Subsidiary_sub').multiselect({
+    columns: 1,
+    texts: {
+        placeholder: 'Select Languages',
+        search     : 'Search Languages'
+    },
+    search: true,
+    selectAll: true
+});
