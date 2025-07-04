@@ -1,4 +1,4 @@
-
+<input type="text" id="fname" name="fname">  input field
    $library_card_aec = $this->input->post('subject_id_aec');
                 $library_card_vac = $this->input->post('subject_id_vac');
                 $library_card_sec = $this->input->post('subject_id_sec');
