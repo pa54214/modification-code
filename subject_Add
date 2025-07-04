@@ -1,0 +1,15 @@
+
+   $library_card_aec = $this->input->post('subject_id_aec');
+                $library_card_vac = $this->input->post('subject_id_vac');
+                $library_card_sec = $this->input->post('subject_id_sec');
+                $inserted_id         = $this->input->post('member_id');
+                $exam_group_class_batch_exam_student_id=$this->input->post('exam_group_class_batch_exam_student_id');
+                $data            = array(
+                    'AEC'     => $library_card_aec,
+                    'VAC'       => $library_card_vac,
+                    'SEC' =>  $library_card_sec,
+                );
+             //   $this->session->set_userdata('id', $exam_group_class_batch_exam_student_id);$this->session->set_userdata('name',  $data );
+                $data = json_encode($data);
+                 $this->examgroupstudent_model->tagsubject(  $exam_group_class_batch_exam_student_id,$data);
+              
