@@ -48,3 +48,16 @@ aec
                           <option value="Swachh Bharat" >Swachh Bharat</option>
                          
                        </select>
+
+
+---------------------------------------------
+ <select  id="blood_group" class="form-control" name="blood_group">
+                          
+                    <option value="English" <?php  if ($student['blood_group'] == "") {  echo "selected=selected";}  ?>>English</option>
+                        <option value="Hindi" <?php  if ($student['blood_group'] == "") {  echo "selected=selected";}  ?>>Hindi</option>
+                         <option value="Urdu" <?php  if ($student['blood_group'] == "") {  echo "selected=selected";}  ?>>Urdu</option>
+                          <option value="Bangali" <?php  if ($student['blood_group'] == "") {  echo "selected=selected";}  ?>>Bangali</option>
+                          
+                            <option value="Maithili" <?php  if ($student['blood_group'] == "") {  echo "selected=selected";}  ?>>Maithili</option>
+                            <option value="Bhojpuri" <?php  if ($student['blood_group'] == "") {  echo "selected=selected";}  ?>>Bhojpuri</option>
+                       </select>
