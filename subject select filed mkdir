@@ -1,1 +1,50 @@
 subject mkdir
+ <select  id="category_id" name="category_id" class="form-control" >
+                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                            <?php foreach ($categorylist as $category) { ?>
+                         <option value="<?php echo $category['id'] ?>" <?php
+                          if ($category_id == $category['id']) {
+                                 echo "selected=selected";
+                           }
+                         ?>><?php echo $category['category'] ?>
+                         </option>
+                                <?php
+                            }
+                            ?>
+                     </select>
+
+
+aec
+<?php
+                          if ($category_id == $category['id']) {
+                                 echo "selected=selected";
+                           }
+                         ?>
+         <select  id="blood_group" class="form-control" name="blood_group">
+                           <option value=""><?php echo $this->lang->line('select'); ?></option>
+                    <option value="English">English</option>
+                        <option value="Hindi">Hindi</option>
+                         <option value="Urdu" >Urdu</option>
+                          <option value="Bangali" >Bangali</option>
+                          
+                            <option value="Maithili" >Maithili</option>
+                            <option value="Bhojpuri" >Bhojpuri</option>
+                       </select>
+
+ <select  id="weight" class="form-control" name="weight">
+                           <option value=""><?php echo $this->lang->line('select'); ?></option>
+                    <option value="Communication in Every Day Life">Communication in Every Day Life</option>
+                        <option value="Creative Writing">Creative Writing</option>
+                         <option value="Public Speaking in English and Leadership" >Public Speaking in English and Leadership</option>
+                         
+                       </select>
+
+<select  id="measure_date" class="form-control" name="measure_date">
+                           <option value=""><?php echo $this->lang->line('select'); ?></option>
+                         <option value="Sport and Life">Sport and Life</option>
+                        <option value="Development of Personality">Development of Personality</option>
+                         <option value="Ethics and Culture" >Ethics and Culture</option>
+                          <option value="Gandhi and Education" >Gandhi and Education</option>
+                          <option value="Swachh Bharat" >Swachh Bharat</option>
+                         
+                       </select>
