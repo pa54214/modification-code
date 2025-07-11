@@ -258,3 +258,10 @@ ADD inter_percent varchar(255) NOT NULL;
 
 ALTER TABLE students
 ADD inter_school varchar(255) NOT NULL;
+==========================================
+for subject
+ALTER TABLE students ADD MIC varchar(255) NOT NULL;
+ALTER TABLE students ADD MDC varchar(255) NOT NULL;
+ALTER TABLE students ADD AEC varchar(255) NOT NULL;
+ALTER TABLE students ADD SEC varchar(255) NOT NULL;
+ALTER TABLE students ADD VAC varchar(255) NOT NULL;
