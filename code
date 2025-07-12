@@ -265,3 +265,6 @@ ALTER TABLE students ADD MDC varchar(255) NOT NULL;
 ALTER TABLE students ADD AEC varchar(255) NOT NULL;
 ALTER TABLE students ADD SEC varchar(255) NOT NULL;
 ALTER TABLE students ADD VAC varchar(255) NOT NULL;
+==================================================
+ALTER TABLE students ADD marital_status varchar(20) NOT NULL;
+ALTER TABLE students ADD Registration_nop varchar(20) NOT NULL;
