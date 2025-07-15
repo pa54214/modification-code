@@ -268,3 +268,31 @@ ALTER TABLE students ADD VAC varchar(255) NOT NULL;
 ==================================================
 ALTER TABLE students ADD marital_status varchar(20) NOT NULL;
 ALTER TABLE students ADD Registration_nop varchar(20) NOT NULL;
+
+===========================================================
+for online form
+ALTER TABLE online_admissions ADD MIC varchar(255) NOT NULL;
+ALTER TABLE online_admissions ADD MDC varchar(255) NOT NULL;
+ALTER TABLE online_admissions ADD AEC varchar(255) NOT NULL;
+ALTER TABLE online_admissions ADD SEC varchar(255) NOT NULL;
+ALTER TABLE online_admissions ADD VAC varchar(255) NOT NULL;
+
+ALTER TABLE online_admissions ADD marital_status varchar(20) NOT NULL;
+ALTER TABLE online_admissions ADD Registration_nop varchar(20) NOT NULL;
+
+ALTER TABLE online_admissions ADD matric_board varchar(255) NOT NULL;
+ALTER TABLE online_admissions ADD matric_passing_year varchar(255) NOT NULL;
+ALTER TABLE online_admissions ADD matric_roll_num varchar(255) NOT NULL;
+ALTER TABLE online_admissions ADD  matric_marks varchar(255) NOT NULL;
+ALTER TABLE online_admissions ADD matric_percent varchar(255) NOT NULL;
+ALTER TABLE online_admissions ADD matric_school varchar(255) NOT NULL;
+
+for inter
+ALTER TABLE online_admissions ADD inter_board varchar(255) NOT NULL;
+ALTER TABLE online_admissions ADD inter_passing_year varchar(255) NOT NULL;
+ALTER TABLE online_admissions ADD  inter_roll_num varchar(255) NOT NULL;
+ALTER TABLE online_admissions ADD inter_marks varchar(255) NOT NULL;
+ALTER TABLE online_admissions ADD inter_percent varchar(255) NOT NULL;
+ALTER TABLE online_admissions ADD inter_school varchar(255) NOT NULL;
+
+=====================================================================================
