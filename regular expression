@@ -10,7 +10,16 @@ First letter capital + only letters (no digits/symbols):
 pattern="^[A-Z][a-z]+(\s[A-Z][a-z]+)*$"
 Allow Hindi or Unicode (for international names):
 pattern="^[\p{L}\s.'-]{2,50}$"
-
+------------------------------------------------------------------
+<input  class="creditCardText" id="adhar_no" name="adhar_no" placeholder="" type="text" class="form-control"  value="<?php echo set_value('adhar_no'); ?>"  autocomplete="off" maxlength="14"/>
+                <script>
+                  document.querySelector('.creditCardText').addEventListener('input', function(e) {
+  var foo = this.value.split("-").join("");
+  if (foo.length > 0) {
+    foo = foo.match(new RegExp('.{1,4}', 'g')).join("-");
+  }
+  this.value = foo;
+});</script>
 
 -----------------------------------------------------
 
