@@ -9,6 +9,7 @@ first
    public function check_adm_exists($admission_no)
     {
         $this->db->where('admission_no',$admission_no);
+////$this->db->where(array('admission_no' => $admission_no));
         $query = $this->db->get('students');
        // echo $query->num_rows();
         if ($query->num_rows() > 0) {
