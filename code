@@ -1,4 +1,11 @@
 edit stuent file
+ //$id =3211;
+ $student           = $this->student_model->get($id);
+// $data['student_house']           = $this->student_model->get_house($id); 
+ $data['heightp'] = $this->customlib->gethousename($student['height']);//creating problem in previos session student
+ echo $heightp;
+
+
 
 <div class="bozero">
     <h4 class="pagetitleh2">Details of Academic Record</h4>
