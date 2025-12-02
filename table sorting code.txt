@@ -115,7 +115,7 @@ function sortTable() {
 
 --------------------------------------------------------------------------------------------------
 =============================================================================================
-
+ <div class="tab-pane active table-responsive no-padding" id="tab_1">
  <div class="download_label"> <?php echo $this->lang->line('student'); ?> <?php echo $this->lang->line('list'); ?></div>
                                         <table class="table table-striped table-bordered table-hover table-student" id="ViewData"  cellspacing="0" width="100%">
                                             <thead>
@@ -144,17 +144,25 @@ $count++;
          }
     }
 
+ </tbody>
+                                        </table>
+                                    </div>
+
+java script
 
 
  var table = $('#ViewData').DataTable({
-           // "aaSorting": [],
-             "pageLength": 10,
-             "ordering": false,
-           /* rowReorder: {
-              selector: 'td:nth-child(2)'
+           
+
+  "aaSorting": [],  
+// "pageLength": 10,
+           //  "ordering": false,
+            rowReorder: {
+           selector: 'td:nth-child(2)'
         
-              },*/
+            },
             //responsive: 'false',
+          //  responsive: true,
             dom: "Bfrtip",
             buttons: [
 
@@ -169,4 +177,5 @@ $count++;
                 },
     ]
         });
+
 
