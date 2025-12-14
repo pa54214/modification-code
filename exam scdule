@@ -23,3 +23,10 @@ if (!empty($exam_subjects)) {
 
                                                 echo $exam_subject_value->	credit_hours;//isko subject group ka naam diya gya hai
 -------------------------------------------------------------------------------------------------------------------------------------------
+$student_value->class $student_value->house_name
+$subject->mdcpapertwo  $subject->aecpapertwo
+
+
+compare with 
+
+$subject_value->subject_name
