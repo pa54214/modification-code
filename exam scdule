@@ -1,0 +1,3 @@
+ $id                      = $_POST['exam_id'];
+            $data['examgroupDetail'] = $this->examgroup_model->getExamByID($id);
+            $data['exam_subjects']   = $this->batchsubject_model->getExamSubjects($id);
