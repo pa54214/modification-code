@@ -1,3 +1,22 @@
+------------------------------------------------------------------------
+---------------------------------------------------------------------|||
+  $facultylist=array(array('id'=>1,"faculty"=>'social science'),array('id'=>2,"faculty"=>'Humanities'),array('id'=>3,"faculty"=>'commerce'));
+
+ $Classlist=array(
+            
+            1=>array(array('id'=>1,"class"=>'AIH&C'),array('id'=>2,"class"=>'ECONOMICS'),array('id'=>3,"class"=>'POLITICAL SCIENCE'),array('id'=>4,"class"=>'SOCIOLOGY'),array('id'=>5,"class"=>'HISTORY'),array('id'=>6,"class"=>'HOME SCIENCE'),array('id'=>7,"class"=>'GEOGRAPHY'),array('id'=>8,"class"=>'PSYCHOLOGY'),array('id'=>21,"class"=>'Public Administration'),array('id'=>22,"class"=>'Others')),
+            2=>array(array('id'=>16,"class"=>'ENGLISH'),array('id'=>17,"class"=>'MUSIC'),array('id'=>18,"class"=>'HINDI'),array('id'=>19,"class"=>'URDU')),
+            3=>array(array('id'=>9,"class"=>'ACCOUNTING & FINANCE'),array('id'=>10,"class"=>'MARKETING'),array('id'=>11,"class"=>'HUMAN RESOURCE MANAGEMENT'),)
+            
+            );
+ foreach($Classlist[$subjectfaculty] as $k=>$v){
+//mjc==mic=$Classlist[$subjectfaculty]
+//mdc=classlist-mjc/mic
+}
+
+
+
+
 subject mkdir
  <select  id="category_id" name="category_id" class="form-control" >
                         <option value=""><?php echo $this->lang->line('select'); ?></option>
