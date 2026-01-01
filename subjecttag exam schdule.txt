@@ -1,0 +1,57 @@
+ <td style="width : 20%; font-size : 25px;"><b>SITTING &nbsp;&nbsp;</b></td>
+
+ <td style="width : 20%;"><?= $datemjc;  ?></td>
+                                  <td style="width : 20%;">
+                                      <?php
+                                                $hour = date("H", strtotime($timemjc));
+                                                if ($hour < 12) {
+                                                                 echo "1<sup>st</sup>"."   &nbsp;"."sitting";
+                                                                   }
+                                                else {
+                                                                 echo  "2<sup>nd</sup>"."   &nbsp;"."  sitting";
+                                                     }
+                                                     
+                                                     ?>
+                                  </td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <option value="MJC PAPER-3" <?php if($exam_subject_value->credit_hours == 'MJC PAPER-3'){echo "selected";} ?>>MJC PAPER-3</option> 
+                        <option value="MJC PAPER-4" <?php if($exam_subject_value->credit_hours == 'MJC PAPER-4'){echo "selected";} ?>>MJC PAPER-4</option>
+                        <option value="MIC PAPER-3" <?php if($exam_subject_value->credit_hours == 'MIC PAPER-3'){echo "selected";} ?>>MIC PAPER-3</option>
+                        <option value="MDC PAPER-3" <?php if($exam_subject_value->credit_hours == 'MDC PAPER-3'){echo "selected";} ?>>MDC PAPER-3</option> 
+                        <option value="AEC PAPER-3" <?php if($exam_subject_value->credit_hours == 'AEC PAPER-3'){echo "selected";} ?>>AEC PAPER-3</option> 
+                        <option value="SEC PAPER-3" <?php if($exam_subject_value->credit_hours == 'SEC PAPER-3'){echo "selected";} ?>>SEC PAPER-3</option> 
+            
+                        <option value="MJC PAPER-5" <?php if($exam_subject_value->credit_hours == 'MJC PAPER-5'){echo "selected";} ?>>MJC PAPER-5</option> 
+                        <option value="MJC PAPER-6" <?php if($exam_subject_value->credit_hours == 'MJC PAPER-6'){echo "selected";} ?>>MJC PAPER-6</option> 
+                        <option value="MJC PAPER-7" <?php if($exam_subject_value->credit_hours == 'MJC PAPER-7'){echo "selected";} ?>>MJC PAPER-7</option> 
+                        <option value="MIC PAPER-4 " <?php if($exam_subject_value->credit_hours == 'MIC PAPER-4'){echo "selected";} ?>>MIC PAPER-4</option> 
+                        <option value="AEC PAPER-4" <?php if($exam_subject_value->credit_hours == 'AEC PAPER-4'){echo "selected";} ?>>AEC PAPER-4</option> 
+                       
+                        <option value="MJC PAPER-8" <?php if($exam_subject_value->credit_hours == 'MJC PAPER-8'){echo "selected";} ?>>MJC PAPER-8</option> 
+                        <option value="MJC PAPER-9" <?php if($exam_subject_value->credit_hours == 'MJC PAPER-9'){echo "selected";} ?>>MJC PAPER-9</option> 
+                        <option value="MIC PAPER-5 " <?php if($exam_subject_value->credit_hours == 'MIC PAPER-5'){echo "selected";} ?>>MIC PAPER-5</option>
+                        <option value="MIC PAPER-6" <?php if($exam_subject_value->credit_hours == 'MIC PAPER-6'){echo "selected";} ?>>MIC PAPER-6</option>
+                        <option value="INT PAPER-1" <?php if($exam_subject_value->credit_hours == 'INT PAPER-1'){echo "selected";} ?>>INT PAPER-1</option> 
+                        
+                        <option value="MJC PAPER-10" <?php if($exam_subject_value->credit_hours == 'MJC PAPER-10'){echo "selected";} ?>>MJC PAPER-10</option> 
+                         <option value="MJC PAPER-11" <?php if($exam_subject_value->credit_hours == 'MJC PAPER-11'){echo "selected";} ?>>MJC PAPER-11</option> 
+                          <option value="MJC PAPER-12" <?php if($exam_subject_value->credit_hours == 'MJC PAPER-12'){echo "selected";} ?>>MJC PAPER-12</option> 
+                        <option value="MIC PAPER-7" <?php if($exam_subject_value->credit_hours == 'MIC PAPER-7'){echo "selected";} ?>>MIC PAPER-7</option> 
+                         <option value="MIC PAPER-8" <?php if($exam_subject_value->credit_hours == 'MIC PAPER-8'){echo "selected";} ?>>MIC PAPER-8</option> 
