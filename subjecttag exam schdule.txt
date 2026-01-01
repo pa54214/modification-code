@@ -121,8 +121,9 @@
                  
    );*/
 
-
-
+///subject_name  credit_hours   subject_code   date_from  time_from duration max_marks  isko subject tag ka naam diya gya hai credit_hours
+$datemjc=" ";$datemic=" ";$datemdc=" ";$dateaec=" ";$datesec=" ";$datevac=" ";//added for date
+      $timemjc=" ";$timemic=" ";$timemdc=" ";$timeaec=" ";$timesec=" ";$timevac=" ";//added sitting 
 
 
            foreach ($houseslist as $house_key => $house_value) {
@@ -265,6 +266,7 @@
                         <option value="MIC PAPER-7" <?php if($exam_subject_value->credit_hours == 'MIC PAPER-7'){echo "selected";} ?>>MIC PAPER-7</option> 
 
                          <option value="MIC PAPER-8" <?php if($exam_subject_value->credit_hours == 'MIC PAPER-8'){echo "selected";} ?>>MIC PAPER-8</option> 
+
 
 
 
