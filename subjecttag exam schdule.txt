@@ -136,7 +136,7 @@ $datemjc=" ";$datemic=" ";$datemdc=" ";$dateaec=" ";$datesec=" ";$datevac=" ";//
                                                            
        //compare with subject                                                    
      
-     foreach ($exam_subjects as $subject_key => $subject_value) {
+       foreach ($exam_subjects as $subject_key => $subject_value) {
           $parts =  explode('(',  $subject_value->subject_name);
                                       // echo $parts[0];
                                      //  echo    strtoupper($parts[0]);
@@ -150,38 +150,44 @@ $datemjc=" ";$datemic=" ";$datemdc=" ";$dateaec=" ";$datesec=" ";$datevac=" ";//
           
           if(strtoupper($parts[0])== strtoupper($student_value->class) && strtoupper($subject_value->credit_hours)=='MJC PAPER-1' ){
               
-               $datemjc=$subject_value->date_from;
+              // $datemjc=$subject_value->date_from;
+               $datemjc=  date($this->customlib->getSchoolDateFormat(), strtotime($subject_value->date_from));
                $timemjc=$subject_value->time_from;
               
           }
           if(strtoupper($parts[0])== strtoupper($student_value->house_name) && strtoupper($subject_value->credit_hours)=='MIC PAPER-1' ){
                
-                $datemic=$subject_value->date_from;
+               // $datemic=$subject_value->date_from;
+                 $datemic=date($this->customlib->getSchoolDateFormat(), strtotime($subject_value->date_from));
                 $timemic=$subject_value->time_from;
               
           }
           if(strtoupper($parts[0])== strtoupper($subjectmdc) && strtoupper($subject_value->credit_hours)=='MDC PAPER-1' ){
              
-                $datemdc=$subject_value->date_from;
+              //  $datemdc=$subject_value->date_from;
+                $datemdc=date($this->customlib->getSchoolDateFormat(), strtotime($subject_value->date_from));
                $timemdc=$subject_value->time_from;
               
               
           }
           if(strtoupper($parts[0])== strtoupper($student_value->BLOOD_GROUP) && strtoupper($subject_value->credit_hours)=='AEC PAPER-1' ){
               
-                 $dateaec=$subject_value->date_from;
+                // $dateaec=$subject_value->date_from;
+                 $dateaec=date($this->customlib->getSchoolDateFormat(), strtotime($subject_value->date_from));
                  $timeaec=$subject_value->time_from;
               
           }
           if(strtoupper($parts[0])== strtoupper($student_value->WEIGHT) && strtoupper($subject_value->credit_hours)=='SEC PAPER-1' ){
              
-                  $datesec=$subject_value->date_from;
+                 // $datesec=$subject_value->date_from;
+                 $datesec=date($this->customlib->getSchoolDateFormat(), strtotime($subject_value->date_from));
                   $timesec=$subject_value->time_from;
               
           }
           if(strtoupper($parts[0])== strtoupper($student_value->MEASUREMENT_DATE) && strtoupper($subject_value->credit_hours)=='VAC PAPER-1' ){
               
-                  $datevac=$subject_value->date_from;
+                //  $datevac=$subject_value->date_from;
+                $datevac=date($this->customlib->getSchoolDateFormat(), strtotime($subject_value->date_from));
                  $timevac=$subject_value->time_from;
               
           }
@@ -198,16 +204,18 @@ $datemjc=" ";$datemic=" ";$datemdc=" ";$dateaec=" ";$datesec=" ";$datevac=" ";//
 <td style="width : 20%; font-size : 25px;"><b>SITTING &nbsp;&nbsp;</b></td>
 
  <td style="width : 20%;"><?= $datemjc;  ?></td>
-                                  <td style="width : 20%;">
+                                 <td style="width : 20%;">
                                       <?php
-                                                $hour = date("H", strtotime($timemjc));
+                                                
+                                                 if($timemic != " "){
+                                                     $hour = date("H", strtotime($timemic));
                                                 if ($hour < 12) {
                                                                  echo "1<sup>st</sup>"."   &nbsp;"."sitting";
                                                                    }
                                                 else {
                                                                  echo  "2<sup>nd</sup>"."   &nbsp;"."  sitting";
                                                      }
-                                                     
+                                                 }
                                                      ?>
                                   </td>
 
@@ -266,6 +274,7 @@ $datemjc=" ";$datemic=" ";$datemdc=" ";$dateaec=" ";$datesec=" ";$datevac=" ";//
                         <option value="MIC PAPER-7" <?php if($exam_subject_value->credit_hours == 'MIC PAPER-7'){echo "selected";} ?>>MIC PAPER-7</option> 
 
                          <option value="MIC PAPER-8" <?php if($exam_subject_value->credit_hours == 'MIC PAPER-8'){echo "selected";} ?>>MIC PAPER-8</option> 
+
 
 
 
