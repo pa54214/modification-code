@@ -1,3 +1,129 @@
+//  $facultylist=array(array('id'=>1,"faculty"=>'Social Science'),array('id'=>2,"faculty"=>'Humanities'),array('id'=>3,"faculty"=>'Commerce'));
+      /* $Classlist=array(
+            1=>array(array('id'=>1,"class"=>'ANCIENT HISTORY & CULTURE'),array('id'=>2,"class"=>'ECONOMICS'),array('id'=>3,"class"=>'POLITICAL SCIENCE'),array('id'=>4,"class"=>'SOCIOLOGY'),array('id'=>5,"class"=>'HISTORY'),array('id'=>6,"class"=>'HOME SCIENCE'),array('id'=>7,"class"=>'GEOGRAPHY'),array('id'=>8,"class"=>'PSYCHOLOGY'),array('id'=>21,"class"=>'PUBLIC ADMINISTRATION'),array('id'=>22,"class"=>'Others')),
+            2=>array(array('id'=>16,"class"=>'ENGLISH'),array('id'=>17,"class"=>'MUSIC'),array('id'=>18,"class"=>'HINDI'),array('id'=>19,"class"=>'URDU')),
+            3=>array(array('id'=>9,"class"=>'ACCOUNTING & FINANCE'),array('id'=>10,"class"=>'MARKETING'),array('id'=>11,"class"=>'HUMAN RESOURCE MANAGEMENT'),)
+            
+            );*/
+            
+        /*    $subject=array(
+                      "1"=>array(
+                                               "sesmeter_second"=>array(
+                                                                         
+                                                                         "mdc"=>array(
+                                                                                       "Hindi", "English", "Urdu", "Music", "Accounting & Finance", "Marketing", "Human Resources Management",  ),
+                                                                         "aec"=>array(
+                                                                                        "Environment Science"  ),
+                                                                         "sec"=>array(
+                                                                                        "Big Data Analysis" ,"Personality Development & Communication", "Script Writing" ),
+                                                                         "vac"=>array(
+                                                                                       "Yoga Philosophy & Practice", "Constitutional Values and Fundamental Duties",  "Emotional Intelligence" ),
+                                                                                       
+                                                                                       
+                                                                        ),
+                                                "sesmeter_Third"=>array(
+                                                                        
+                                                                         "mdc"=>array(
+                                                                                       "Hindi", "English", "Urdu", "Music", "Accounting & Finance", "Marketing", "Human Resources Management",  ),
+                                                                         "aec"=>array(
+                                                                                        "Course On Disaster Management"  ),
+                                                                       
+                                                                         "sec"=>array(
+                                                                                       "Personal Financial Planing", "Communication in professional Life", "Visual Communication & Photography","Rangamanch","Rachanaatmak Lekhan","Statistical Software Package"),
+                                                                                       
+                                                                                       
+                                                                        ),
+                                             "sesmeter_fourth"=>array(
+                                            
+                                                                    
+                                                                          "aec"=>array(
+                                                                                    "Course On NCC , NSC / NGO", "Social Science","Scout & Guide","Sports" ),
+                                                                   
+                                                            
+                                                                                   
+                                                                                   
+                                                                    )
+                                            ),
+                    "2"=>array(
+                                                "sesmeter_second"=>array(
+                                                                         
+                                                                         "mdc"=>array(
+                                                                                       "Hindi", "English", "Urdu", "Music", "Accounting & Finance", "Marketing", "Human Resources Management",  ),
+                                                                         "aec"=>array(
+                                                                                        "Environment Science"  ),
+                                                                         "sec"=>array(
+                                                                                        "Big Data Analysis" ,"Personality Development & Communication", "Script Writing" ),
+                                                                         "vac"=>array(
+                                                                                       "Yoga Philosophy & Practice", "Constitutional Values and Fundamental Duties",  "Emotional Intelligence" ),
+                                                                                       
+                                                                                       
+                                                                        ),
+                                                "sesmeter_Third"=>array(
+                                                                        
+                                                                         "mdc"=>array(
+                                                                                       "Hindi", "English", "Urdu", "Music", "Accounting & Finance", "Marketing", "Human Resources Management",  ),
+                                                                         "aec"=>array(
+                                                                                        "Course On Disaster Management"  ),
+                                                                       
+                                                                         "sec"=>array(
+                                                                                       "Personal Financial Planing", "Communication in professional Life", "Visual Communication & Photography","Rangamanch","Rachanaatmak Lekhan","Statistical Software Package"),
+                                                                                       
+                                                                                       
+                                                                        ),
+                                                "sesmeter_fourth"=>array(
+                                                
+                                                
+                                                "aec"=>array(
+                                                            "Course On NCC , NSC / NGO", "Social Science","Scout & Guide","Sports" ),
+                                                
+                                                
+                                                           
+                                                           
+                                                                        )
+                                            ),
+                    "3"=>array(
+                                                "sesmeter_second"=>array(
+                                                                         
+                                                                         "mdc"=>array(
+                                                                                       "Hindi", "English", "Urdu", "Music", "Accounting & Finance", "Marketing", "Human Resources Management",  ),
+                                                                         "aec"=>array(
+                                                                                        "Environment Science"  ),
+                                                                         "sec"=>array(
+                                                                                        "Big Data Analysis" ,"Personality Development & Communication", "Script Writing" ,"Business Communication"),
+                                                                         "vac"=>array(
+                                                                                       "Yoga Philosophy & Practice", "Constitutional Values and Fundamental Duties",  "Emotional Intelligence" ),
+                                                                                       
+                                                                                       
+                                                                        ),
+                                                "sesmeter_Third"=>array(
+                                                                        
+                                                                         "mdc"=>array(
+                                                                                       "Hindi", "English", "Urdu", "Music", "Accounting & Finance", "Marketing", "Human Resources Management",  ),
+                                                                         "aec"=>array(
+                                                                                        "Course On Disaster Management"  ),
+                                                                       
+                                                                         "sec"=>array(
+                                                                                       "Personal Financial Planing", "Communication in professional Life", "Visual Communication & Photography","Rangamanch","Rachanaatmak Lekhan","Statistical Software Package"),
+                                                                                       
+                                                                                       
+                                                                        ),
+                                                "sesmeter_fourth"=>array(
+                                                
+                                                
+                                                "aec"=>array(
+                                                            "Course On NCC , NSC / NGO", "Social Science","Scout & Guide","Sports" ),
+                                                
+                                                
+                                                           
+                                                           
+                                                                        )
+                                            )
+                 
+   );*/
+
+
+
+
 
            foreach ($houseslist as $house_key => $house_value) {
                                                   if($student_value->HEIGHT ==  $house_value["id"]){
@@ -139,4 +265,5 @@
                         <option value="MIC PAPER-7" <?php if($exam_subject_value->credit_hours == 'MIC PAPER-7'){echo "selected";} ?>>MIC PAPER-7</option> 
 
                          <option value="MIC PAPER-8" <?php if($exam_subject_value->credit_hours == 'MIC PAPER-8'){echo "selected";} ?>>MIC PAPER-8</option> 
+
 
