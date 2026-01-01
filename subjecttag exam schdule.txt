@@ -1,4 +1,74 @@
- <td style="width : 20%; font-size : 25px;"><b>SITTING &nbsp;&nbsp;</b></td>
+
+           foreach ($houseslist as $house_key => $house_value) {
+                                                  if($student_value->HEIGHT ==  $house_value["id"]){
+                                                                            // echo strtoupper($house_value["house_name"]);
+                                                                             $subjectmdc=$house_value["house_name"];
+                                                                             
+                                                                         }
+                                                           }
+                                                           
+       //compare with subject                                                    
+     
+     foreach ($exam_subjects as $subject_key => $subject_value) {
+          $parts =  explode('(',  $subject_value->subject_name);
+                                      // echo $parts[0];
+                                     //  echo    strtoupper($parts[0]);
+       /* if( strtoupper($parts[0])== strtoupper($student_value->class) ||  strtoupper($parts[0])== strtoupper($student_value->house_name)
+             || strtoupper($parts[0])== strtoupper($subjectmdc)||strtoupper($parts[0])== strtoupper($student_value->BLOOD_GROUP)||
+             strtoupper($parts[0])== strtoupper($student_value->WEIGHT)||strtoupper($parts[0])== strtoupper($student_value->MEASUREMENT_DATE)){
+             
+            // echo $subject_value->date_from."<br>";
+             
+          }*/
+          
+          if(strtoupper($parts[0])== strtoupper($student_value->class) && strtoupper($subject_value->credit_hours)=='MJC PAPER-1' ){
+              
+               $datemjc=$subject_value->date_from;
+               $timemjc=$subject_value->time_from;
+              
+          }
+          if(strtoupper($parts[0])== strtoupper($student_value->house_name) && strtoupper($subject_value->credit_hours)=='MIC PAPER-1' ){
+               
+                $datemic=$subject_value->date_from;
+                $timemic=$subject_value->time_from;
+              
+          }
+          if(strtoupper($parts[0])== strtoupper($subjectmdc) && strtoupper($subject_value->credit_hours)=='MDC PAPER-1' ){
+             
+                $datemdc=$subject_value->date_from;
+               $timemdc=$subject_value->time_from;
+              
+              
+          }
+          if(strtoupper($parts[0])== strtoupper($student_value->BLOOD_GROUP) && strtoupper($subject_value->credit_hours)=='AEC PAPER-1' ){
+              
+                 $dateaec=$subject_value->date_from;
+                 $timeaec=$subject_value->time_from;
+              
+          }
+          if(strtoupper($parts[0])== strtoupper($student_value->WEIGHT) && strtoupper($subject_value->credit_hours)=='SEC PAPER-1' ){
+             
+                  $datesec=$subject_value->date_from;
+                  $timesec=$subject_value->time_from;
+              
+          }
+          if(strtoupper($parts[0])== strtoupper($student_value->MEASUREMENT_DATE) && strtoupper($subject_value->credit_hours)=='VAC PAPER-1' ){
+              
+                  $datevac=$subject_value->date_from;
+                 $timevac=$subject_value->time_from;
+              
+          }
+          else{
+            //  echo "kuch nahi";
+            //  echo $subject_value->credit_hours;
+          }
+
+          
+         
+     }
+
+
+<td style="width : 20%; font-size : 25px;"><b>SITTING &nbsp;&nbsp;</b></td>
 
  <td style="width : 20%;"><?= $datemjc;  ?></td>
                                   <td style="width : 20%;">
@@ -69,3 +139,4 @@
                         <option value="MIC PAPER-7" <?php if($exam_subject_value->credit_hours == 'MIC PAPER-7'){echo "selected";} ?>>MIC PAPER-7</option> 
 
                          <option value="MIC PAPER-8" <?php if($exam_subject_value->credit_hours == 'MIC PAPER-8'){echo "selected";} ?>>MIC PAPER-8</option> 
+
