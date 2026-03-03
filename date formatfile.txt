@@ -1,1 +1,5 @@
  date($this->customlib->getSchoolDateFormat(), strtotime($value['admission_date']))
+
+
+
+$this->customlib->dateformat($student->admission_date);
