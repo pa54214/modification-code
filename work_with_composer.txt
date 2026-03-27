@@ -1,0 +1,18 @@
+First, you need to install all development dependencies using Composer:
+command
+
+curl -sS https://getcomposer.org/installer | php
+mv composer.phar /usr/local/bin/composer
+
+if  composer is all ready install then
+command for installation of tcpdf library
+composer require tecnickcom/tc-lib-pdf
+
+This project include a Makefile that allows you to test and build the project with simple commands. To see all available options:
+command
+make help
+
+To install all the development dependencies:
+command
+make deps
+
