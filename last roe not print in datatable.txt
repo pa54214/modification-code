@@ -1,0 +1,37 @@
+<table id="myTable" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>John</td>
+            <td>25</td>
+        </tr>
+        <tr>
+            <td>Jane</td>
+            <td>30</td>
+        </tr>
+        <tr class="no-export">
+            <td>Total</td>
+            <td>55</td>
+        </tr>
+    </tbody>
+</table>
+
+$(document).ready(function() {
+    $('#myTable').DataTable({
+        dom: 'Bfrtip', // Enable buttons
+        buttons: [
+            {
+                extend: 'excel',
+                text: 'Export to Excel',
+                exportOptions: {
+                    rows: ':not(.no-export)' // Exclude rows with class 'no-export'
+                }
+            }
+        ]
+    });
+});
