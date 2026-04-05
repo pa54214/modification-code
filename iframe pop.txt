@@ -1,0 +1,28 @@
+    function Popup(data)
+    {
+  //  document.getElementById('printBtn').addEventListener('click', function() {
+  // 1. Create hidden iframe
+  var frame1 = document.createElement('iframe');
+  frame1.style.position = 'absolute';
+  frame1.style.width = '0px';
+  frame1.style.height = '0px';
+  frame1.style.border = '0';
+  document.body.appendChild(frame1);
+
+  // 2. Write the content of the div into iframe
+//  var content = document.getElementById('contentToPrint').innerHTML;
+  var doc = frame1.contentDocument || frame1.contentWindow.document;
+  doc.open();
+  doc.write('<html><head><title>Print</title></head><body>');
+  doc.write(data);
+  doc.write('</body></html>');
+  doc.close();
+ //This is more reliable than setTimeout. Instead of guessing time, a better method is to wait until iframe loads
+  // 3. Wait for iframe to load content, then print
+  frame1.onload = function () {
+    frame1.contentWindow.focus(); // important for some browsers
+    frame1.contentWindow.print();
+    frame1.remove();
+  };
+//});
+}
