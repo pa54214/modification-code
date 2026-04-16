@@ -1,0 +1,11 @@
+Check SMS Center Number (Very Important)
+
+Open dialer and type:
+
+*#*#4636#*#*
+
+Go to Phone Information
+Find SMSC
+Tap Refresh or enter your carrier’s SMS center number.
+
+If you don’t know it, tell me your SIM provider (Jio, Airtel, Vi, BSNL), I’ll give you the correct number.
