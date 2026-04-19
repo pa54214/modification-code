@@ -1,0 +1,19 @@
+
+                                                <td><?php echo $this->lang->line(strtolower($value['gender'])) ?></td>
+                                                <td><?php echo date($this->customlib->getSchoolDateFormat(), strtotime($value['dob'])); ?></td>
+                                               
+                                             
+                                                <td><?php echo $value['house_name']; ?></td>
+                                                <td><?php 
+                                             //   echo"<pre>";
+                                               // var_dump($value);
+                                            //   echo $value['id'];
+                                            //  $h=  $this->customlib->gethousename($value['id']);
+                                            
+                                            if($value['height']){
+                                                $h=  $this->customlib->gethousename($value['height']);
+                                                echo $h;
+                                            }else{
+                                                echo " ";
+                                            }
+                      
