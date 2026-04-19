@@ -1,0 +1,70 @@
+<table id="myTable" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>John</td>
+            <td>25</td>
+        </tr>
+        <tr>
+            <td>Jane</td>
+            <td>30</td>
+        </tr>
+        <tr class="no-export">
+            <td>Total</td>
+            <td>55</td>
+        </tr>
+    </tbody>
+</table>
+
+$(document).ready(function() {
+    $('#myTable').DataTable({
+        dom: 'Bfrtip', // Enable buttons
+        buttons: [
+            {
+                extend: 'excel',
+                text: 'Export to Excel',
+                exportOptions: {
+                    rows: ':not(.no-export)' // Exclude rows with class 'no-export'
+                }
+            }
+        ]
+    });
+});
+
+//also apply footer tag caption tag 
+
+reportdailycollection
+
+-------------------------------------------------------
+error page chal rha hai
+feeCollectionStudentDeposit
+
+-------------------------------------------------------------
+kya fee collection revert krne ke nad utr id remove hota hauu ki nahi
+
+
+
+ customize: function (win){
+                var $table = $(win.document.body).find('table');
+
+                // Add styling
+                $table.addClass('compact').css({
+                    'font-size':'9pt',
+                    'width':'100%',
+                    'border-collapse':'collapse'
+                });
+
+                // Move the .no-sort row to the bottom in the cloned print table
+                $table.find('tbody').append($table.find('tr.no-sort'));
+
+                // Ensure footer row is displayed if you use tfoot
+                $table.find('tfoot').css('display','table-footer-group');
+            },
+
+
+tfoot sorting issue remains and no-sort class sorting issue remains check it later 
