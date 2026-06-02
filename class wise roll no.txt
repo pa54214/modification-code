@@ -1,0 +1,42 @@
+$sch_setting = $this->sch_setting_detail;
+           $students = array();
+        if ($search_type == "search_filter") {
+
+            $resultlist = $this->student_model->searchdtByClassSection($class, $section);
+              // $this->session->set_userdata('check', $resultlist);
+               $students = json_decode($resultlist);
+               $ranked = [];
+                $rank = 1;
+                $id_array=array();
+                foreach ($students->data as $student_key => $student) {
+                    $id_array[]=$student->id;
+                }
+                sort($id_array);
+                foreach ($id_array as $id) {
+                       $ranked[$id] =  $rank++;
+                }
+      
+        } elseif ($search_type == "search_full") {
+
+            $resultlist = $this->student_model->searchFullText($search_text, $carray);
+            $students = json_decode($resultlist);
+        }
+
+      
+        //$students = json_decode($resultlist);
+        
+        //for accendinf
+     /*  if (!empty($students->data)) {
+           usort($students->data, function ($a, $b) {
+            return $a->id <=> $b->id; // ascending
+          });
+      }*/
+//for decending
+    /*if (!empty($students->data)) {
+        usort($students->data, function ($a, $b) {
+            return $b->id <=> $a->id;
+        });
+  }*/
+    // usort($students->data, function ($a, $b) {    return $a->id <=> $b->id;  });
+    
+        $dt_data = array();
