@@ -1,0 +1,31 @@
+   public function getreligion()
+    {
+        $religions = [
+    ['id' => 1, 'name' => 'Hindu'],
+    ['id' => 2, 'name' => 'Muslim'],
+    ['id' => 3, 'name' => 'Christian'],
+    ['id' => 4, 'name' => 'Sikh'],
+    ['id' => 5, 'name' => 'Buddhist'],
+    ['id' => 6, 'name' => 'Jain'],
+    ['id' => 7, 'name' => 'Other']
+    ];
+      return   $religions;
+    }
+
+
+-------------------------------------------------------------------
+ public function create()
+    {
+.
+.
+.
+.
+
+  $religion            = $this->student_model-> getreligion();
+  $data['religion'] = $religion;
+
+
+-------------------------------------------------
+
+
+------------------------------------------------------
