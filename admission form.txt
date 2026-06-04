@@ -1,3 +1,5 @@
+echo "<pre>";var_dump($classlist);
+
 caste-> registraion no   hai 
 mother occupation -> maritalStatuse hai
 ----------------------------------------
