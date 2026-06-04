@@ -2,6 +2,7 @@ echo "<pre>";var_dump($classlist);
 
 caste-> registraion no   hai 
 mother occupation -> maritalStatuse hai
+blood_group -> aec-1
 ----------------------------------------
 application/models/Student_model.php
 public function getreligion()
