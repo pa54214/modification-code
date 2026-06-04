@@ -1,4 +1,5 @@
-   public function getreligion()
+application/models/Student_model.php
+public function getreligion()
     {
         $religions = [
     ['id' => 1, 'name' => 'Hindu'],
@@ -11,7 +12,17 @@
     ];
       return   $religions;
     }
-
+   public function getmaritalstatus()
+    {
+        $maritalStatuses = [
+    ['id' => 1, 'name' => 'Single'],
+    ['id' => 2, 'name' => 'Married'],
+    ['id' => 3, 'name' => 'Divorced'],
+    ['id' => 4, 'name' => 'Widowed'],
+    ['id' => 5, 'name' => 'Separated']
+];
+      return   $maritalStatuses;
+    }
 
 -------------------------------------------------------------------
  public function create()
@@ -24,7 +35,8 @@
   $religion            = $this->student_model-> getreligion();
   $data['religion'] = $religion;
 
-
+ $maritalStatuses            = $this->student_model-> getmaritalstatus();
+ $data['maritalStatuses '] = $maritalStatuses;
 -------------------------------------------------
 views/student/studentCreate.php-----------
 
