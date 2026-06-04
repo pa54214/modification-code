@@ -49,25 +49,27 @@ public function getreligion()
 
 //for Subject aec vac sec
    
-          $subject=  $this-> Subject_model-> get();
+           $subject=  $this-> Subject_model-> get();
         //  echo "<pre>";var_dump($subject);
           $aec11 = [];
-          $vac12 = [];
-          $sac13 = [];
+          $sec12 = [];
+          $vac13 = [];
           foreach ($subject as $subject) {
 
             if (strpos($subject['code'], '11') === 0) {
                 $aec11[] = $subject;
             }
             elseif (strpos($subject['code'], '12') === 0) {
-                 $vac12[] = $subject;
+                 $sec12[] = $subject;
             }
             elseif (strpos($subject['code'], '13') === 0) {
-                $sac13[] = $subject;
+                $vac13[] = $subject;
             }
         }
-
-          /* echo '<pre>';
+        $data['aec11']=$aec11;
+        $data['sec12']=$sec12;
+        $data['vac13']= $vac13;
+  /* echo '<pre>';
              print_r($code11);
               print_r($code12);
              print_r($code13);
