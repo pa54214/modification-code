@@ -1,5 +1,26 @@
                 <label for="exampleInputEmail1"><?php echo $this->lang->line('subject_code')."<br>Note: AEC-1 start with 11/--, SEC-1 start with 12/--,VAC-1 start with 13/--"; ?></label>   used for subect prefix 
 
+add this line for acedmic details:-
+ <label for="exampleInputEmail1"><?php echo $this->lang->line('previous_school_details')." "."Write In Given Formate<br>{
+Class: Matric,
+Board: BSEB,
+Passing Year: 2022,
+Roll No: 1000243,
+Marks Obt:350,
+Percentage: 75%,
+Previous School/College : ABC
+}<br>{
+Class: Intermediate,
+Board: CBSE,
+Passing Year: 2022,
+Roll No: 1000243,
+Marks Obt:350,
+Percentage: 75%,
+Previous School/College : ABC
+}"; ?></label>
+
+database work
+
 ALTER TABLE `students` CHANGE `measurement_date` `measurement_date` VARCHAR(100) NULL DEFAULT NULL;
 
 
