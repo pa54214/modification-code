@@ -106,4 +106,19 @@ if (set_value('mother_occupation') == $status['id']) {
 </select>
 
 
+
+  <select name="blood_group" class="form-control">
+                               <option value=""><?php echo $this->lang->line('select') ?></option>
+                            
+                                <?php foreach ($aec11 as $subject) { ?>
+                                    <option value="<?= $subject['id']; ?>"    <?php
+                            if (set_value('blood_group') == $subject['id']) {
+                                    echo "selected=selected";
+                                }
+                                ?>>
+                                        <?= $subject['name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+
 ------------------------------------------------------
