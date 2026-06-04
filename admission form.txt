@@ -183,9 +183,31 @@ if (set_value('mother_occupation') == $status['id']) {
 
 for student view page 
 wtite in controller  /controllers/Student.php
-  $data['religion']  = $this->student_model->getreligion();
-        $data['maritalstatus']  = $this->student_model->getmaritalstatus();
+      $data['category_list']  = $this->category_model->get();
+        $data['religion']  = $this->student_model->getreligion();//nwy addedd
+        $data['maritalstatus']  = $this->student_model->getmaritalstatus();//nwy addedd
+         $subject=  $this-> Subject_model-> get();//nwy addedd
+          $aec11 = [];//nwy addedd
+          $sec12 = [];//nwy addedd
+          $vac13 = [];//nwy addedd
+          foreach ($subject as $subject) {
 
+            if (strpos($subject['code'], '11') === 0) {
+                $aec11[] = $subject;//nwy addedd
+            }
+            elseif (strpos($subject['code'], '12') === 0) {
+                 $sec12[] = $subject;//nwy addedd
+            }
+            elseif (strpos($subject['code'], '13') === 0) {
+                $vac13[] = $subject;//nwy addedd
+            }
+        }
+        $data['aec11']=$aec11;//nwy addedd
+        $data['sec12']=$sec12;//nwy addedd
+        $data['vac13']= $vac13;//nwy addedd
+        $class                   = $this->class_model->get();//nwy addedd
+        $data['classlist']       = $class;//nwy addedd
+        $data['student'] = $student;
 
 add in view views/student/studentShow.php
 <!--1-->
@@ -202,6 +224,28 @@ add in view views/student/studentShow.php
                                                         foreach ($religion as $value) {
                                                             if ($student['religion'] == $value['id']) {
                                                                 echo $value['name'];
+                                                            }
+                                                        }
+                                                        ?>
+<?php
+                                                        foreach ($vac13 as $value) {
+                                                            if ($student['measurement_date'] == $value['id']) {
+                                                                echo $value['name'];//vac13
+                                                            }
+                                                        }
+                                                        ?>
+
+ <?php
+                                                        foreach ($sec12 as $value) {
+                                                            if ($student['weight'] == $value['id']) {
+                                                                echo $value['name'];//SEC
+                                                            }
+                                                        }
+                                                        ?>
+ <?php
+                                                        foreach ($aec11 as $value) {
+                                                            if ( $student['blood_group'] == $value['id']) {
+                                                                echo $value['name'];//AEC
                                                             }
                                                         }
                                                         ?>
