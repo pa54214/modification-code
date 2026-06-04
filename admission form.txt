@@ -1,3 +1,5 @@
+caste-> registraion no   hai 
+----------------------------------------
 application/models/Student_model.php
 public function getreligion()
     {
