@@ -121,4 +121,33 @@ if (set_value('mother_occupation') == $status['id']) {
                                 <?php } ?>
                             </select>
 
+<select name="weight" class="form-control">
+                               <option value=""><?php echo $this->lang->line('select') ?></option>
+                            
+                                <?php foreach ($sec12 as $subject) { ?>
+                                    <option value="<?= $subject['id']; ?>"    <?php
+                            if (set_value('weight') == $subject['id']) {
+                                    echo "selected=selected";
+                                }
+                                ?>>
+                                        <?= $subject['name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+
+
+          <select name="measurement_date" class="form-control">
+                               <option value=""><?php echo $this->lang->line('select') ?></option>
+                            
+                                <?php foreach ($vac13 as $subject) { ?>
+                                    <option value="<?= $subject['id']; ?>"    <?php
+                            if (set_value('measurement_date') == $subject['id']) {
+                                    echo "selected=selected";
+                                }
+                                ?>>
+                                        <?= $subject['name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+
 ------------------------------------------------------
