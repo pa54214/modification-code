@@ -154,3 +154,31 @@ if (set_value('mother_occupation') == $status['id']) {
                             </select>
 
 ------------------------------------------------------
+
+
+
+
+for student view page 
+wtite in controller  /controllers/Student.php
+  $data['religion']  = $this->student_model->getreligion();
+        $data['maritalstatus']  = $this->student_model->getmaritalstatus();
+
+
+add in view views/student/studentShow.php
+<!--1-->
+  <?php
+                                                        foreach ($maritalstatus as $value) {
+                                                            if ($student['mother_occupation'] == $value['id']) {
+                                                                echo $value['name'];
+                                                            }
+                                                        }
+                                                        ?>
+
+<!-- 2-->
+ <?php
+                                                        foreach ($religion as $value) {
+                                                            if ($student['religion'] == $value['id']) {
+                                                                echo $value['name'];
+                                                            }
+                                                        }
+                                                        ?>
