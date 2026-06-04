@@ -38,7 +38,7 @@ public function getreligion()
   $data['religion'] = $religion;
 
  $maritalStatuses            = $this->student_model-> getmaritalstatus();
- $data['maritalStatuses '] = $maritalStatuses;
+  $data['maritalStatuses'] = $maritalStatuses;
 -------------------------------------------------
 views/student/studentCreate.php-----------
 
@@ -54,4 +54,21 @@ if (set_value('religion') == $religion['id']) {
     }
     ?>
                                                     </select>
+
+
+
+ <select name="mother_occupation" id="mother_occupation"  class="form-control">
+    <option value=""><?php echo $this->lang->line('select'); ?></option>
+    <?php foreach ($maritalStatuses as $status) { ?>
+        <option value="<?php echo $status['id']; ?>" <?php
+if (set_value('mother_occupation') == $status['id']) {
+        echo "selected=selected";
+    }
+        ?>>
+            <?php echo $status['name']; ?>
+        </option>
+    <?php } ?>
+</select>
+
+
 ------------------------------------------------------
