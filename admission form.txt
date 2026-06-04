@@ -1,4 +1,5 @@
 caste-> registraion no   hai 
+mother occupation -> maritalStatuse hai
 ----------------------------------------
 application/models/Student_model.php
 public function getreligion()
