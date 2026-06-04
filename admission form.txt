@@ -26,6 +26,18 @@
 
 
 -------------------------------------------------
+views/student/studentCreate.php-----------
 
-
+<select  id="religion" name="religion" class="form-control" >
+                                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                                        <?php  foreach ($religion as $religion) {?>
+                                                            <option value="<?php echo $religion['id'] ?>" <?php
+if (set_value('religion') == $religion['id']) {
+        echo "selected=selected";
+    }
+        ?>><?php echo $religion['name'] ?></option>
+        <?php 
+    }
+    ?>
+                                                    </select>
 ------------------------------------------------------
