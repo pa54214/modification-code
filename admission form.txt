@@ -1,3 +1,5 @@
+                <label for="exampleInputEmail1"><?php echo $this->lang->line('subject_code')."<br>Note: AEC-1 start with 11/--, SEC-1 start with 12/--,VAC-1 start with 13/--"; ?></label>   used for subect prefix 
+
 ALTER TABLE `students` CHANGE `measurement_date` `measurement_date` VARCHAR(100) NULL DEFAULT NULL;
 
 
