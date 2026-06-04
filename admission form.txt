@@ -1,3 +1,6 @@
+ALTER TABLE `students` CHANGE `measurement_date` `measurement_date` VARCHAR(100) NULL DEFAULT NULL;
+
+
 echo "<pre>";var_dump($classlist);
 
 caste-> registraion no   hai 
