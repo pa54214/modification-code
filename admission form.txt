@@ -46,7 +46,33 @@ public function getreligion()
 
  $maritalStatuses            = $this->student_model-> getmaritalstatus();
   $data['maritalStatuses'] = $maritalStatuses;
--------------------------------------------------
+
+//for Subject aec vac sec
+   
+          $subject=  $this-> Subject_model-> get();
+        //  echo "<pre>";var_dump($subject);
+          $aec11 = [];
+          $vac12 = [];
+          $sac13 = [];
+          foreach ($subject as $subject) {
+
+            if (strpos($subject['code'], '11') === 0) {
+                $aec11[] = $subject;
+            }
+            elseif (strpos($subject['code'], '12') === 0) {
+                 $vac12[] = $subject;
+            }
+            elseif (strpos($subject['code'], '13') === 0) {
+                $sac13[] = $subject;
+            }
+        }
+
+          /* echo '<pre>';
+             print_r($code11);
+              print_r($code12);
+             print_r($code13);
+            echo '</pre>';exit();*/
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
 views/student/studentCreate.php-----------
 
 <select  id="religion" name="religion" class="form-control" >
