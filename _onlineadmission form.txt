@@ -12,6 +12,24 @@ $config['marital_status'] = array('1' => 'Single', '2' => 'Married', '3' => 'Div
 
 ----------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------
+/application/models/Onlinestudent_model.php
+
+
+ public function getallsubject($id = null)
+{
+//$this->db->select()->from('subjects'); $this->db->order_by('id'); $query = $this->db->get(); return $query->result_array();
+$query = $this->db->order_by('id')
+                ->get('subjects');
+
+return $query->result_array();
+/*$sql = "SELECT * FROM subjects ORDER BY id ASC";
+$query = $this->db->query($sql);
+
+return $query->result_array();*/
+}
+
+-------------------------------------------------------------------------------------
+---------------------------------------------------------------------------
 
 /application/controllers/Welcome.php
 
@@ -38,7 +56,7 @@ public function __construct()
 ..
 ..
 $this->data['classlist']      = $class;
-$subject=  $this-> Subject_model-> get();//nwy addedd
+  $subject=  $this->  onlinestudent_model-> getallsubject();//newly added 
                  $aec11 = [];//nwy addedd
           $sec12 = [];//nwy addedd
           $vac13 = [];//nwy addedd
