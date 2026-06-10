@@ -5,5 +5,29 @@ E:\apk\school patch file by prince
 ------------------------------------------------------------------------------------
 collegeerp/application/config/mailsms.php
 $config['bloodgroup'] = array('1' => 'O+', '2' => 'A+', '3' => 'B+', '4' => 'AB+', '5' => 'O-', '6' => 'A-', '7' => 'B-', '8' => 'AB-');
+
+//newly added
+$config['religion'] = array('1' => 'Hindu', '2' => 'Muslim', '3' => 'Christian', '4' => 'Sikh', '5' => 'Buddhist', '6' => 'Jain', '7' => 'Other');
+$config['marital_status'] = array('1' => 'Single', '2' => 'Married', '3' => 'Divorced', '4' => 'Widowed', '5' => 'Separated');
+
 ----------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------
+
+/application/controllers/Welcome.php
+
+
+public function __construct()
+    {
+..
+..
+  $this->blood_group = $this->config->item('bloodgroup');//religion marital_status
+ $this->religion = $this->config->item('religion');//newly added
+        $this->blood_group = $this->config->item('blood_group');//newly added
+..
+..
+}
+
+   public function admission()
+    {
+
+
