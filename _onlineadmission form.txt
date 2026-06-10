@@ -22,12 +22,17 @@ public function __construct()
 ..
   $this->blood_group = $this->config->item('bloodgroup');//religion marital_status
  $this->religion = $this->config->item('religion');//newly added
-        $this->blood_group = $this->config->item('blood_group');//newly added
+       $this->marital_status = $this->config->item('marital_status');//newly added
 ..
 ..
 }
 
    public function admission()
     {
+..
+..
+ $this->data["bloodgroup"]     = $this->blood_group;
+            $this->data["religion"]     = $this->religion;//newly added
+            $this->data["marital_status"]     = $this->marital_status;//newly added
 
 
