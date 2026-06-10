@@ -107,7 +107,8 @@ foreach ($classlist as $class) {
                         <?php
 }
 ?>
+ </select>
 mdc same as class
 _______
 
-                </select>
+aec
