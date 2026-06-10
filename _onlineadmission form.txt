@@ -8,6 +8,21 @@ alter command
 ALTER TABLE `online_admissions` CHANGE `measurement_date` `measurement_date` VARCHAR(20) NULL DEFAULT NULL;
 
 ALTER TABLE `online_admissions` CHANGE `measurement_date` `measurement_date` VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_uca1400_ai_ci NULL DEFAULT NULL;
+
+house id  showing error while insertion to fix it run below command
+Step 1: Drop the foreign key first
+ALTER TABLE online_admissions
+DROP FOREIGN KEY online_admissions_ibfk_4;
+Step 2: Now modify the column
+ALTER TABLE online_admissions
+MODIFY school_house_id INT NULL;
+Step 3 (Optional): Add foreign key back
+If you still want the relationship:
+ALTER TABLE online_admissions
+ADD CONSTRAINT online_admissions_ibfk_4
+FOREIGN KEY (school_house_id)
+REFERENCES school_houses(id)
+ON DELETE CASCADE;
 ------------------------------------------------------------------------------------
 collegeerp/application/config/mailsms.php
 $config['bloodgroup'] = array('1' => 'O+', '2' => 'A+', '3' => 'B+', '4' => 'AB+', '5' => 'O-', '6' => 'A-', '7' => 'B-', '8' => 'AB-');
