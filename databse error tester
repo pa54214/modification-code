@@ -1,0 +1,7 @@
+if (!$this->db->insert('online_admissions', $data)) {
+    $error = $this->db->error();
+
+    echo 'Error Code: ' . $error['code'];
+    echo '<br>';
+    echo 'Error Message: ' . $error['message'];
+}
