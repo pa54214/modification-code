@@ -20,6 +20,7 @@ public function __construct()
     {
 ..
 ..
+   $this->load->model(array('frontcms_setting_model', 'complaint_Model', 'Visitors_model', 'onlinestudent_model', 'filetype_model', 'customfield_model', 'setting_model', 'examgroupstudent_model', 'examgroup_model', 'grade_model', 'marksdivision_model', 'currency_model', 'section_model','Subject_model'));
   $this->blood_group = $this->config->item('bloodgroup');//religion marital_status
  $this->religion = $this->config->item('religion');//newly added
        $this->marital_status = $this->config->item('marital_status');//newly added
@@ -34,5 +35,79 @@ public function __construct()
  $this->data["bloodgroup"]     = $this->blood_group;
             $this->data["religion"]     = $this->religion;//newly added
             $this->data["marital_status"]     = $this->marital_status;//newly added
+..
+..
+$this->data['classlist']      = $class;
+$subject=  $this-> Subject_model-> get();//nwy addedd
+                 $aec11 = [];//nwy addedd
+          $sec12 = [];//nwy addedd
+          $vac13 = [];//nwy addedd
+          foreach ($subject as $subject) {
 
+            if (strpos($subject['code'], '11') === 0) {
+                $aec11[] = $subject;//nwy addedd
+            }
+            elseif (strpos($subject['code'], '12') === 0) {
+                 $sec12[] = $subject;//nwy addedd
+            }
+            elseif (strpos($subject['code'], '13') === 0) {
+                $vac13[] = $subject;//nwy addedd
+            }
+        }
+        $data['aec11']=$aec11;//nwy addedd
+        $data['sec12']=$sec12;//nwy addedd
+        $data['vac13']= $vac13;//nwy addedd
+..
+..
 
+----------------------------------------
+-------------------------------------------------------------------------------------------------
+path :- application/views/themes/material_pink/pages/admission.php
+
+   <select class="form-control" rows="3" placeholder="" name="blood_group">
+                    <option value=""><?php echo $this->lang->line('select') ?></option>
+                    <?php foreach ($bloodgroup as $bgkey => $bgvalue) {
+        ?>
+                        <option value="<?php echo $bgvalue ?>" <?php if (set_value('blood_group') == $bgvalue) {  echo "selected"; } ?>><?php echo $$bgvalue ?></option>
+  <?php }?>
+                </select>
+
+                   
+//for relgion
+
+  <select class="form-control" rows="3" placeholder="" name="religion" id="religion">
+                    <option value=""><?php echo $this->lang->line('select') ?></option>
+                    <?php foreach ($religion as $bgkey => $bgvalue) {
+        ?>
+                        <option value="<?php echo $bgkey ?>"><?php echo $bgvalue ?></option>
+                      <?php }?>
+                </select>
+
+//fir martial satus
+
+<select class="form-control" rows="3" placeholder="" name="mother_occupation" id="mother_occupation">
+                    <option value=""><?php echo $this->lang->line('select') ?></option>
+                    <?php foreach ($marital_status as $bgkey => $bgvalue) {
+        ?>
+                        <option value="<?php echo $bgkey ?>"><?php echo $bgvalue ?></option>
+                      <?php }?>
+                </select>
+//f0r subject  house->mic   height->mdc  blood_group->aec  weight-> sac  measurement_date->vac    
+mic
+______
+<select  id="class_id" name="class_id" class="form-control"  >
+                    <option value=""><?php echo $this->lang->line('select'); ?></option>
+                    <?php
+foreach ($classlist as $class) {
+    ?>
+                        <option value="<?php echo $class['id'] ?>"<?php if (set_value('class_id') == $class['id']) {
+        echo "selected=selected";
+    }
+    ?>><?php echo $class['class'] ?></option>
+                        <?php
+}
+?>
+mdc same as class
+_______
+
+                </select>
