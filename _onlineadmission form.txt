@@ -6,6 +6,8 @@ E:\apk\school patch file by prince
 database query to upadte measurement column of online student table 
 alter command
 ALTER TABLE `online_admissions` CHANGE `measurement_date` `measurement_date` VARCHAR(20) NULL DEFAULT NULL;
+
+ALTER TABLE `online_admissions` CHANGE `measurement_date` `measurement_date` VARCHAR(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_uca1400_ai_ci NULL DEFAULT NULL;
 ------------------------------------------------------------------------------------
 collegeerp/application/config/mailsms.php
 $config['bloodgroup'] = array('1' => 'O+', '2' => 'A+', '3' => 'B+', '4' => 'AB+', '5' => 'O-', '6' => 'A-', '7' => 'B-', '8' => 'AB-');
