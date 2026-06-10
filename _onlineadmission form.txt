@@ -3,6 +3,10 @@
 
 E:\apk\school patch file by prince
 ------------------------------------------------------------------------------------
+database query to upadte measurement column of online student table 
+alter command
+ALTER TABLE `online_admissions` CHANGE `measurement_date` `measurement_date` VARCHAR(20) NULL DEFAULT NULL;
+------------------------------------------------------------------------------------
 collegeerp/application/config/mailsms.php
 $config['bloodgroup'] = array('1' => 'O+', '2' => 'A+', '3' => 'B+', '4' => 'AB+', '5' => 'O-', '6' => 'A-', '7' => 'B-', '8' => 'AB-');
 
@@ -72,12 +76,23 @@ $this->data['classlist']      = $class;
                 $vac13[] = $subject;//nwy addedd
             }
         }
-        $data['aec11']=$aec11;//nwy addedd
-        $data['sec12']=$sec12;//nwy addedd
-        $data['vac13']= $vac13;//nwy addedd
+        $this-> data['aec11']=$aec11;//nwy addedd
+            $this->data['sec12']=$sec12;//nwy addedd
+           $this-> data['vac13']= $vac13;//nwy addedd
+             //  echo "<pre>"; var_dump($vac13);exit();
 ..
 ..
+if (isset($weight)) {
+                        $data['weight'] = $this->input->post('weight');
+                    }
+                    if (!empty($measurement_date)) {
+                        //$data['measurement_date'] = date('Y-m-d', $this->customlib->datetostrtotime($this->input->post('measure_date')));
+                        $data['measurement_date'] = $this->input->post('measure_date');
+                    }
 
+..
+..
+}
 ----------------------------------------
 -------------------------------------------------------------------------------------------------
 path :- application/views/themes/material_pink/pages/admission.php
@@ -130,3 +145,46 @@ mdc same as class
 _______
 
 aec
+ <select name="blood_group" class="form-control">
+                               <option value=""><?php echo $this->lang->line('select') ?></option>
+                            
+                                <?php foreach ($aec11 as $subject) { ?>
+                                    <option value="<?= $subject['id']; ?>"    <?php
+                            if (set_value('blood_group') == $subject['id']) {
+                                    echo "selected=selected";
+                                }
+                                ?>>
+                                        <?= $subject['name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+
+sec
+ <!--   <input type="text" name="weight" class="form-control" value="<?php echo set_value('weight'); ?>" autocomplete="off" >-->
+                     <select name="weight" class="form-control">
+                               <option value=""><?php echo $this->lang->line('select') ?></option>
+                            
+                                <?php foreach ($sec12 as $subject) { ?>
+                                    <option value="<?= $subject['id']; ?>"    <?php
+                            if (set_value('blood_group') == $subject['id']) {
+                                    echo "selected=selected";
+                                }
+                                ?>>
+                                        <?= $subject['name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+vac
+ <select name="measure_date" class="form-control">
+                               <option value=""><?php echo $this->lang->line('select') ?></option>
+                            
+                                <?php foreach ($vac13 as $subject) { ?>
+                                    <option value="<?= $subject['id']; ?>"    <?php
+                            if (set_value('blood_group') == $subject['id']) {
+                                    echo "selected=selected";
+                                }
+                                ?>>
+                                        <?= $subject['name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
