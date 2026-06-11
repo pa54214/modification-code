@@ -25,7 +25,11 @@ pattern="^[\p{L}\s.'-]{2,50}$"
 
 <input type="email" name="email" required>
 
-
+ <input
+        type="email"
+        pattern="[a-zA-Z0-9._%+-]+@gmail\.com"
+        required
+        placeholder="Enter Gmail address">
 <input type="text" name="email" 
 pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$" 
 required title="Enter a valid email (e.g. user@example.com)">
