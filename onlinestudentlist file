@@ -1,1 +1,32 @@
 upadte
+public function getstudentlist()
+    {
+.
+.
+  $sch_setting       = $this->sch_setting_detail;
+          $currentsession                       = $this->setting_model->getCurrentSessionName(); //newly ADDED
+.
+.
+if (!empty($m->data)) {
+             $sno=1;//newly added
+.
+.
+  foreach ($m->data as $key => $value) {
+                 if(substr( $value->created_at, 0, 4) == substr( $currentsession, 0, 4)){//newly added
+.
+.
+  if ($sch_setting->mobile_no) {
+                    $row[] = $value->mobileno;
+                }
+
+                if ($value->form_status == 1) {
+                   // $row[] = '<span class="label label-success">' . $this->lang->line('submitted') . '  ' . $submit_date . '</span>';
+                } else if ($value->form_status == 0) {
+                    //$row[] = '<span class="label label-danger">' . $this->lang->line('not_submitted') . '</span>';
+                }
+.
+.
+ $dt_data[] = $row;
+                 }//newly added
+.
+.
