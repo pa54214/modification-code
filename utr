@@ -239,3 +239,80 @@ application/models/
     }
 ---------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------
+utr sql
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Generation Time: Apr 08, 2025 at 12:17 PM
+-- Server version: 10.11.10-MariaDB
+-- PHP Version: 7.2.34
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `u460719727_mkdr`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `utrcheck`
+--
+
+CREATE TABLE `utrcheck` (
+  `id` int(11) NOT NULL,
+  `student_fees_master_id` int(11) DEFAULT NULL,
+  `utr` varchar(15) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+--
+-- Dumping data for table `utrcheck`
+--
+
+INSERT INTO `utrcheck` (`id`, `student_fees_master_id`, `utr`, `created_at`) VALUES
+(1, 592, '12345', '2025-03-07 12:59:34'),
+(2, NULL, '54321', '2025-03-26 16:52:56'),
+(4, NULL, '123456789 ', '2025-03-26 16:59:35'),
+(5, NULL, '123456 ', '2025-03-26 17:00:42'),
+(6, NULL, '5879654125', '2025-04-05 09:10:41'),
+(7, NULL, '5879654125', '2025-04-05 09:10:47'),
+(8, NULL, '987654 ', '2025-04-05 09:32:18'),
+(9, NULL, '5565487 ', '2025-04-05 09:33:39'),
+(10, NULL, '36548951247 ', '2025-04-05 09:44:10'),
+(11, NULL, '843302 ', '2025-04-05 13:52:04');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `utrcheck`
+--
+ALTER TABLE `utrcheck`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `utrcheck`
+--
+ALTER TABLE `utrcheck`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
