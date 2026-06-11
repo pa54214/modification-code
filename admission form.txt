@@ -62,6 +62,9 @@ public function getreligion()
     }
 
 -------------------------------------------------------------------
+
+add in constructor load subject model
+  $this->load->model("Subject_model");
  public function create()
     {
 .
