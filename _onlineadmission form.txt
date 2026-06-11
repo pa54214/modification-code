@@ -205,3 +205,18 @@ vac
                                     </option>
                                 <?php } ?>
                             </select>
+==============================================================================================================================================================================================================================================================================================================================================================================================================================
+application/views/admin/onlinestudent/studentEdit.php
+for religion
+
+<select class="form-control" rows="3" placeholder="" name="religion" id="religion">
+                    <option value=""><?php echo $this->lang->line('select') ?></option>
+                    <?php foreach ($religion as $bgkey => $bgvalue) {
+        ?>
+                        <option value="<?php echo $bgkey ?>"  <?php
+if ( set_value('religion', $student['religion']) == $bgkey) {
+            echo "selected =selected";
+        }
+        ?> ><?php echo $bgvalue ?></option>
+                      <?php }?>
+                </select>
