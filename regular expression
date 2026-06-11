@@ -38,6 +38,14 @@ required title="Enter a valid email (e.g. user@example.com)">
 pattern="^(\+91[\-\s]?)?[6-9]\d{9}$" 
 required title="Enter a valid 10-digit number (with or without +91)">
 
+
+<input
+        type="tel"
+        name="mobile"
+        pattern="[0-9]{10}"
+        maxlength="10"
+        required
+        placeholder="Enter 10-digit mobile number">
 ------------------------------------------------------------------------------
 <input type="password" name="password" 
 pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" 
