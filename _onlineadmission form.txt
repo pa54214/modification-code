@@ -113,7 +113,13 @@ if (isset($weight)) {
 ----------------------------------------
 -------------------------------------------------------------------------------------------------
 path :- application/views/themes/material_pink/pages/admission.php
-
+===============================================================
+<?php
+if ( set_value('religion', $student['religion']) == $bgkey) {
+            echo "selected =selected";
+        }
+        ?>
+================================================================
    <select class="form-control" rows="3" placeholder="" name="blood_group">
                     <option value=""><?php echo $this->lang->line('select') ?></option>
                     <?php foreach ($bloodgroup as $bgkey => $bgvalue) {
@@ -145,12 +151,12 @@ path :- application/views/themes/material_pink/pages/admission.php
 //f0r subject  house->mic   height->mdc  blood_group->aec  weight-> sac  measurement_date->vac    
 mic
 ______
-<select  id="class_id" name="class_id" class="form-control"  >
+<select  id="house" name="house" class="form-control"  >
                     <option value=""><?php echo $this->lang->line('select'); ?></option>
                     <?php
 foreach ($classlist as $class) {
     ?>
-                        <option value="<?php echo $class['id'] ?>"<?php if (set_value('class_id') == $class['id']) {
+                        <option value="<?php echo $house['id'] ?>"<?php if (set_value('class_id') == $class['id']) {
         echo "selected=selected";
     }
     ?>><?php echo $class['class'] ?></option>
@@ -220,3 +226,75 @@ if ( set_value('religion', $student['religion']) == $bgkey) {
         ?> ><?php echo $bgvalue ?></option>
                       <?php }?>
                 </select>
+for martila staus
+/>-->
+                                                <select class="form-control" rows="3" placeholder="" name="mother_occupation" id="mother_occupation">
+                    <option value=""><?php echo $this->lang->line('select') ?></option>
+                    <?php foreach ($marital_status as $bgkey => $bgvalue) {
+        ?>
+                        <option value="<?php echo $bgkey ?>" <?php
+if ( set_value('mother_occupation', $student['mother_occupation']) == $bgkey) {
+            echo "selected =selected";
+        }
+        ?>><?php echo $bgvalue ?></option>
+                      <?php }?>
+                </select>
+
+for mic
+</select>-->
+                                                <select  id="house" name="house" class="form-control"  >
+                    <option value=""><?php echo $this->lang->line('select'); ?></option>
+                    <?php
+foreach ($classlist as $class) {
+    ?>
+                        <option value="<?php echo $class['id'] ?>"<?php if (set_value('house', $student['school_house_id']) == $class['id']) {
+        echo "selected=selected";
+    }
+    ?>><?php echo $class['class'] ?></option>
+                        <?php
+}
+?>
+ </select>
+for mdc
+  <select  id="height" name="height" class="form-control"  >
+                    <option value=""><?php echo $this->lang->line('select'); ?></option>
+                    <?php
+foreach ($classlist as $class) {
+    ?>
+                        <option value="<?php echo $class['id'] ?>"<?php if (set_value('height', $student['height']) == $class['id']) {
+        echo "selected=selected";
+    }
+    ?>><?php echo $class['class'] ?></option>
+                        <?php
+}
+?>
+ </select>
+for aec
+  <select name="blood_group" class="form-control">
+                               <option value=""><?php echo $this->lang->line('select') ?></option>
+                            
+                                <?php foreach ($aec11 as $subject) { ?>
+                                    <option value="<?= $subject['id']; ?>"    <?php
+                            if ($student["blood_group"] == $subject['id']) {
+                                    echo "selected=selected";
+                                }
+                                ?>>
+                                        <?= $subject['name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+for sec
+  <select name="weight" class="form-control">
+                               <option value=""><?php echo $this->lang->line('select') ?></option>
+                            
+                                <?php foreach ($sec12 as $subject) { ?>
+                                    <option value="<?= $subject['id']; ?>"    <?php
+                            if ( set_value('weight', $student['weight']) == $subject['id']) {
+                                    echo "selected=selected";
+                                }
+                                ?>>
+                                        <?= $subject['name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+for vac
