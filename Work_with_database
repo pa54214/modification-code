@@ -1,0 +1,8 @@
+
+
+use for database 
+feetype.code,feetype.type,feetype.description
+
+students.note
+
+TRUNCATE TABLE student_fees_deposite; for zero set payment id in nek erp
