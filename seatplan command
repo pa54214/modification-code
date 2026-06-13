@@ -1,0 +1,19 @@
+create seat plan in php , roll starts from 1423040001 to 1423040240, verticle increase roll , ceter name :- umv muradpur ,dumra sitamarhi, give print button and print room wise using page break, show total candidate count on each page and show roll range also, give space for total present and total absent at below table and add signature at botton  , in seating paln  room 1 has 48 in which 1st col has 7 row and in one row 2 student can seat middle or 2nd col has 7 row and two can seat in one row , 3rd or last col has 10 row and two student can seat in one row, same pattern used for room 2, foe room 3 24 student can seat left has 6 row and 2 can seat in one row and 6 row in right and 2 student can seat in each row same as class 3 class 4 using pattern , for class 5 total 48 can seat and 9row in left two can seat in each row and 9 in middle and two can seat in each last right has 6 row and two acn seat in each same for class 6 total 6 room in use and total seating capacity in 240 make on consolidated sheet also room wise
+
+
+
+
+Below is a complete PHP script that generates:
+
+Center Name: UMV Muradpur, Dumra, Sitamarhi
+Roll numbers: 1423040001 to 1423040240
+Total 240 candidates
+6 rooms
+Room-wise seating plans with page breaks
+Print button
+Roll range on each room page
+Total candidate count on each room page
+Space for Present and Absent
+Invigilator Signature
+Consolidated summary sheet
+Vertical roll number allocation (top to bottom in each column)
