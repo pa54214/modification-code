@@ -1,3 +1,6 @@
+class wise roll made for mkr 
+its not acceptable so note field of student changed or renamed into class roll no that is filled manuaaly
+
 $sch_setting = $this->sch_setting_detail;
            $students = array();
         if ($search_type == "search_filter") {
