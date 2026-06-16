@@ -1,0 +1,40 @@
+        foreach ($student_due_fee as $key => $fee) {
+                foreach ($fee->fees as $fee_key => $fee_value) {
+                      $fee_paid         = 0;
+        $fee_discount     = 0;
+        $fee_fine         = 0;
+        $fees_fine_amount = 0;
+        $feetype_balance  = 0;
+                     if (!empty($fee_value->amount_detail)) {
+            $fee_deposits = json_decode(($fee_value->amount_detail));
+
+            foreach ($fee_deposits as $fee_deposits_key => $fee_deposits_value) {
+                
+               //  $fee_paid     = $fee_paid + $fee_deposits_value->amount;
+               // $fee_discount = $fee_discount + $fee_deposits_value->amount_discount;
+               // $fee_fine     = $fee_fine + $fee_deposits_value->amount_fine;
+               // $feetype_balance = $fee_value->amount - ($fee_paid + $fee_discount);
+                if ($feetype_balance == 0) {
+       // <span class="label label-success"><?php echo $this->lang->line('paid'); </span>
+        }
+                
+            }}
+                    
+                    ?>
+                        <td class="text-left" style="white-space: nowrap; float: left;">
+                            <input style="display: inline;" class="checkbox" type="checkbox" id="<?php echo $fee_value->fee_groups_feetype_id ?>">
+                            <?php
+                            if ($fee_value->is_system) {
+                                echo $fee_value->name . ' ' . $this->lang->line($fee_value->name) . ' (' . $this->lang->line($fee_value->type) . ')';
+                            } else {
+                              //  echo  $fee_value->type. '('.$fee_value->name . ' )'  ;
+                               // echo $fee_value->type . " ". "Fee";
+                               echo  $fee_value->name. '('.$fee_value->code . ' )'  ;
+                            }
+                        ?>
+                        </td>
+                <?php
+                }
+                ?>
+            <?php
+            }
