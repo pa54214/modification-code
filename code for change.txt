@@ -1,3 +1,8 @@
+preg_match('/\((.*?)\)/', $str, $matches);
+echo $matches[1]; 
+use dfor utr
+
+
 ## back button
 
     <div class="col-md-8">
