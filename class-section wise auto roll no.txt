@@ -1,3 +1,9 @@
+class-section wise auto roll no.txt
+write code here
+
+====================================================================================================
+================================================================================================================
+*********** not accepable ***************** 
 class wise roll made for mkr 
 its not acceptable so note field of student changed or renamed into class roll no that is filled manuaaly
 
