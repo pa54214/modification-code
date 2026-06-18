@@ -13,6 +13,14 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-info" style="padding:5px;">
+                     <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-search"></i> <?php //echo $this->lang->line('select_criteria'); ?></h3>
+                        <div class="pull-right box-tools">
+                            <a href="<?php echo site_url('student/exportformatonlinestudent') ?>">
+                                <button class="btn btn-primary btn-sm"><i class="fa fa-download"></i> <?php echo $this->lang->line('download_sample_import_file'); ?></button>
+                            </a>
+                        </div>
+                    </div>
             
                  <form action="<?php echo site_url('student/importonlinestudent_') ?>"  id=" " name=" " method="post" enctype="multipart/form-data">
                         <div class="box-body">
@@ -33,11 +41,41 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                             </div>
                         </div>
                     </form>
-                    <div>
+                    
                     </div>
                 </div>
-                </section>
-            </div>
+                  <div class="col-md-12">
+                <div class="box box-info" style="padding:5px;">
+                      <div class="box-body">
+                        <?php  $message = $this->session->userdata('message');
+                        
+                       // echo ($message !== null) ? $message : 'No Record Found';
+                      /*  echo "<pre>";
+                         var_dump($message);
+                        echo"</pre>";*/
+                        
+                        if($message !== null){
+                       //      echo "<pre>";
+                       //  var_dump($message);
+                       // echo"</pre>";
+                        
+                        echo "<ul>";
+foreach ($message as $message) {
+    echo "<li>" . $message . "</li>";
+}
+echo "</ul>";
+                        }else{
+                            echo 'No Record Found' ;
+                        }
+                        
+                        ?>
+                        
+                        </div>
+                  </div>
+                        </div>
+                 </div>
+    </section>
+</div>
 
 
 
@@ -45,14 +83,16 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 
       /application/controllers/Student.php     
 
-          public function importonlinestudent_()
+       public function importonlinestudent_()
     {
          // $fields = array('admission_no','first_name','father_name', 'date_of_birth', 'email', 'mobile_no', 'category','mother_name');
-      //   $fields = array('admission_no','firstname','father_name', 'dob', 'email', 'mobileno', 'category_id','mother_name');
+    
         $fields = array('admission_no','firstname','father_name', 'dob', 'email', 'mobileno', 'mother_name');
            $data["fields"]       = $fields;
+       //    $this->session->unset_userdata('message');
+       
     if (isset($_FILES["file"]) && !empty($_FILES['file']['name'])) {
-               // var_dump($_FILES['file']['name']);exit();
+               $message=array();//newly added
                 $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
                 if ($ext == 'csv') {
                     $file = $_FILES['file']['tmp_name'];
@@ -60,6 +100,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                     $result = $this->csvreader->parse_file($file);
                     if (!empty($result)) {
                         $rowcount = 0;
+                        //$message=array();
                         for ($i = 1; $i <= count($result); $i++) {
                             $student_data[$i] = array();
                             $n                = 0;
@@ -68,73 +109,83 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                
                                  $n++;
                             }
-                          /*   $data_setting                      = array();
-                            
-                             $data_setting['id']                = $this->sch_setting_detail->id;
-                             $data_setting['adm_auto_insert']   = $this->sch_setting_detail->adm_auto_insert;
-                            
-                            $data_setting['adm_update_status'] = $this->sch_setting_detail->adm_update_status;*/
+                         
                             $adm_no                            = $student_data[$i]["admission_no"];
-                            $roll_no                           = $student_data[$i]["roll_no"];
-                            $reg_no                            = $student_data[$i]["reg_no"];
-                                $admission_no_exists = $this->onlinestudent_model->check_adm_exists($adm_no );
-                               //  var_dump(  $admission_no_exists);exit();
+                         
+                                $admission_no_exists = $this->onlinestudent_model->check_adm_exists_online_student($adm_no );
+                             
                                if ($admission_no_exists) {
-                                  // $insert_id = $this->student_model->updateroll_excel($adm_no ,$roll_no,$reg_no);
-                                 echo "<pre>";
-                                 echo "Admission no is exists";
-                                 var_dump($admission_no_exists);
-                                  echo "</pre><br>";
+                                   
+                                $message[]="Admission no is exists";
+                                
+                                // echo "Admission no is exists";
+                               
+                                  
                                 } else {
                                   
                                    $insert_id = $this->onlinestudent_model->addexceldata($student_data[$i]);
-                                     echo "<br>Successfully data is inserted Id :-";
-                                     echo  $insert_id;
+                                   $message[]="Successfully data is inserted with Id no :-". $insert_id;
+                                    // echo "<br>Successfully data is inserted Id :-";
+                                   //  echo  $insert_id;
                                       $rowcount++;
                                 }
-                          
-                           /* if (!empty($insert_id)) {
-                                    $temp              = $insert_id;
-                                    $data['csvData'] = $result;
-                                   $rowcount++;
-                                  
-                                } else {
-                                
-                                 
-                                }*/
-                            
-                            
-                            
+                             
                         }//end of for loop
                         
-                        echo "Total inserted row:-" .$rowcount++;
+                        $message[]="Total inserted row:-" .$rowcount++;
+                       // echo "Total inserted row:-" .$rowcount++;
                         
                     } else {
-
-                         echo "<br>no result found in csv file add result to upload";
+                         $message[]= "No result found in csv file add result to upload";
+                        // echo "<br>No result found in csv file add result to upload";
                     }
                 } else {
-                      
-                   echo "<br>file is not CSV kindly check uploaded file ";
+                    $message[]=   "file is not CSV kindly check uploaded file ";
+                   //echo "<br>file is not CSV kindly check uploaded file ";
                 }
+                $this->session->set_userdata('message', $message);
                 redirect('student/importonlinestudent_');
             }else{
+                
+                  $this->load->view('layout/header', $data);
+           
+           
                   $this->load->view('student/importonlinestudent_');
+                   $this->load->view('layout/footer', $data);
             }
     } 
+
+
+public function exportformatonlinestudent()
+    {
+        $this->load->helper('download');
+        $filepath = "./backend/import/import_Onlinne_raw_excel_update.csv";
+        $data     = file_get_contents($filepath);
+        $name     = 'import_student_sample_file.csv';
+
+        force_download($name, $data);
+    }
+}
+
     -------------------------------------------------------------------------------------------------------------------
     ---------------------------------------------------------------------
-        public function addexceldata($data)
+
+application/models/Onlinestudent_model.php
+         public function addexceldata($data)
     {
        // $this->db->insert('online_admissions', $data);
        $this->db->insert('online_admissions', $data);
        if ($this->db->affected_rows() > 0) {
-    echo $this->db->insert_id();
+    //echo $this->db->insert_id();
+    return $this->db->insert_id();
 } else {
-    echo $this->db->error()['message'];
+   // echo $this->db->error()['message'];
+ 
+   return  $this->db->error()['message'];
 }
        // return $this->db->insert_id();
     }
+    
       public function check_adm_exists_online_student($admission_no)
     {
         $this->db->where(array('admission_no' => $admission_no));
