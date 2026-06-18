@@ -3,3 +3,9 @@
 
 
 $this->customlib->dateformat($student->admission_date);
+
+
+use for database 
+feetype.code,feetype.type,feetype.description
+
+date('Y-m-d', strtotime($result[$i]['date_of_birth']));
