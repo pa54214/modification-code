@@ -135,4 +135,14 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 }
        // return $this->db->insert_id();
     }
-    
+      public function check_adm_exists_online_student($admission_no)
+    {
+        $this->db->where(array('admission_no' => $admission_no));
+        // $this->db->where('admission_no',$admission_no);
+        $query = $this->db->get('online_admissions');
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
