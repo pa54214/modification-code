@@ -27,4 +27,147 @@ Footer Top Margin  500
 Body Top Margin  200
 Body Width 500
   ===================================================================================================================
-  
+  BONAFIDE CERTIFICATE 
+<b></b><br><br><b></b><b></b><b><b></b><br><br><b></b><b></b><b>
+This is certify that Mr / Ms <b>[name]</b> bearing Registration No. <b>[cast] </b> Roll No. <b>[roll_no]</b> is a bonafide student of this institute, studying in the [class] (H) [section] course during Academic Year 2025-26, Session 2024-28.<br><br>
+The student details as entered in our institute record are : <br>
+Student  Name                    :          </b><b>[name]</b><br>
+Father's  Name                    :            <b>[father_name]</b><br>
+Mother's Name           :                  <b>[mother_name]</b><br>
+<span>Date  of   Birth        :                 <b>[dob]</b><br>
+Course                 :                          <b>  [class] (H)</b><br>
+Term                     :                           <b> [section]</b><br>
+Category              :                           <b>  [category]</b><br>
+Present Address  :                  <b>[present_address]</b><br>
+Expected Year of Course Completion  :   4 Year<br>
+
+Name of the Institute :       College name <br>
+Address of Institute  : Sitamarhi, Bihar- 843302<br> 
+<b>Details of Fee</b><br>
+Date of Admission                           :        [admission_date] <br>
+Admission Fee                                  :      2255/-<br>
+Fee Receipt No:-                              :      ................
+
+Header Top Margin
+200
+Footer Top Margin
+0
+Body Top Margin
+160
+Body Width
+510
+Student Photo
+Image Top Margin
+400
+
+
+=============================================================================
+BONAFIDE CERTIFICATE
+<b></b><br><br><b></b><b></b><b><b></b><br><br><b></b><b></b><b>
+This is certify that Mr / Ms <b>[name]</b> bearing Registration No. <b>[cast] </b> Roll No. <b>[roll_no]</b> is a bonafide student of this institute, studying in the [class] (H) [section] course during Academic Year 2025-26, Session 2023-27.<br><br>
+The student details as entered in our institute record are : <br>
+Student  Name                    :          </b><b>[name]</b><br>
+Father's  Name                    :            <b>[father_name]</b><br>
+Mother's Name           :                  <b>[mother_name]</b><br>
+<span>Date  of   Birth        :                 <b>[dob]</b><br>
+Course                 :                          <b>  [class] (H)</b><br>
+Term                     :                           <b> [section]</b><br>
+Category              :                           <b>  [category]</b><br>
+Present Address  :                  <b>[present_address]</b><br>
+Expected Year of Course Completion  :   4 Year<br>
+
+Name of the Institute :       College<br>
+Address of Institute  :  Sitamarhi, Bihar- 843302<br> 
+<b>Details of Fee</b><br>
+Date of Admission                           :        .........................<br>
+Admission Fee                                  :       .........................-<br>
+Fee Receipt No:-                              :        .........................
+
+==========================================================================================================
+BONAFIDE CERTIFICATE(Portrait)new
+<h4>This is to certify that Mr/Ms <b>[name]</b> bearing Registration No <b>[cast]</b> is a bonafide student of this institute, studying in the  [class] [section] course during Academic Year 2024-25, Session 2024-28<br><br>
+</h4><hr><br>
+<p><b>The student details as entered in our institute record are :</b> </p><br>
+<hr><br>
+Date of Birth   :                                       <b>[dob]</b><br>
+Father's Name   :                                    <b>[father_name]</b><br>
+Mother's Name   :                                  <b>[mother_name]</b><br>
+Date of Admission  :                               <b>[admission_date]</b><br>
+
+Expected year of Course Completion  :     2024-28<br>
+
+Name of the Institute :       <b>Matashri Kaushalya Ramdev Dr. Ganesh Ray Degree College</b><br>
+Address of Institute  :                 <b>Near Punaura Police Station, Punaura, Sitamarhi, Bihar - 843302</b><br>                                                                      
+Course                         :                         <b>  [class]</b><br>
+Semester                       :                         <b> [section]</b><br>
+Date of Admission          :                    <b>    [admission_date] </b> <br><br>
+<hr><br>
+<p><b>Details of Fee</b></p><br><hr><br>
+Admission Fee               :     2255/- <br>
+-------------------------------------
+Header Top Margin
+0
+Footer Top Margin
+0
+Body Top Margin
+320
+Body Width
+550
+Student Photo off
+
+=====================================================================================================================
+============================================================================================
+college leaving certificate
+Header Left Text
+SI. NO:
+Header Center Text
+Header Right Text
+date:-
+body text
+<table>
+<tr>
+  <td colspan="6">the college leaving certifficate of the below mentioned has been issued on the request of the stuedent in the vide his / her CLC Application :-[s_no]</td> 
+  </tr>
+<tr>
+  <td colspan="6"><br>Personal information</td> 
+  </tr>
+<tr>
+  <td colspan="2">name<br>father name<br>mother name<br>date of  birth <br>permanent Address</td> 
+<td colspan="2">[name]<br> [father_name]<br>[mother_name]<br> [dob]<br>[present_address]</td> 
+<td></td>
+ <td></td> 
+  </tr>
+<tr>
+  <td colspan="6"><br>Academic Information</td> 
+  </tr>
+  <tr>
+    <td colspan="2">class<br>Session</td> 
+<td>Graduation<br>[session] </td> 
+<td colspan="2">Faculty<br>Registration No</td>
+ <td>[faculty]<br>[admission_no]</td>   
+  </tr>
+<tr>
+  <td colspan="6"><br>Examination information</td> 
+  </tr>
+  <tr>
+    <td colspan="2">Exam Passes<br>passing year<br>Full marks<br>Result Publication Date</td> 
+<td>B.A Examination 2024<br>2024<br>800<br>12.12.2024</td> 
+<td colspan="2">University<br>roll No<br>marks obtained<br>division</td>
+ <td>BRA bihar university muzaffarpur<br>[roll_no]<br>[marks_obtianed]<br>first/ second/ third</td>   
+  </tr>
+<tr>
+  <td colspan="6"><br>Subject Appeared</td> 
+  </tr>
+  <tr>
+    <td colspan="2">Honors subejct<br>composition subject</td> 
+<td>[class]<br>[composition_subject] </td> 
+<td colspan="2">subsidiary subject<br>optional subject</td>
+ <td>1.[subsidiary_subject_1]   2.[subsidiary_subject_2]<br>[optional_subject]</td>   
+  </tr>
+<tr>
+  <td colspan="6"><br>Character :     Good</td> 
+  </tr>
+<tr>
+  <td colspan="6"><br>No any compliant aginist this student has been registered during the academic session at this institution</td> 
+  </tr>
+</table>
