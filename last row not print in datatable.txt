@@ -68,3 +68,358 @@ kya fee collection revert krne ke nad utr id remove hota hauu ki nahi
 
 
 tfoot sorting issue remains and no-sort class sorting issue remains check it later 
+
+
+===============================================================================================
+====================================================================================================
+<?php
+$currency_symbol = $this->customlib->getSchoolCurrencyFormat();
+if (!empty($student_list)) {
+
+?>
+<div class="row">
+	<div class="col-md-12">
+<div class="pull-right mb10">
+<strong><?php echo $this->lang->line('collection_date'); ?>: </strong><?php echo $this->customlib->dateformat(date('Y-m-d',$date)); ?>
+	</div>
+</div>
+</div>
+<div class="table-responsive">
+	<div class="download_label_"><?php echo $this->lang->line('collection_list')."(".$this->customlib->dateformat(date('Y-m-d',$date)).")"; ?></div>	
+     <table class="table table-striped table-bordered table-hover" id="ViewData" >
+        <thead>
+            <tr>            
+                <th><?php echo $this->lang->line('admission_no') ?></th>
+                <th><?php echo "Class Roll No."; ?></th>
+                <th><?php echo $this->lang->line('name') ?></th>
+                <th><?php echo $this->lang->line('father_name') ?> </th>
+                <th><?php echo $this->lang->line('class') ?></th>
+                <th>Fee Code</th>
+                
+                <th><?php echo $this->lang->line('payment_mode') ?></th>
+                <th><?php echo $this->lang->line('payment_id') ?></th>
+                <th><?php echo $this->lang->line('collected_by') ?></th>
+                <th class="text text-right"><?php echo $this->lang->line('fine') ?></th>
+                <th>Discount</th>
+                <th class="text text-right"><?php echo $this->lang->line('amount') ?></th>
+                <th class="text text-right"><?php echo $this->lang->line('total') ?></th>                
+                <th>UTR/Note</th>
+            </tr>
+        </thead>
+    <tbody>
+    	<?php 
+  $total_fine=0;
+  $total_amount=0;
+  $total_discount_amount=0;//p
+  
+ // echo "<pre>";
+ //var_dump($student_list);
+foreach ($student_list as $student_key => $student_value) {
+    
+     // echo "<pre>";
+ //var_dump($student_list);
+	if (isJSON($student_value->amount_detail)) {
+		    $fees_details = (json_decode($student_value->amount_detail));		 
+			 
+		    foreach ($fees_details as $fees_key => $fees_value) {
+		    
+		    	if(strtotime($fees_value->date) == $date){
+		    		
+		    		$total_fine+=$fees_value->amount_fine;
+		    		$total_amount+=$fees_value->amount;	
+		    		 $total_discount_amount+=$fees_value->amount_discount;//p
+					
+		    ?>
+		    <tr>
+		    	<td><?php echo $student_value->admission_no;?></td>
+		    	<td><?php
+		    	//echo "<pre>";var_dump($student_value) 
+		    //	echo $student_value->roll_no;
+		    	echo $student_value->note;
+		    	;?></td>
+		    	<td><?php echo $this->customlib->getFullName($student_value->firstname,$student_value->middlename,$student_value->lastname,$sch_setting->middlename,$sch_setting->lastname); ?></td>
+		    	<td><?php echo $student_value->father_name;?></td>
+		    	<td><?php echo $student_value->class . " (" . $student_value->section . ")" ?></td>
+		    
+		    	<td><?php echo $student_value->name;?></td>
+		    	<td><?php echo $this->lang->line(strtolower($fees_value->payment_mode));  ?></td>
+		    	<td><?php echo $student_value->student_fees_deposite_id."/".$fees_value->inv_no;  ?></td>
+		    	<td>
+					<?php  
+                  
+
+					if( is_object($fees_value) && (array_key_exists('collected_by', $fees_value) )) { 			
+						echo $fees_value->collected_by;	
+					} 	   
+					?>
+				</td>
+		    	<td class="text text-right"><strong><?php echo $currency_symbol.amountFormat($fees_value->amount_fine);  ?></strong></td>	
+		    	<td class="text text-right"><strong><?php echo $currency_symbol.amountFormat($fees_value->amount_discount);  ?></strong></td>	
+		    	<td class="text text-right"><strong><?php echo $currency_symbol.amountFormat($fees_value->amount);  ?></strong></td>
+		    	<td class="text text-right"><strong><?php echo $currency_symbol.amountFormat($fees_value->amount_fine+$fees_value->amount);  ?></strong></td>		  
+		    	<td><?= $fees_value->description?></td>
+		    </tr>
+		    <?php		
+		    	}		    
+		    }
+	}
+	}
+
+    	 ?>    	 
+    </tbody>
+		<!--<tr>-->
+		<!--	<td ></td>-->
+  <!--  	 	<td ></td>-->
+		<!--	<td ></td>-->
+  <!--  	 	<td ></td>-->
+  <!--  	 	<td ></td>-->
+  <!--  	 	<td ></td>-->
+  <!--  	 	<td ></td>-->
+  <!--  	 	<td ></td>-->
+		<!--	<td  class="text text-right"><strong> <?php echo $this->lang->line('grand_total'); ?></strong></td>-->
+  <!--  	 	<td class="text text-right"><strong><?php echo $currency_symbol.amountFormat($total_amount + $total_fine); ?></strong></td>    	-->
+  <!--  	 </tr>-->
+  
+  <!---------------------------->
+
+  <!-- note:- tr is repated 2 times beacuse tfoot is not showing on loading its showing on datatble button function like print... need to fix it -->
+   <tr>
+		<td ></td>
+    	 	<td ></td>
+		<td ></td>
+   	 	<td ></td>
+   	 	<td ></td>
+  	 	<td ></td>
+  	 	<td ></td>
+   	 	<td ></td>
+   	 
+		<td  class="text text-right"><strong> <?php echo $this->lang->line('grand_total'); ?></strong></td>
+		<td class="text text-right"><strong><?php echo $currency_symbol.amountFormat( $total_fine); ?></strong></td>
+		<td class="text text-right"><strong><?php echo $currency_symbol.amountFormat($total_discount_amount); ?></strong></td>
+		<td class="text text-right"><strong><?php echo $currency_symbol.amountFormat($total_amount ); ?></strong></td>
+   	 	<td class="text text-right"><strong><?php echo $currency_symbol.amountFormat($total_amount + $total_fine); ?></strong></td>    	
+ 	 </tr>
+ 	   <tfoot>
+        <tr>
+		<td ></td>
+    	 	<td ></td>
+		<td ></td>
+   	 	<td ></td>
+   	 	<td ></td>
+  	 	<td ></td>
+  	 	<td ></td>
+   	 	<td ></td>
+   	 
+		<td  class="text text-right"><strong> <?php echo $this->lang->line('grand_total'); ?></strong></td>
+		<td class="text text-right"><strong><?php echo $currency_symbol.amountFormat( $total_fine); ?></strong></td>
+		<td class="text text-right"><strong><?php echo $currency_symbol.amountFormat($total_discount_amount); ?></strong></td>
+		<td class="text text-right"><strong><?php echo $currency_symbol.amountFormat($total_amount ); ?></strong></td>
+   	 	<td class="text text-right"><strong><?php echo $currency_symbol.amountFormat($total_amount + $total_fine); ?></strong></td>    	
+ 	 </tr>
+  
+  </tfoot>
+</table>
+<!--<table class="table table-striped table-bordered table-hover"  >
+            <thead>
+                <tr>            
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th> </th>
+                    <th></th>
+                    <th></th>
+                    
+                    <th></th>
+                    <th></th>
+                 <th><?php echo "Total";//$this->lang->line('collected_by') ?></th>
+                <th ><?php echo $total_fine; ?></th>
+                <th></th>
+                <th ><?php echo $total_amount; ?></th>
+                <th ><?php echo $total_amount + $total_fine; ?></th>                
+                <th></th>
+            </tr>
+        </thead>
+        </table>
+<!--<span style="float : right; padding-right : 400px;">
+               <strong><?php echo $this->lang->line('grand_total'); ?> - <?= $total_amount + $total_fine?></strong>
+         </span>-->
+</div>
+<?php 
+	
+
+} else {
+    ?>
+                                        <div class="alert alert-info">
+                                            <?php echo $this->lang->line('no_record_found'); ?>
+                                        </div>
+                                        <?php
+}
+?>
+
+<script type="text/javascript">
+$(document).ready(function () {
+        var table = $('#ViewData').DataTable({
+            "aaSorting": [],           
+            rowReorder: {
+            selector: 'td:nth-child(2)'
+            },
+            //responsive: 'false',
+            dom: "Bfrtip",
+            buttons: [
+
+                {
+                    extend: 'copyHtml5',
+                    text: '<i class="fa fa-files-o"></i>',
+                     footer: true  , // ✅ IMPORTANT
+                    titleAttr: 'Copy',
+                    title: $('.download_label_').html(),
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fa fa-file-excel-o"></i>',
+                    titleAttr: 'Excel',
+                    footer: true ,  // ✅ IMPORTANT
+                    title: $('.download_label_').html(),
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-file-text-o"></i>',
+                     footer: true,   // ✅ IMPORTANT,
+                    titleAttr: 'CSV',
+                    title: $('.download_label_').html(),
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+
+                {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fa fa-file-pdf-o"></i>',
+                    orientation: 'landscape',   // ✅ IMPORTANT
+                   pageSize: 'A4',             // or try 'LEGAL'
+                   footer: true,
+                    titleAttr: 'PDF',
+                    title: $('.download_label_').html(),
+                    customize: function (doc) {
+
+                // ✅ Reduce font size
+                doc.defaultStyle.fontSize = 6;
+
+                // ✅ Table header style
+                doc.styles.tableHeader.fontSize = 9;
+                doc.styles.tableHeader.alignment = 'center';
+
+                // ✅ Auto-fit columns
+                var table = doc.content[1].table;
+                var colCount = table.body[0].length;
+
+                // Make all columns auto width
+                table.widths = Array(colCount).fill('*');
+
+                // ✅ Reduce margins
+                doc.pageMargins = [10, 10, 10, 10];
+            },
+                    exportOptions: {
+                        columns: ':visible'
+                        
+                    }
+                },
+
+                {
+                    extend: 'print',
+                    text: '<i class="fa fa-print"></i>',
+                    titleAttr: 'Print',
+                   // text: 'Print (Landscape)',   // ✅ IMPORTANT
+                     footer: true  , // ✅ IMPORTANT
+                    title: $('.download_label_').html(),
+                        customize: function ( win ) {
+                             // Add footer
+              /*  $(win.document.body).append(
+                        '<div style="position:fixed; bottom:0; width:100%; text-align:center; font-size:10px;">' +
+                        'This is footer text | Page <span class="pageNumber"></span>' +
+                        '</div>'
+                );*/
+                //for table 
+                    $(win.document.body)
+                        .css( 'font-size', '8pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                        
+                        //for landcape css
+                    var css = '@page { size: landscape; }',
+                    head = win.document.head || win.document.getElementsByTagName('head')[0],
+                    style = win.document.createElement('style');
+
+                style.type = 'text/css';
+                style.media = 'print';
+
+                if (style.styleSheet) {
+                    style.styleSheet.cssText = css;
+                } else {
+                    style.appendChild(win.document.createTextNode(css));
+                }
+
+                head.appendChild(style);
+                
+        // Ensure footer behaves like table footer
+        $(win.document.body).find('tfoot').css({
+            //display: 'table-footer-group'
+            display: 'table-row-group'
+        });
+
+        // Optional styling
+        $(win.document.body).find('tfoot th').css({
+            'font-weight': 'bold',
+            'border-top': '2px solid black'
+        });
+        
+        //this line to add last row sticky at button for grand total 
+        /* var css = `
+                table { page-break-inside: auto; }
+    
+                tr { 
+                    page-break-inside: avoid; 
+                    page-break-after: auto; 
+                }
+
+            tfoot {
+                display: table-row-group;
+            }
+
+            tfoot tr {
+                page-break-inside: avoid;
+            }
+        `;
+
+        var style = win.document.createElement('style');
+        style.appendChild(win.document.createTextNode(css));
+        win.document.head.appendChild(style);*/
+        
+                },
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+
+                {
+                    extend: 'colvis',
+                    text: '<i class="fa fa-columns"></i>',
+                    titleAttr: 'Columns',
+                    title: $('.download_label_').html(),
+                    postfixButtons: ['colvisRestore']
+                },
+            ]
+        });
+    });
+
+</script>
