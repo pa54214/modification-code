@@ -77,7 +77,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                             $adm_no                            = $student_data[$i]["admission_no"];
                             $roll_no                           = $student_data[$i]["roll_no"];
                             $reg_no                            = $student_data[$i]["reg_no"];
-                                $admission_no_exists = $this->student_model->check_adm_exists($adm_no );
+                                $admission_no_exists = $this->onlinestudent_model->check_adm_exists($adm_no );
                                //  var_dump(  $admission_no_exists);exit();
                                if ($admission_no_exists) {
                                   // $insert_id = $this->student_model->updateroll_excel($adm_no ,$roll_no,$reg_no);
