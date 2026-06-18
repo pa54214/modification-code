@@ -1,7 +1,11 @@
-preg_match('/\((.*?)\)/', $str, $matches);
+#used to remoce bracket from ute in fee
+preg_match('/\((.*?)\)/', $str, $matches);  used to remoce bracket from ute in fee
 echo $matches[1]; 
 use dfor utr
 
+#TRUNCATE TABLE student_fees_deposite; for zero set payment id in nek erp
+
+#ALTER TABLE online_admissions AUTO_INCREMENT = 67;
 
 ## back button
 
