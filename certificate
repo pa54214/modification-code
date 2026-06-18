@@ -322,3 +322,49 @@ foreach ($students as $student) {
     <?php
 }//end of for loop
 ?>
+=======================================================================================================
+===============================================================
+bulk printing id fixed by these code of java script 
+
+function Popup_(data)
+    {
+        //two varibales is used here one  to get i frame and one for to get contentwinodw
+        var frame1 = $('<iframe />');
+      /*  frame1[0].style.position = "fixed";
+            frame1[0].style.right = "0";
+            frame1[0].style.bottom = "0";
+            frame1[0].style.width = "0";
+            frame1[0].style.height = "0";
+            frame1[0].style.border = "0";*/
+        frame1[0].name = "frame1";
+        $("body").append(frame1);
+        var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
+        frameDoc.document.open();
+//Create a new HTML document.
+        frameDoc.document.write('<html>');
+        frameDoc.document.write('<head>');
+        frameDoc.document.write('<title></title>');
+        frameDoc.document.write('</head>');
+        frameDoc.document.write('<body>');
+        frameDoc.document.write(data);
+        frameDoc.document.write('</body>');
+        frameDoc.document.write('</html>');
+        frameDoc.document.close();
+        /*setTimeout(function () {
+            window.frames["frame1"].focus();
+            window.frames["frame1"].print();
+            frame1.remove();
+             }, 500);*/
+             frame1[0].onload = function () {
+          //  const win = frame.contentWindow;
+            frameDoc.focus();
+           frameDoc.print();
+
+          // Clean up after print
+          frameDoc.onafterprint = function () {
+          frame1.remove();
+          };
+          };
+
+        return true;
+    }
