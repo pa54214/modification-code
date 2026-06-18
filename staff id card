@@ -1,4 +1,6 @@
 views/admin/generatestaffidcard/
+horizontal is working properly check and test
+
 <style type="text/css">
     @media print {
       .page-break { display: block; page-break-before: always; }
