@@ -1,0 +1,103 @@
+   <div class="card-header">
+        <h4 class="mb-0">Details of Academic Record</h4>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th>Class</th>
+                        <th>Board</th>
+                        <th>Passing Year</th>
+                        <th>Roll No.</th>
+                        <th>Marks Obt</th>
+                        <th>Marks %</th>
+                        <th>Which School/College did you Pass</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td><strong>Matric (10th)</strong></td>
+
+                        <td>
+                            <input type="text" class="form-control"
+                                name="matric_board"
+                                value="<?= $student['matric_board'] ?>">
+                        </td>
+
+                        <td>
+                            <input type="text" class="form-control"
+                                name="matric_passing_year"
+                                value="<?= $student['matric_passing_year'] ?>">
+                        </td>
+
+                        <td>
+                            <input type="text" class="form-control"
+                                name="matric_roll_num"
+                                value="<?= $student['matric_roll_num'] ?>">
+                        </td>
+
+                        <td>
+                            <input type="text" class="form-control"
+                                name="matric_marks"
+                                value="<?= $student['matric_marks'] ?>">
+                        </td>
+
+                        <td>
+                            <input type="text" class="form-control"
+                                name="matric_percent"
+                                value="<?= $student['matric_percent'] ?>">
+                        </td>
+
+                        <td>
+                            <input type="text" class="form-control"
+                                name="matric_school"
+                                value="<?= $student['matric_school'] ?>">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Inter (12th)</strong></td>
+
+                        <td>
+                            <input type="text" class="form-control"
+                                name="inter_board"
+                                value="<?= $student['inter_board'] ?>">
+                        </td>
+
+                        <td>
+                            <input type="text" class="form-control"
+                                name="inter_passing_year"
+                                value="<?= $student['inter_passing_year'] ?>">
+                        </td>
+
+                        <td>
+                            <input type="text" class="form-control"
+                                name="inter_roll_num"
+                                value="<?= $student['inter_roll_num'] ?>">
+                        </td>
+
+                        <td>
+                            <input type="text" class="form-control"
+                                name="inter_marks"
+                                value="<?= $student['inter_marks'] ?>">
+                        </td>
+
+                        <td>
+                            <input type="text" class="form-control"
+                                name="inter_percent"
+                                value="<?= $student['inter_percent'] ?>">
+                        </td>
+
+                        <td>
+                            <input type="text" class="form-control"
+                                name="inter_school"
+                                value="<?= $student['inter_school'] ?>">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
