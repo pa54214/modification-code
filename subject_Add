@@ -74,7 +74,7 @@ $subject=array(
                                             
                                                                     
                                                                           "aec"=>array(
-                                                                                    "Course On NCC , NSC / NGO", "Social Science","Scout & Guide","Sports" ),
+                                                                                    "Course On NCC","Course On  NSS ","Course On NGO", "Social Services","Scout & Guide","Sports" ),
                                                                    
                                                             
                                                                                    
@@ -111,7 +111,7 @@ $subject=array(
                                                 
                                                 
                                                 "aec"=>array(
-                                                            "Course On NCC , NSC / NGO", "Social Science","Scout & Guide","Sports" ),
+                                                             "Course On NCC","Course On  NSS ","Course On NGO", "Social Services","Scout & Guide","Sports" ),
                                                 
                                                 
                                                            
