@@ -1,0 +1,85 @@
+After uploading your Laravel project to a server, you need to configure it before it will run in the browser.
+
+1. Point the web server to the public folder
+
+Your web server's document root should point to:
+
+/home/username/your-project/public
+
+Apache VirtualHost example:
+
+DocumentRoot /var/www/your-project/public
+
+<Directory /var/www/your-project/public>
+    AllowOverride All
+    Require all granted
+</Directory>
+
+Nginx example:
+
+root /var/www/your-project/public;
+index index.php index.html;
+2. Configure the .env file
+
+Edit the .env file:
+
+APP_NAME=Laravel
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://yourdomain.com
+
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=your_database
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+
+Replace the database values with your actual credentials.
+
+3. Install dependencies
+
+If the vendor folder is missing, run:
+
+composer install --no-dev --optimize-autoloader
+4. Generate the application key (if needed)
+php artisan key:generate
+5. Run database migrations
+php artisan migrate
+6. Set permissions
+
+On Linux:
+
+chmod -R 775 storage bootstrap/cache
+
+or
+
+chown -R www-data:www-data storage bootstrap/cache
+7. Clear and rebuild caches
+php artisan optimize:clear
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+8. Open your website
+
+Visit:
+
+https://yourdomain.com
+
+or, if it's in a subfolder:
+
+https://yourdomain.com/your-project/public
+If you're using shared hosting (cPanel)
+Upload the Laravel project outside public_html (for example, /home/username/laravel-app).
+Copy the contents of the project's public folder into public_html.
+Update the paths in public_html/index.php to point to the Laravel project:
+require __DIR__.'/../laravel-app/vendor/autoload.php';
+
+$app = require_once __DIR__.'/../laravel-app/bootstrap/app.php';
+If it still doesn't work
+
+Please tell me:
+
+Are you using cPanel, VPS, Apache, Nginx, XAMPP, or Laragon?
+What is your domain or URL (or an example)?
+What error do you see in the browser? (For example: 404 Not Found, 500 Internal Server Error, 403 Forbidden, or a blank page.)
