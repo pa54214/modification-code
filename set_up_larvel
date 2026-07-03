@@ -1,0 +1,114 @@
+1. Install PHP and Composer
+
+Make sure you have:
+
+PHP 8.2 or later (depending on your Laravel version)
+Composer
+A database (MySQL, PostgreSQL, SQLite, etc.)
+Verify your installation:
+php -v
+composer -V
+2. Create a Laravel Project
+
+Using Composer:
+
+composer create-project laravel/laravel my-project
+
+Or using the Laravel Installer:
+
+composer global require laravel/installer
+
+laravel new my-project
+
+3. Go to the Project Directory
+cd my-project
+
+4. Configure the Environment
+
+Copy the environment file if needed:
+
+cp .env.example .env
+
+Generate the application key:
+
+php artisan key:generate
+
+5. Configure the Database
+
+Edit .env:
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel_db
+DB_USERNAME=root
+DB_PASSWORD=your_password
+
+6. Run Migrations
+php artisan migrate
+
+7. Start the Development Server
+php artisan serve
+
+
+Open:
+
+http://127.0.0.1:8000
+
+8. Typical Laravel Directory Structure
+my-project/
+├── app/
+│   ├── Http/
+│   ├── Models/
+│   ├── Providers/
+│   └── Services/        (optional)
+├── bootstrap/
+├── config/
+├── database/
+│   ├── migrations/
+│   ├── seeders/
+│   └── factories/
+├── public/
+├── resources/
+│   ├── views/
+│   ├── css/
+│   └── js/
+├── routes/
+│   ├── web.php
+│   ├── api.php
+│   └── console.php
+├── storage/
+├── tests/
+├── vendor/
+├── .env
+├── artisan
+└── composer.json
+9. Common Artisan Commands
+# Start development server
+php artisan serve
+
+# Create a controller
+php artisan make:controller UserController
+
+# Create a model with migration
+php artisan make:model User -m
+
+# Create a migration
+php artisan make:migration create_users_table
+
+# Run migrations
+php artisan migrate
+
+# Roll back the last migration batch
+php artisan migrate:rollback
+
+# Create a seeder
+php artisan make:seeder UserSeeder
+
+# Run seeders
+php artisan db:seed
+
+# Clear application cache
+php artisan optimize:clear
+
+If you're using Laravel 11 or Laravel 12, I can also provide the updated project setup and recommended folder structure specific to those versions.
