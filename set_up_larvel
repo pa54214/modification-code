@@ -1,3 +1,128 @@
+1. Models
+
+Location:
+
+app/
+└── Models/
+    ├── User.php
+    ├── Product.php
+    └── Post.php
+
+To edit a model, open the file in your editor.
+
+Example: app/Models/Product.php
+
+2. Views
+
+Location:
+
+resources/
+└── views/
+    ├── welcome.blade.php
+    ├── home.blade.php
+    └── products/
+        ├── index.blade.php
+        ├── create.blade.php
+        └── edit.blade.php
+
+Example: resources/views/products/index.blade.php
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+</head>
+<body>
+
+<h1>Products</h1>
+
+@foreach($products as $product)
+    <p>{{ $product->name }}</p>
+@endforeach
+
+</body>
+</html>
+
+Laravel uses the Blade templating engine for views.
+
+
+3. Controllers
+
+Location:
+app/
+└── Http/
+    └── Controllers/
+        ├── Controller.php
+        ├── ProductController.php
+        └── UserController.php
+
+
+
+4. Routes
+
+Location:
+
+routes/
+├── web.php
+└── api.php
+
+Example:
+
+use App\Http\Controllers\ProductController;
+
+Route::get('/products', [ProductController::class, 'index']);
+
+
+
+MVC Flow
+Browser
+   │
+   ▼
+Route (routes/web.php)
+   │
+   ▼
+Controller
+   │
+   ▼
+Model
+   │
+   ▼
+Database
+   │
+   ▼
+Controller
+   │
+   ▼
+Blade View
+   │
+   ▼
+Browser
+Creating files with Artisan
+
+Instead of creating files manually, you can use Artisan commands:
+
+# Create a model
+php artisan make:model Product
+
+# Create a controller
+php artisan make:controller ProductController
+
+# Create a model, migration, controller, factory, and seeder
+php artisan make:model Product -mcrfs
+
+The generated files will be placed in the appropriate directories:
+
+Model: app/Models/Product.php
+Controller: app/Http/Controllers/ProductController.php
+Views: Create them manually under resources/views/ (for example, resources/views/products/index.blade.php).
+
+
+
+
+-----------------------------------------------------------------
+-------------------------------------------------------------installation
+-------------------------------------------------------------------------------------------------------------
+
 1. Install PHP and Composer
 
 Make sure you have:
