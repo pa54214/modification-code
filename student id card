@@ -1,3 +1,11 @@
+To make these ID cards print perfectly on a standard A4 page, we need to apply precise dimensional constraints.
+
+The standard dimensions for a CR80 ID card are 85.6mm × 54mm (roughly 3.37" × 2.125").
+
+Here is the updated code. The CSS has been refactored to explicitly set the page sheet size, apply strict card dimensions, and auto-calculate a grid layout that fits exactly 8 cards per A4 page (2 columns × 4 rows) for horizontal layout, or 9 cards (3 columns × 3 rows) for vertical layout.
+
+
+
 <style type="text/css">
 
 /* ================= FLEXBOX ID CARD LAYOUT ================= */
