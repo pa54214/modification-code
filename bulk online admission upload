@@ -80,7 +80,7 @@ echo "</ul>";
 
 
            ======================================================================================================
-
+url:- domain /student/importonlinestudent_
       /application/controllers/Student.php     
 
        public function importonlinestudent_()
