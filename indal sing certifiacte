@@ -1,5 +1,5 @@
 <b>
-This is certify that Mr / Ms <b>[name]</b> bearing Roll No. <b>[roll_no]</b> is a bonafide student of this institute, studying in the [class] (H) [section] course during Academic Year 2026-30, Session 2026-30.<br><br>
+This is certify that Mr / Ms <b>[name]</b> bearing Roll No. <b>[note]</b> is a bonafide student of this institute, studying in the [class] (H) [section] course during Academic Year 2026-30, Session 2026-30.<br><br>
 The student details as entered in our institute record are : <br><br>
 <table><tr><td>
 Student  Name     :  </td> <td></b><b>[name]</b></td></tr><tr><td>
@@ -13,14 +13,14 @@ Date  of   Birth   :    </td><td>     <b>[dob]</b>
 Honours (MJC) :        
 </td>
 <td>   
-<b>  [class] (H)</b>
+<b>  [class] </b>
 </td>
 </tr>
 <tr><td>
 Term           :   </td><td>            <b> [section]</b></td></tr><tr><td>
 Roll Number : </td><td><b> [roll_no]</b>
 </td></tr><tr><td>
-Registration Number :      </td><td> [reg_no]    
+Registration Number :      </td><td> [cast]    
 </td></tr><tr><td>
 Category              :  </td><td>     <b>  [category]</b></td></tr>
 <tr><td> 
