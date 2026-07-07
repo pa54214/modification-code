@@ -1,0 +1,58 @@
+<b>
+This is certify that Mr / Ms <b>[name]</b> bearing Roll No. <b>[roll_no]</b> is a bonafide student of this institute, studying in the [class] (H) [section] course during Academic Year 2026-30, Session 2026-30.<br><br>
+The student details as entered in our institute record are : <br><br>
+<table><tr><td>
+Student  Name     :  </td> <td></b><b>[name]</b></td></tr><tr><td>
+Father's  Name  :  </td> <td> <b>[father_name]</b>
+</td></tr><tr><td>
+Mother's Name   :  </td><td><b>[mother_name]</b></td></tr><tr><td>
+Date  of   Birth   :    </td><td>     <b>[dob]</b>
+</td></tr>
+<tr>
+<td>
+Honours (MJC) :        
+</td>
+<td>   
+<b>  [class] (H)</b>
+</td>
+</tr>
+<tr><td>
+Term           :   </td><td>            <b> [section]</b></td></tr><tr><td>
+Roll Number : </td><td><b> [roll_no]</b>
+</td></tr><tr><td>
+Registration Number :      </td><td> [reg_no]    
+</td></tr><tr><td>
+Category              :  </td><td>     <b>  [category]</b></td></tr>
+<tr><td> 
+Date of Admission                           :        </td><td>[admission_date] 
+</td></tr><tr><td>
+Expected Year of Course Completion  :           </td><td>  4 Year<br>
+</td></tr><tr><td>
+Student Mobile No :                                  :     </td><td> [phone]</td></tr></table>
+
+----------------------------------------------------------------------------------------------------------------------------------------------\-----------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------
+<b>
+This is certify that Mr / Ms <b>[name]</b> bearing Roll No. <b>[roll_no]</b> is a bonafide student of this institute, studying in the [class] (H) [section] course during Academic Year 2026-30, Session 2026-30.<br><br>
+The student details as entered in our institute record are : <br><br>
+<table><tr><td>
+Student  Name     :  </td> <td></b><b>[name]</b></td></tr><tr><td>
+Father's  Name  :  </td> <td> <b>[father_name]</b>
+</td></tr><tr><td>
+Mother's Name   :  </td><td><b>[mother_name]</b></td></tr><tr><td>
+Date  of   Birth   :    </td><td>     <b>[dob]</b>
+</td></tr><tr><td>
+Course       :        </td><td>   <b>  [class] (H)</b></td></tr><tr><td>
+Term           :   </td><td>            <b> [section]</b></td></tr><tr><td>
+Category              :  </td><td>     <b>  [category]</b></td></tr><tr><td>
+Present Address : </td><td><b> [present_address]</b>
+</td></tr><tr><td>
+Expected Year of Course Completion  :           </td><td>  4 Year<br>
+</td></tr><tr><td>
+Name of the Institute :      </td><td>      Dr. Indal Singh Ram Janki Degree College
+</td></tr><tr><td>
+Address of Institute  :   </td><td>         Parihar, Sitamarhi
+</td></tr><tr><td> 
+Date of Admission                           :        </td><td>[admission_date] 
+</td></tr><tr><td>
+Student Mobile No :                                  :     </td><td> [phone]</td></tr></table>
