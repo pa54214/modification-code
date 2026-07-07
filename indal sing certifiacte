@@ -56,3 +56,7 @@ Address of Institute  :   </td><td>         Parihar, Sitamarhi
 Date of Admission                           :        </td><td>[admission_date] 
 </td></tr><tr><td>
 Student Mobile No :                                  :     </td><td> [phone]</td></tr></table>
+=--------------------------------------------------------------------------------------------
+  "columnDefs": [
+          { orderable: false, targets: 0 }  // Disable sorting for first column
+            ],  error fix
