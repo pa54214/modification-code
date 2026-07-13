@@ -58,6 +58,22 @@ project/
     └── migrations/
 
 ===========================================================
+work flow Complete Flow
+Browser
+   |
+   | GET /attendances/import
+   ↓
+routes/web.php
+   |
+   ↓
+AttendanceController
+   |
+   ↓
+importAttendance()
+   |
+   ↓
+resources/views/account/attendances/import.blade.php
+
 
 
 After uploading your Laravel project to a server, you need to configure it before it will run in the browser.
