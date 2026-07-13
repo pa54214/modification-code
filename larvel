@@ -1,3 +1,65 @@
+1. Routes
+Directory:
+project/
+└── routes/
+    ├── web.php
+    ├── api.php
+    ├── console.php
+    └── channels.php
+
+2. Controller
+project/
+└── app/
+    └── Http/
+        └── Controllers/
+            └── DcrManagementController.php
+
+3. Model
+Directory:
+project/
+└── app/
+    └── Models/
+        └── DcrManagement.php
+
+4. View (Blade)
+Directory:
+project/
+└── resources/
+    └── views/
+        └── account/
+            └── dcr-management/
+                ├── index.blade.php
+                ├── create.blade.php
+                ├── edit.blade.php
+                └── show.blade.php
+===================================================================
+project/
+│
+├── app/
+│   ├── Http/
+│   │   └── Controllers/
+│   │       └── DcrManagementController.php
+│   └── Models/
+│       └── DcrManagement.php
+│
+├── resources/
+│   └── views/
+│       └── account/
+│           └── dcr-management/
+│               ├── index.blade.php
+│               ├── create.blade.php
+│               ├── edit.blade.php
+│               └── show.blade.php
+│
+├── routes/
+│   └── web.php
+│
+└── database/
+    └── migrations/
+
+===========================================================
+
+
 After uploading your Laravel project to a server, you need to configure it before it will run in the browser.
 
 1. Point the web server to the public folder
