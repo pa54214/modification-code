@@ -1,0 +1,307 @@
+ function Popup(data, winload = false)
+    {
+        var frameDoc=window.open('', 'Print-Window');
+        frameDoc.document.open();
+        //Create a new HTML document.
+        frameDoc.document.write('<html>');
+        frameDoc.document.write('<head>');
+        frameDoc.document.write('<title></title>');
+        frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'backend/bootstrap/css/bootstrap.min.css">');
+        frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'backend/dist/css/font-awesome.min.css">');
+        frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'backend/dist/css/ionicons.min.css">');
+        frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'backend/dist/css/AdminLTE.min.css">');
+        frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'backend/dist/css/skins/_all-skins.min.css">');
+        frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'backend/plugins/iCheck/flat/blue.css">');
+        frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'backend/plugins/morris/morris.css">');
+        frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'backend/plugins/jvectormap/jquery-jvectormap-1.2.2.css">');
+        frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'backend/plugins/datepicker/datepicker3.css">');
+        frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'backend/plugins/daterangepicker/daterangepicker-bs3.css">');
+        frameDoc.document.write('</head>');
+        frameDoc.document.write('<body onload="window.print()">');
+        frameDoc.document.write(data);
+        frameDoc.document.write('</body>');
+        frameDoc.document.write('</html>');
+        frameDoc.document.close();
+        setTimeout(function () {
+            frameDoc.close();      
+            if (winload) {
+                window.location.reload(true);
+            }
+        }, 5000);
+
+        return true;
+    }
+
+$(document).ready(function () {
+            $(document).on('click', '.printDoc', function () {
+            var main_invoice = $(this).data('main_invoice');
+            var sub_invoice = $(this).data('sub_invoice');
+            var fee_category = $(this).data('fee-category');
+            var student_session_id = '<?php echo $student['student_session_id'] ?>';
+            $.ajax({
+                url: '<?php echo site_url("studentfee/printFeesByName") ?>',
+                type: 'post',
+                dataType:"JSON",
+                data: {'fee_category': fee_category,'student_session_id': student_session_id, 'main_invoice': main_invoice, 'sub_invoice': sub_invoice},
+                success: function (response) {
+                    Popup(response.page);
+                }
+            });
+        }); 
+        
+  <button  class="btn btn-xs btn-default printDoc" data-main_invoice="<?php echo $fee_value->student_fees_deposite_id ?>" data-sub_invoice="<?php echo $fee_deposits_value->inv_no ?>"  title="<?php echo $this->lang->line('print'); ?>"><i class="fa fa-print"></i> </button>  
+ --------------------------------------------------------------------------------------------------------------------------------------
+ controller 
+  public function printFeesByName()
+    {
+        $data                   = array('payment' => "0");
+        $record                 = $this->input->post('data');
+        $fee_category           = $this->input->post('fee_category');
+        $invoice_id             = $this->input->post('main_invoice');
+        $sub_invoice_id         = $this->input->post('sub_invoice');
+        $student_session_id     = $this->input->post('student_session_id');
+        $setting_result         = $this->setting_model->get();
+        $data['settinglist']    = $setting_result;
+        $student                = $this->studentsession_model->searchStudentsBySession($student_session_id);
+        $data['student']        = $student;
+        $data['sub_invoice_id'] = $sub_invoice_id;
+        $data['sch_setting']    = $this->sch_setting_detail;
+
+        $data['superadmin_rest'] = $this->customlib->superadmin_visible();
+
+        if ($fee_category == "transport") {
+            $fee_record      = $this->studentfeemaster_model->getTransportFeeByInvoice($invoice_id, $sub_invoice_id);
+            $data['feeList'] = $fee_record;
+            $page            = $this->load->view('print/printTransportFeesByName', $data, true);
+        } else {
+            $fee_record      = $this->studentfeemaster_model->getFeeByInvoice($invoice_id, $sub_invoice_id);
+            $data['feeList'] = $fee_record;
+            $page = $this->load->view('print/printFeesByName', $data, true);
+        }
+
+        echo json_encode(array('status' => 1, 'page' => $page));
+    }
+=======================================================================================================================================================
+'print/printFeesByName
+<?php
+$currency_symbol = $this->customlib->getSchoolCurrencyFormat();
+$print_copy = !empty($settinglist[0]['is_duplicate_fees_invoice']) ? explode(',', $settinglist[0]['is_duplicate_fees_invoice']) : array('0');
+$ps = isset($fee_receipt_print_settings) ? $fee_receipt_print_settings : array();
+$on = function($key) use ($ps) { return !empty($ps[$key]); };
+
+// Safe student data accessor (supports both array and object)
+$get_student_val = function($key) use ($student) {
+    if (is_array($student)) {
+        return isset($student[$key]) ? $student[$key] : '';
+    } elseif (is_object($student)) {
+        return isset($student->$key) ? $student->$key : '';
+    }
+    return '';
+};
+
+$first_name = isset($feeList->firstname) ? $feeList->firstname : $get_student_val('firstname');
+$middle_name = isset($feeList->middlename) ? $feeList->middlename : $get_student_val('middlename');
+$last_name = isset($feeList->lastname) ? $feeList->lastname : $get_student_val('lastname');
+$student_name = $this->customlib->getFullName($first_name, $middle_name, $last_name, $sch_setting->middlename, $sch_setting->lastname);
+
+// Resolve amount record safely
+$record = null;
+if (!empty($feeList->amount_detail)) {
+    $details = is_string($feeList->amount_detail) ? json_decode($feeList->amount_detail) : $feeList->amount_detail;
+    if (!empty($details)) {
+        if (isset($sub_invoice_id) && isset($details->{$sub_invoice_id})) {
+            $record = $details->{$sub_invoice_id};
+        } else {
+            // Pick the latest/last transaction if sub_invoice_id doesn't match
+            foreach ((array)$details as $sub_id => $val) {
+                $record = $val;
+            }
+        }
+    }
+}
+
+// Academic session
+$session_name = '';
+$s_id = !empty($feeList->session_id) ? $feeList->session_id : $get_student_val('session_id');
+if (!empty($s_id)) {
+    $sr = $this->db->select('session')->where('id', (int)$s_id)->get('sessions')->row_array();
+    $session_name = $sr ? $sr['session'] : '';
+}
+
+$payment_date = (!empty($record) && !empty($record->date)) ? date($this->customlib->getSchoolDateFormat(), strtotime($record->date)) : '';
+$fee_amount   = (!empty($record) && isset($record->amount)) ? (float)$record->amount : 0;
+$discount     = (!empty($record) && isset($record->amount_discount)) ? (float)$record->amount_discount : 0;
+$fine         = (!empty($record) && isset($record->amount_fine)) ? (float)$record->amount_fine : 0;
+$paid         = $fee_amount;
+
+// Calculate balance
+$balance = 0;
+$master_total = 0;
+if (isset($feeList->fee_master_amount)) {
+    $master_total = (float)$feeList->fee_master_amount;
+} elseif (isset($feeList->fees)) {
+    $master_total = (float)$feeList->fees; // Transport fee standard column
+}
+
+if ($master_total > 0) {
+    $all_paid = 0;
+    if (!empty($feeList->amount_detail)) {
+        $details_arr = is_string($feeList->amount_detail) ? json_decode($feeList->amount_detail) : $feeList->amount_detail;
+        if (!empty($details_arr)) {
+            foreach ((array)$details_arr as $r) {
+                $all_paid += (float)$r->amount + (float)(isset($r->amount_discount) ? $r->amount_discount : 0);
+            }
+        }
+    }
+    $balance = max(0, $master_total - $all_paid);
+}
+
+if (!function_exists('nmm_amount_words')) {
+    function nmm_amount_words($amount) {
+        $amount = number_format((float)$amount, 2, '.', '');
+        $parts = explode('.', $amount);
+        $num = (int)$parts[0];
+        $ones = array('', 'One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen');
+        $tens = array('', '', 'Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety');
+        $words = function($n) use (&$words, $ones, $tens) {
+            if ($n < 20) return $ones[$n];
+            if ($n < 100) return $tens[intdiv($n, 10)].($n % 10 ? ' '.$ones[$n % 10] : '');
+            if ($n < 1000) return $ones[intdiv($n, 100)].' Hundred'.($n % 100 ? ' '.$words($n % 100) : '');
+            if ($n < 100000) return $words(intdiv($n, 1000)).' Thousand'.($n % 1000 ? ' '.$words($n % 1000) : '');
+            if ($n < 10000000) return $words(intdiv($n, 100000)).' Lakh'.($n % 100000 ? ' '.$words($n % 100000) : '');
+            return $words(intdiv($n, 10000000)).' Crore'.($n % 10000000 ? ' '.$words($n % 10000000) : '');
+        };
+        $out = $words($num).' '.($num == 1 ? 'Rupee' : 'Rupees');
+        if ((int)$parts[1]) $out .= ' and '.$words((int)$parts[1]).' Paise';
+        return trim($out).' Only';
+    }
+}
+
+if (!function_exists('nmm_render_fee_receipt')) {
+    function nmm_render_fee_receipt($copy_label, $feeList, $record, $student, $sch_setting, $settinglist, $ps, $on, $student_name, $session_name, $payment_date, $fee_amount, $discount, $fine, $paid, $balance, $currency_symbol, $customlib, $media_storage, $setting_model, $get_student_val) {
+        $bg = !empty($ps['_background_image']) ? $ps['_background_image'] : '';
+        $background = (!empty($ps['background']) && $bg) ? 'background-image:url("'.html_escape($media_storage->getImageURL('/uploads/print_headerfooter/student_receipt/'.$bg)).'");background-size:cover;background-position:center;' : '';
+
+        // Determine fee name & type safely
+        $fee_group_name = '';
+        if (isset($feeList->name)) {
+            $fee_group_name = $feeList->name . (isset($feeList->type) ? ' ('.$feeList->type.')' : '');
+        } elseif (isset($feeList->month)) {
+            $fee_group_name = 'Transport Fee ('.$feeList->month.')';
+        } else {
+            $fee_group_name = 'Transport Fee';
+        }
+
+        $fee_code = isset($feeList->code) ? $feeList->code : (isset($feeList->route_title) ? $feeList->route_title : '-');
+        $admission_no = isset($feeList->admission_no) ? $feeList->admission_no : $get_student_val('admission_no');
+        $roll_no = isset($feeList->roll_no) ? $feeList->roll_no : $get_student_val('roll_no');
+        $class_name = isset($feeList->class) ? $feeList->class : $get_student_val('class');
+        $section_name = isset($feeList->section) ? $feeList->section : $get_student_val('section');
+        $student_img = $get_student_val('image');
+        $inv_display_id = isset($feeList->id) ? (int)$feeList->id : 0;
+        $inv_sub_id = (!empty($record) && isset($record->inv_no)) ? (int)$record->inv_no : 1;
+        $payment_mode_raw = (!empty($record) && !empty($record->payment_mode)) ? $record->payment_mode : 'Cash';
+        ?>
+        <div class="invoice" style="<?php echo $background; ?>">
+            <div class="receipt-header"><img src="<?php echo $media_storage->getImageURL('/uploads/print_headerfooter/student_receipt/'.$setting_model->get_receiptheader()); ?>" style="height:100px;width:100%;"></div>
+            <div class="text-center receipt-copy"><strong><?php echo html_escape($copy_label); ?></strong></div>
+            <div class="row student-info">
+                <div class="col-xs-7">
+                    <?php if ($on('photo') && !empty($student_img)) { ?>
+                        <div style="float:left;margin-right:10px;"><img src="<?php echo $media_storage->getImageURL('/uploads/student_images/'.$student_img); ?>" style="width:60px;height:70px;object-fit:cover;"></div>
+                    <?php } ?>
+                    <address>
+                    <?php if ($on('name')) { ?><strong><?php echo html_escape($student_name); ?></strong><br><?php } ?>
+                    <?php if ($on('father_name')) { ?>Father Name: <?php echo html_escape($get_student_val('father_name')); ?><br><?php } ?>
+                    <?php if ($on('mother_name')) { ?>Mother Name: <?php echo html_escape($get_student_val('mother_name')); ?><br><?php } ?>
+                    <?php if ($on('dob')) { ?>Date Of Birth: <?php echo html_escape($get_student_val('dob')); ?><br><?php } ?>
+                    <?php if ($on('admission_no')) { ?>Admission No.: <?php echo html_escape($admission_no); ?><br><?php } ?>
+                    <?php if ($on('roll_no')) { ?>Roll Number: <?php echo html_escape($roll_no); ?><br><?php } ?>
+                    <?php if ($on('class')) { ?>Class: <?php echo html_escape($class_name); ?><?php if ($on('section')) { ?> (<?php echo html_escape($section_name); ?>)<?php } ?><br><?php } ?>
+                    <?php if ($on('section') && !$on('class')) { ?>Section: <?php echo html_escape($section_name); ?><br><?php } ?>
+                    <?php if ($on('mobile')) { ?>Mobile: <?php echo html_escape($get_student_val('mobileno')); ?><br><?php } ?>
+                    <?php if ($on('gender')) { ?>Gender: <?php echo html_escape($get_student_val('gender')); ?><br><?php } ?>
+                    <?php if ($on('address')) { ?>Address: <?php echo html_escape($get_student_val('current_address')); ?><br><?php } ?>
+                    <?php if ($on('session') && $session_name !== '') { ?>Academic Session: <?php echo html_escape($session_name); ?><?php } ?>
+                    </address>
+                </div>
+                <div class="col-xs-5 text-right"><address>
+                    <?php if ($on('payment_date')) { ?><strong>Date: <?php echo html_escape($payment_date); ?></strong><br><?php } ?>
+                    <?php if ($on('receipt_title')) { ?><strong>Fee Receipt</strong><br><?php } ?>
+                    <?php if ($on('receipt_no') && !empty($record->receipt_no)) { ?><strong>Receipt No.: <?php echo html_escape($record->receipt_no); ?></strong><br><?php } ?>
+                    <?php if ($on('payment_id')) { ?><strong>Payment ID: <?php echo $inv_display_id.'/'.$inv_sub_id; ?></strong><br><?php } ?>
+                    <?php if ($on('payment_mode')) { ?><strong>Mode: <?php echo html_escape($customlib->lang->line(strtolower($payment_mode_raw))); ?></strong><br><?php } ?>
+                    <?php if ($on('session') && $session_name === '') { ?><strong>Academic Session: -</strong><br><?php } ?>
+                    <?php if ($on('signature') && !empty($record->collected_by)) { ?><br><strong>Collected By: <?php echo html_escape($record->collected_by); ?></strong><?php } ?>
+                </address></div>
+            </div>
+            <table class="table table-striped table-responsive receipt-table">
+                <thead><tr>
+                    <?php if ($on('payment_date')) { ?><th>Date</th><?php } ?>
+                    <?php if ($on('fee_group')) { ?><th>Fee Group</th><?php } ?>
+                    <?php if ($on('fee_code')) { ?><th>Fee Code</th><?php } ?>
+                    <?php if ($on('due_date')) { ?><th>Due Date</th><?php } ?>
+                    <?php if ($on('payment_mode')) { ?><th>Mode</th><?php } ?>
+                    <?php if ($on('amount')) { ?><th class="text-right">Amount</th><?php } ?>
+                    <?php if ($on('discount')) { ?><th class="text-right">Discount</th><?php } ?>
+                    <?php if ($on('fine')) { ?><th class="text-right">Fine</th><?php } ?>
+                    <?php if ($on('paid')) { ?><th class="text-right">Paid</th><?php } ?>
+                    <?php if ($on('balance')) { ?><th class="text-right">Balance</th><?php } ?>
+                </tr></thead>
+                <tbody><tr>
+                    <?php if ($on('payment_date')) { ?><td><?php echo html_escape($payment_date); ?></td><?php } ?>
+                    <?php if ($on('fee_group')) { ?><td><?php echo html_escape($fee_group_name); ?></td><?php } ?>
+                    <?php if ($on('fee_code')) { ?><td><?php echo html_escape($fee_code); ?></td><?php } ?>
+                    <?php if ($on('due_date')) { ?><td><?php echo !empty($feeList->due_date) ? html_escape($feeList->due_date) : '-'; ?></td><?php } ?>
+                    <?php if ($on('payment_mode')) { ?><td><?php echo html_escape($customlib->lang->line(strtolower($payment_mode_raw))); ?></td><?php } ?>
+                    <?php if ($on('amount')) { ?><td class="text-right"><?php echo $currency_symbol.amountFormat($fee_amount); ?></td><?php } ?>
+                    <?php if ($on('discount')) { ?><td class="text-right"><?php echo $currency_symbol.amountFormat($discount); ?></td><?php } ?>
+                    <?php if ($on('fine')) { ?><td class="text-right"><?php echo $currency_symbol.amountFormat($fine); ?></td><?php } ?>
+                    <?php if ($on('paid')) { ?><td class="text-right"><?php echo $currency_symbol.amountFormat($paid); ?></td><?php } ?>
+                    <?php if ($on('balance')) { ?><td class="text-right"><?php echo $currency_symbol.amountFormat($balance); ?></td><?php } ?>
+                </tr></tbody>
+            </table>
+            <div class="receipt-total text-right"><strong>Total Paid: <?php echo $currency_symbol.amountFormat($paid); ?></strong></div>
+            <?php if ($on('amount_words')) { ?><div class="amount-words"><strong>Amount in Words: <?php echo html_escape(nmm_amount_words($paid)); ?></strong></div><?php } ?>
+            <?php if ($on('note') && !empty($record->description)) { ?><div class="receipt-note">Note: <?php echo nl2br(html_escape($record->description)); ?></div><?php } ?>
+            <?php if ($on('signature')) { ?><div class="signature-space"><span>Authorized Signature</span></div><?php } ?>
+            <?php if (!empty($setting_model->get_receiptfooter())) { ?><div class="receipt-footer"><?php echo $setting_model->get_receiptfooter(); ?></div><?php } ?>
+        </div>
+        <?php
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Fee Receipt</title>
+    <link rel="stylesheet" href="<?php echo base_url(); ?>backend/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>backend/dist/css/AdminLTE.min.css">
+    <style>
+        body{font-size:11px}.invoice{padding:8px 12px;margin:0 auto;max-width:100%}.receipt-copy{margin:5px 0}.receipt-title{font-size:16px;margin:4px 0}.receipt-number{font-size:12px;margin-bottom:7px}.student-info{margin:0}.student-info address{line-height:1.45;margin-bottom:6px}.receipt-table{font-size:8pt;margin-bottom:5px}.receipt-table th,.receipt-table td{padding:3px!important}.receipt-total{padding:4px 0}.amount-words,.receipt-note{padding:3px 0}.signature-space{text-align:right;margin-top:22px}.signature-space span{border-top:1px solid #333;padding-top:3px;display:inline-block;min-width:120px;text-align:center}.receipt-footer{margin-top:8px}.page-break{page-break-before:always}@media print{.page-break{display:block;page-break-before:always}}
+    </style>
+</head>
+<body>
+<div class="container">
+<?php 
+$copies = array(
+    '0' => $this->lang->line('office_copy'),
+    '1' => $this->lang->line('student_copy'),
+    '2' => $this->lang->line('bank_copy')
+);
+
+$rendered = 0;
+foreach ($print_copy as $copy_index) {
+    $copy_index = trim($copy_index);
+    if (isset($copies[$copy_index])) {
+        if ($rendered > 0) {
+            echo '<div class="page-break"></div>';
+        }
+        nmm_render_fee_receipt($copies[$copy_index], $feeList, $record, $student, $sch_setting, $settinglist, $ps, $on, $student_name, $session_name, $payment_date, $fee_amount, $discount, $fine, $paid, $balance, $currency_symbol, $this->customlib, $this->media_storage, $this->setting_model, $get_student_val);
+        $rendered++;
+    }
+}
+?>
+</div>
+</body>
+</html>
