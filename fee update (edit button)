@@ -1,0 +1,677 @@
+1)view
+2)controller
+3) model
+
+/application/controllers/Financereports.php
+
+public function update_single_fee_collection() {
+    if (!$this->input->is_ajax_request()) {
+        exit('No direct script access allowed');
+    }
+
+    $id  = $this->input->post('id');
+    $inv = $this->input->post('inv');
+
+    $update_data = [
+        'received_by'     => $this->input->post('collect_by'),
+        'payment_mode'    => $this->input->post('payment_mode'),
+        'amount'          => $this->input->post('amount'),
+        'amount_discount' => $this->input->post('amount_discount'),
+        'amount_fine'     => $this->input->post('amount_fine')
+    ];
+
+    // FIX: Explicitly load the model name you used for the database operations
+    $this->load->model('Studentfeemaster_model'); // Replace with your exact model file name if different  Studentfeemaster_model
+
+    if ($this->Studentfeemaster_model->update_json_fee_collection($id, $inv, $update_data)) {
+        echo json_encode(['status' => 'success', 'message' => 'Record updated successfully']);
+    } else {
+        echo json_encode(['status' => 'fail', 'message' => 'Failed to update record']);
+    }
+}
+
+public function bulk_update_fee_collection() {
+    if (!$this->input->is_ajax_request()) {
+        exit('No direct script access allowed');
+    }
+
+    $records = $this->input->post('records');
+    
+    // FIX: Load the model here as well
+    $this->load->model('Studentfeemaster_model');//Studentfeemaster_model
+
+    if (!empty($records) && is_array($records)) {
+        $success = true;
+        foreach ($records as $row) {
+            $id  = $row['id'];
+            $inv = $row['inv'];
+            $update_data = [
+                'received_by'     => $row['collect_by'],
+                'payment_mode'    => $row['payment_mode'],
+                'amount'          => $row['amount'],
+                'amount_discount' => $row['amount_discount'],
+                'amount_fine'     => $row['amount_fine']
+            ];
+            if (!$this->Studentfeemaster_model->update_json_fee_collection($id, $inv, $update_data)) {
+                $success = false;
+            }
+        }
+
+        if ($success) {
+            echo json_encode(['status' => 'success', 'message' => 'All records updated successfully']);
+            return;
+        }
+    }
+
+    echo json_encode(['status' => 'fail', 'message' => 'Bulk update failed']);
+}
+
+public function delete_fee_collection() {
+    if (!$this->input->is_ajax_request()) {
+        exit('No direct script access allowed');
+    }
+
+    $id  = $this->input->post('id');
+    $inv = $this->input->post('inv');
+
+    // FIX: Load the model here as well
+    $this->load->model('Studentfeemaster_model');//Studentfeemaster_model
+
+    if ($this->Studentfeemaster_model->delete_json_fee_collection($id, $inv)) {
+        echo json_encode(['status' => 'success', 'message' => 'Record deleted successfully']);
+    } else {
+        echo json_encode(['status' => 'fail', 'message' => 'Failed to delete record']);
+    }
+}
+
+------------------------------------------------------------------------------------------------------------
+model
+/application/models/Studentfeemaster_model.php
+
+    public function update_json_fee_collection($id, $inv, $new_data) {
+        // 1. Fetch the deposit row by table ID
+        $this->db->where('id', $id);
+        $query = $this->db->get('student_fees_deposite');
+        
+        if ($query->num_rows() == 0) {
+            return false;
+        }
+
+        $row = $query->row_array();
+        
+        // 2. Decode the amount_detail JSON column into an associative PHP array
+        $amount_detail = json_decode($row['amount_detail'], true);
+
+        // 3. Check if the invoice/receipt key exists inside the JSON array
+        if (isset($amount_detail[$inv])) {
+            // Update specific fields while keeping other properties intact
+            $amount_detail[$inv]['received_by']     = $new_data['received_by'];
+            $amount_detail[$inv]['payment_mode']    = $new_data['payment_mode'];
+            $amount_detail[$inv]['amount']          = $new_data['amount'];
+            $amount_detail[$inv]['amount_discount'] = $new_data['amount_discount'];
+            $amount_detail[$inv]['amount_fine']     = $new_data['amount_fine'];
+
+            // 4. Encode the array back to a JSON string and save it to the database
+            $this->db->where('id', $id);
+            $this->db->update('student_fees_deposite', [
+                'amount_detail' => json_encode($amount_detail)
+            ]);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Delete a specific JSON sub-key entry from amount_detail
+     */
+    public function delete_json_fee_collection($id, $inv) {
+        // 1. Fetch the deposit row by table ID
+        $this->db->where('id', $id);
+        $query = $this->db->get('student_fees_deposite');
+        
+        if ($query->num_rows() == 0) {
+            return false;
+        }
+
+        $row = $query->row_array();
+        
+        // 2. Decode JSON amount details
+        $amount_detail = json_decode($row['amount_detail'], true);
+
+        // 3. Check if the entry exists
+        if (isset($amount_detail[$inv])) {
+            // Remove the specific entry using its key (e.g., "1" or "2")
+            unset($amount_detail[$inv]);
+
+            // 4. If no other receipts remain in this record, delete the entire table row; otherwise, update JSON
+            if (empty($amount_detail)) {
+                $this->db->where('id', $id);
+                $this->db->delete('student_fees_deposite');
+            } else {
+                $this->db->where('id', $id);
+                $this->db->update('student_fees_deposite', [
+                    'amount_detail' => json_encode($amount_detail)
+                ]);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    --------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------
+    viwe 
+
+    /application/views/financereports/collection_report.php
+
+    <?php
+$currency_symbol = $this->customlib->getSchoolCurrencyFormat();
+?>
+<div class="content-wrapper">
+    <section class="content-header"></section>
+    <!-- Main content -->
+    <section class="content">
+        <?php $this->load->view('financereports/_finance');?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box removeboxmius">
+                    <div class="box-header ptbnull"></div>
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-search"></i> <?php echo $this->lang->line('select_criteria'); ?></h3>
+                    </div>
+                    <form role="form" action="<?php echo site_url('financereports/collection_report') ?>" method="post" class="">
+                        <div class="box-body row">
+                            <?php echo $this->customlib->getCSRF(); ?>
+                            <div class="col-sm-2 col-lg-2 col-md-2">
+                                <div class="form-group">
+                                    <label><?php echo $this->lang->line('search_duration'); ?><small class="req"> *</small></label>
+                                    <select class="form-control" name="search_type" onchange="showdate(this.value)">
+                                        <?php foreach ($searchlist as $key => $search) { ?>
+                                            <option value="<?php echo $key ?>" <?php if ((isset($search_type)) && ($search_type == $key)) { echo "selected"; } ?>><?php echo $search ?></option>
+                                        <?php }?>
+                                    </select>
+                                    <span class="text-danger"><?php echo form_error('search_type'); ?></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2 col-lg-2 col-md-2">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('class'); ?></label>
+                                    <select autofocus="" id="class_id" name="class_id" class="form-control">
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                        <?php foreach ($classlist as $class) { ?>
+                                            <option value="<?php echo $class['id'] ?>" <?php if (set_value('class_id') == $class['id']) { echo "selected=selected"; } ?>><?php echo $class['class'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <span class="text-danger"><?php echo form_error('class_id'); ?></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2 col-lg-2 col-md-2">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('section'); ?></label>
+                                    <select id="section_id" name="section_id" class="form-control">
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                    </select>
+                                    <span class="text-danger"><?php echo form_error('section_id'); ?></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2 col-lg-2 col-md-2">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('fees_type'); ?></label>
+                                    <select id="feetype_id" name="feetype_id" class="form-control">
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                        <?php foreach ($feetypeList as $feetype) { ?>
+                                            <option value="<?php echo $feetype['id'] ?>" <?php if (set_value('feetype_id') == $feetype['id']) { echo "selected=selected"; } ?>><?php echo $feetype['type'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <span class="text-danger"><?php echo form_error('feetype_id'); ?></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2 col-lg-2 col-md-2">
+                                <div class="form-group">
+                                    <label><?php echo $this->lang->line('collect_by'); ?></label>
+                                    <select class="form-control" name="collect_by">
+                                        <option value=""><?php echo $this->lang->line('select') ?></option>
+                                        <?php foreach ($collect_by as $key => $value) { ?>
+                                            <option value="<?php echo $key ?>" <?php if ((isset($received_by)) && ($received_by == $key)) { echo "selected"; } ?>><?php echo $value ?></option>
+                                        <?php }?>
+                                    </select>
+                                    <span class="text-danger"><?php echo form_error('collect_by'); ?></span>
+                                </div>
+                            </div>
+
+                            <div id='date_result'></div>
+
+                            <div class="col-sm-2 col-lg-2 col-md-2">
+                                <div class="form-group">
+                                    <label><?php echo $this->lang->line('group_by'); ?></label>
+                                    <select class="form-control" name="group">
+                                        <?php foreach ($group_by as $key => $value) { ?>
+                                            <option value="<?php echo $key ?>" <?php if ((isset($group_byid)) && ($group_byid == $key)) { echo "selected"; } ?>><?php echo $value ?></option>
+                                        <?php }?>
+                                    </select>
+                                    <span class="text-danger"><?php echo form_error('group'); ?></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="submit" name="search" value="search_filter" id="search_btn" class="btn btn-primary btn-sm checkbox-toggle pull-right"><i class="fa fa-search"></i> <?php echo $this->lang->line('search'); ?></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <?php if (empty($results)) { ?>
+                        <div class="box-header ptbnull">
+                            <div class="alert alert-info">
+                               <?php echo $this->lang->line('no_record_found'); ?>
+                            </div>
+                        </div>
+                    <?php } else { ?>
+                        <div class="">
+                            <div class="box-header ptbnull"></div>
+                            <div class="box-header ptbnull">
+                                <h3 class="box-title titlefix"><i class="fa fa-money"></i> <?php echo $this->lang->line('fees_collection_report'); ?></h3>
+                            </div>
+                            
+                            <div class="box-body table-responsive" id="transfee">
+                                <div id="printhead"><center><b><h4><?php echo $this->lang->line('fees_collection_report') . "<br>"; $this->customlib->get_postmessage(); ?></h4></b></center></div>
+                                <div class="download_label"><?php echo $this->lang->line('fees_collection_report') . "<br>"; $this->customlib->get_postmessage(); ?></div>
+                                
+                                <div class="row mb10" style="margin-bottom:10px;">
+                                    <div class="col-md-12">
+                                        <!-- Global Edit / Save All Updates Button -->
+                                        <button type="button" class="btn btn-primary btn-sm pull-right" id="global_edit_toggle_btn" style="margin-left: 5px;">
+                                            <i class="fa fa-pencil"></i> <span id="global_btn_text">Edit All</span>
+                                        </button>
+                                        <a class="btn btn-default btn-xs pull-right" id="btnExport" onclick="fnExcelReport();"> <i class="fa fa-file-excel-o"></i> </a>
+                                        <a class="btn btn-default btn-xs pull-right" id="print" onclick="printDiv()" style="margin-right: 5px;"><i class="fa fa-print"></i></a>
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-bordered table-hover" id="headerTable">
+                                    <thead class="header">
+                                        <tr>
+                                            <th><?php echo $this->lang->line('payment_id'); ?></th>
+                                            <th><?php echo $this->lang->line('date'); ?></th>
+                                            <th><?php echo $this->lang->line('admission_no'); ?></th>
+                                            <th><?php echo $this->lang->line('name'); ?></th>
+                                            <th><?php echo $this->lang->line('class'); ?></th>
+                                            <th><?php echo $this->lang->line('fee_type'); ?></th>
+                                            <th><?php echo $this->lang->line('collect_by'); ?></th>
+                                            <th><?php echo $this->lang->line('mode'); ?></th>
+                                            <th style="mso-number-format:'\@'" class="text text-right"><?php echo $this->lang->line('paid'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
+                                            <th style="mso-number-format:'\@'" class="text text-right"><?php echo $this->lang->line('discount'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
+                                            <th style="mso-number-format:'\@'" class="text text-right"><?php echo $this->lang->line('fine'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
+                                            <th style="mso-number-format:'\@'" class="text text-right"><?php echo $this->lang->line('total'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
+                                            <th class="text-right no-print"><?php echo $this->lang->line('action') ?: 'Action'; ?></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $count = 1;
+                                        $grdamountLabel   = array();
+                                        $grddiscountLabel = array();
+                                        $grdfineLabel     = array();
+                                        $grdTotalLabel    = array();
+
+                                        foreach ($results as $key => $value) {
+                                            $amountLabel   = array();
+                                            $discountLabel = array();
+                                            $fineLabel     = array();
+                                            $TotalLabel    = array();
+
+                                            foreach ($value as $collect) {
+                                                $amountLabel[]   = number_format($collect['amount'], 2, '.', '');
+                                                $discountLabel[] = number_format($collect['amount_discount'], 2, '.', '');
+                                                $fineLabel[]     = number_format($collect['amount_fine'], 2, '.', '');
+                                                $t               = $collect['amount'] + $collect['amount_fine'];
+                                                $TotalLabel[]    = number_format($t, 2, '.', '');
+                                            ?>
+                                                <tr data-id="<?php echo $collect['id']; ?>" data-inv="<?php echo $collect['inv_no']; ?>">
+                                                    <td><?php echo $collect['id'] . "/" . $collect['inv_no']; ?></td>            
+                                                    <td><?php echo date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($collect['date'])); ?></td>            
+                                                    <td><?php echo $collect['admission_no']; ?></td>            
+                                                    <td><?php echo $this->customlib->getFullName($collect['firstname'], $collect['middlename'], $collect['lastname'], $sch_setting->middlename, $sch_setting->lastname); ?></td>            
+                                                    <td><?php echo $collect['class'] . " (" . $collect['section'] . ")"; ?></td>            
+                                                    <td>
+                                                        <?php
+                                                        if ($collect['is_system']) {
+                                                            echo $this->lang->line($collect['type']);
+                                                        } else {
+                                                            echo $collect['type'];
+                                                        }    
+                                                        ?>
+                                                    </td>
+                                                    <!-- Collect By (Editable Field - Disabled by default) -->
+                                                    <td>
+                                                        <select class="form-control input-sm editable-field" name="collect_by" disabled>
+                                                            <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                                            <?php foreach ($collect_by as $cb_key => $cb_value) { ?>
+                                                                <option value="<?php echo $cb_key; ?>" <?php echo ((is_array($collect['received_byname']) && $collect['received_byname']['id'] == $cb_key) || (isset($collect['received_by']) && $collect['received_by'] == $cb_key)) ? 'selected' : ''; ?>>
+                                                                    <?php echo $cb_value; ?>
+                                                                </option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </td>
+
+                                                    <!-- Payment Mode (Editable Field - Disabled by default) -->
+                                                    <td>
+                                                        <select class="form-control input-sm editable-field" name="payment_mode" disabled>
+                                                            <?php 
+                                                            $modes = ['Cash', 'Cheque', 'Online', 'Bank Transfer', 'upi'];
+                                                            foreach ($modes as $m) {
+                                                                $sel = (strtolower($collect['payment_mode']) == strtolower($m)) ? 'selected' : '';
+                                                                echo '<option value="' . $m . '" ' . $sel . '>' . ucfirst($m) . '</option>';
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </td>
+
+                                                    <!-- Paid Amount (Editable Field - Disabled by default) -->
+                                                    <td class="text text-right">
+                                                        <input type="text" class="form-control input-sm text-right editable-field" name="amount" value="<?php echo number_format($collect['amount'], 2, '.', ''); ?>" disabled style="max-width:90px; display:inline-block;">
+                                                    </td>
+
+                                                    <!-- Discount Amount (Editable Field - Disabled by default) -->
+                                                    <td class="text text-right">
+                                                        <input type="text" class="form-control input-sm text-right editable-field" name="amount_discount" value="<?php echo number_format($collect['amount_discount'], 2, '.', ''); ?>" disabled style="max-width:90px; display:inline-block;">
+                                                    </td>
+
+                                                    <!-- Fine Amount (Editable Field - Disabled by default) -->
+                                                    <td class="text text-right">
+                                                        <input type="text" class="form-control input-sm text-right editable-field" name="amount_fine" value="<?php echo number_format($collect['amount_fine'], 2, '.', ''); ?>" disabled style="max-width:90px; display:inline-block;">
+                                                    </td>
+
+                                                    <!-- Total -->
+                                                    <td class="text text-right">
+                                                        <?php echo number_format($t, 2, '.', ''); ?>
+                                                    </td>
+
+                                                    <!-- Actions (Row Edit/Save Button & Delete Button) -->
+                                                    <td class="text-right no-print">
+                                                        <button type="button" class="btn btn-default btn-xs btn-row-edit" title="Edit">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </button>
+                                                        <button type="button" class="btn btn-success btn-xs btn-row-save" style="display:none;" title="Save Update">
+                                                            <i class="fa fa-check"></i> Save Update
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger btn-xs btn-row-delete" title="Delete">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+
+                                            <?php
+                                            $count++;
+                                            if ($subtotal) { ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td style="font-weight:bold"><?php echo $this->lang->line('sub_total'); ?></td>
+                                                    <td class="text text-right" style="font-weight:bold"><?php echo amountFormat(array_sum($amountLabel)); ?></td>
+                                                    <td class="text text-right" style="font-weight:bold"><?php echo amountFormat(array_sum($discountLabel)); ?></td>
+                                                    <td class="text text-right" style="font-weight:bold"><?php echo amountFormat(array_sum($fineLabel)); ?></td>
+                                                    <td class="text text-right" style="font-weight:bold"><?php echo amountFormat(array_sum($TotalLabel)); ?></td>
+                                                    <td class="no-print"></td>
+                                                </tr>
+                                            <?php }
+                                            $grdamountLabel[]   = array_sum($amountLabel);
+                                            $grddiscountLabel[] = array_sum($discountLabel);
+                                            $grdfineLabel[]     = array_sum($fineLabel);
+                                            $grdTotalLabel[]    = array_sum($TotalLabel);
+                                        }
+                                        ?>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td style="font-weight:bold"><?php echo $this->lang->line('grand_total'); ?></td>
+                                            <td class="text text-right" style="font-weight:bold"><?php echo amountFormat(array_sum($grdamountLabel)); ?></td>
+                                            <td class="text text-right" style="font-weight:bold"><?php echo amountFormat(array_sum($grddiscountLabel)); ?></td>
+                                            <td class="text text-right" style="font-weight:bold"><?php echo amountFormat(array_sum($grdfineLabel)); ?></td>
+                                            <td class="text text-right" style="font-weight:bold"><?php echo amountFormat(array_sum($grdTotalLabel)); ?></td>
+                                            <td class="no-print"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<iframe id="txtArea1" style="display:none"></iframe>
+
+<script>
+$(document).ready(function() {
+    var class_id = $('#class_id').val();
+    var section_id = '<?php echo $selected_section; ?>';
+    getSectionByClass(class_id, section_id);
+});
+
+$(document).on('change', '#class_id', function (e) {
+    $('#section_id').html("");
+    var class_id = $(this).val();
+    getSectionByClass(class_id, 0);
+});
+
+function getSectionByClass(class_id, section_id) {
+    if (class_id != "") {
+        $('#section_id').html("");
+        var base_url = '<?php echo base_url() ?>';
+        var div_data = '<option value=""><?php echo $this->lang->line('select'); ?></option>';
+        $.ajax({
+            type: "GET",
+            url: base_url + "sections/getByClass",
+            data: {'class_id': class_id},
+            dataType: "json",
+            beforeSend: function () {
+                $('#section_id').addClass('dropdownloading');
+            },
+            success: function (data) {
+                $.each(data, function (i, obj) {
+                    var sel = "";
+                    if (section_id == obj.section_id) {
+                        sel = "selected";
+                    }
+                    div_data += "<option value=" + obj.section_id + " " + sel + ">" + obj.section + "</option>";
+                });
+                $('#section_id').append(div_data);
+            },
+            complete: function () {
+                $('#section_id').removeClass('dropdownloading');
+            }
+        });
+    }
+}
+
+<?php if ($search_type == 'period') { ?>
+    $(document).ready(function () {
+        showdate('period');
+    });
+<?php } ?>
+
+document.getElementById("print").style.display = "block";
+document.getElementById("btnExport").style.display = "block";
+document.getElementById("printhead").style.display = "none";
+
+function printDiv() {
+    document.getElementById("print").style.display = "none";
+    document.getElementById("btnExport").style.display = "none";
+    document.getElementById("printhead").style.display = "block";
+    var divElements = document.getElementById('transfee').innerHTML;
+    var oldPage = document.body.innerHTML;
+    document.body.innerHTML =
+            "<html><head><title><?php echo $this->lang->line('fee_collection_report'); ?></title></head><body>" +
+            divElements + "</body>";
+    window.print();
+    document.body.innerHTML = oldPage;
+    document.getElementById("printhead").style.display = "none";
+    location.reload(true);
+}
+
+/* ==========================================================================
+   GLOBAL TOGGLE EDIT / SAVE ALL & ROW SPECIFIC EDIT/SAVE/DELETE AJAX
+   ========================================================================== */
+
+var isGlobalEditing = false;
+
+// Global "Edit All" / "Save Updates" Button Logic
+$(document).on('click', '#global_edit_toggle_btn', function() {
+    if (!isGlobalEditing) {
+        // Switch to Edit mode for all rows
+        $('.editable-field').prop('disabled', false);
+        $('.btn-row-edit').hide();
+        $('.btn-row-save').show();
+        
+        isGlobalEditing = true;
+        $('#global_edit_toggle_btn').removeClass('btn-primary').addClass('btn-success');
+        $('#global_btn_text').text('Save Updates');
+        $(this).find('i').removeClass('fa-pencil').addClass('fa-save');
+    } else {
+        // Save All Data via AJAX
+        var records = [];
+        $('tbody tr[data-id]').each(function() {
+            var tr = $(this);
+            records.push({
+                'id': tr.attr('data-id'),
+                'inv': tr.attr('data-inv'),
+                'collect_by': tr.find('[name="collect_by"]').val(),
+                'payment_mode': tr.find('[name="payment_mode"]').val(),
+                'amount': tr.find('[name="amount"]').val(),
+                'amount_discount': tr.find('[name="amount_discount"]').val(),
+                'amount_fine': tr.find('[name="amount_fine"]').val()
+            });
+        });
+
+        if (records.length === 0) return;
+
+        $.ajax({
+            url: '<?php echo site_url('financereports/bulk_update_fee_collection'); ?>',
+            type: 'POST',
+            data: {
+                'records': records,
+                '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    alert(response.message || 'Records updated successfully.');
+                    location.reload();
+                } else {
+                    alert(response.message || 'Update failed.');
+                }
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+                alert('Server communication error.');
+            }
+        });
+    }
+});
+
+// Row-specific Edit Toggle
+$(document).on('click', '.btn-row-edit', function() {
+    var tr = $(this).closest('tr');
+    tr.find('.editable-field').prop('disabled', false);
+    $(this).hide();
+    tr.find('.btn-row-save').show();
+});
+
+// Row-specific Save Update Click
+$(document).on('click', '.btn-row-save', function() {
+    var tr = $(this).closest('tr');
+    var id = tr.attr('data-id');
+    var inv = tr.attr('data-inv');
+    var collect_by = tr.find('[name="collect_by"]').val();
+    var payment_mode = tr.find('[name="payment_mode"]').val();
+    var amount = tr.find('[name="amount"]').val();
+    var amount_discount = tr.find('[name="amount_discount"]').val();
+    var amount_fine = tr.find('[name="amount_fine"]').val();
+    var btn = $(this);
+
+    $.ajax({
+        url: '<?php echo site_url('financereports/update_single_fee_collection'); ?>',
+        type: 'POST',
+        data: {
+            'id': id,
+            'inv': inv,
+            'collect_by': collect_by,
+            'payment_mode': payment_mode,
+            'amount': amount,
+            'amount_discount': amount_discount,
+            'amount_fine': amount_fine,
+            '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
+        },
+        dataType: 'json',
+        success: function(response) {
+            if (response.status === 'success') {
+                tr.find('.editable-field').prop('disabled', true);
+                btn.hide();
+                tr.find('.btn-row-edit').show();
+                alert(response.message || 'Record updated successfully.');
+            } else {
+                alert(response.message || 'Update failed.');
+            }
+        },
+        error: function(xhr) {
+            console.log(xhr.responseText);
+            alert('Server communication error.');
+        }
+    });
+});
+
+// Row-specific Delete Action
+$(document).on('click', '.btn-row-delete', function() {
+    var tr = $(this).closest('tr');
+    var id = tr.attr('data-id');
+    var inv = tr.attr('data-inv');
+
+    if (confirm('Are you sure you want to delete this record?')) {
+        $.ajax({
+            url: '<?php echo site_url('financereports/delete_fee_collection'); ?>',
+            type: 'POST',
+            data: {
+                'id': id,
+                'inv': inv,
+                '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    tr.fadeOut(300, function() { $(this).remove(); });
+                    alert(response.message || 'Record deleted successfully.');
+                } else {
+                    alert(response.message || 'Deletion failed.');
+                }
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+                alert('Server communication error during deletion.');
+            }
+        });
+    }
+});
+</script>
