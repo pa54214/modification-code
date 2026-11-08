@@ -192,3 +192,25 @@ INSERT INTO `sidebar_sub_menus` (`id`, `sidebar_menu_id`, `menu`, `key`, `lang_k
 
 -------------------------------------------------------------------------------------------------------------------------
 $lang['roll_import'] = "Bulk import";
+
+--------------------------------------------------------------------------------------------------------------------------------------
+1)add menu in db suing sql insert
+2) lan file add name for menu
+3) upload sample excel file
+4) work on view 
+5)work on controller
+
+controller 
+exportformatp(),
+public function exportformatp()
+    {
+        $this->load->helper('download');
+      $filepath = "./backend/import/import_student_sample_filee.csv";
+        $data     = file_get_contents($filepath);
+        $name     = 'import_student_sample_file.csv';
+
+        force_download($name, $data);
+    }
+
+
+
