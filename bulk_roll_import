@@ -199,6 +199,14 @@ $lang['roll_import'] = "Bulk import";
 3) upload sample excel file
 4) work on view 
 5)work on controller
+6)work on model
+
+$lang['roll_import'] = "Bulk import";
+
+INSERT INTO `sidebar_sub_menus` (`id`, `sidebar_menu_id`, `menu`, `key`, `lang_key`, `url`, `level`, `access_permissions`, `permission_group_id`, `activate_controller`, `activate_methods`, `addon_permission`, `is_active`) VALUES
+(194, 2, 'roll_import', NULL, 'roll_import', 'student/importp', 10, '(\'import_student\', \'can_view\')', NULL, 'student', 'importp', NULL, 1)
+;
+
 
 controller 
 exportformatp(), importp()
@@ -223,7 +231,8 @@ public function importp()
         $userdata           = $this->customlib->getUserData();
         $category = $this->category_model->get();
         // ==============================  change by sonu 07/03/2024 ==========================================
-        $fields = array('admission_no', 'roll_no','reg_no');
+       // $fields = array('admission_no', 'roll_no','reg_no');
+  $fields = array('admission_no', 'roll_no','reg_no','father_name','mother_name','email');
         //  ====================================================================================================
         $data["fields"]       = $fields;
         $data['categorylist'] = $category;
@@ -289,4 +298,52 @@ public function importp()
         }
     }
 
+-------------
+model
+princecollege/application/models/Student_model.php
 
+first
+   public function check_adm_exists($admission_no)
+    {
+        $this->db->where('admission_no',$admission_no);
+////$this->db->where(array('admission_no' => $admission_no));
+        $query = $this->db->get('students');
+       // echo $query->num_rows();
+        if ($query->num_rows() > 0) {
+           // return $query->num_rows();
+           
+            return true;
+        } else {
+         
+             return false;
+        }
+    }
+
+ public function updateroll_excel($adm_no,$roll_no,$reg_no,$father_name,$mother_name,$email)
+    {
+      //  echo $adm_no;
+      //  echo "<br>";
+      //  echo $roll_no;
+      // echo "<br>";
+      //  echo $reg_no;
+      //   echo "<br>";
+        $data = array(
+        'roll_no' => $roll_no,
+        'cast'=>$reg_no,
+     'father_name' => $father_name,
+             'mother_name' => $mother_name,
+             'email' => $email
+
+          );
+        // echo '<pre>';print_r($data);exit;
+        //var_dump( isset($adm_no));
+        if (isset($adm_no)) { 
+            $this->db->where('admission_no', $adm_no);
+            $this->db->update('students', $data);
+            $message   = UPDATE_RECORD_CONSTANT . " On students Admisssion_No " . $adm_no;
+            $action    = "Update";
+            $record_id = $insert_id = $adm_no;
+            $this->log($message, $record_id, $action);
+            return true;
+        }
+    }
